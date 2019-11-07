@@ -1,0 +1,1106 @@
+{
+  "about": {
+    "name": "XtremeZero",
+    "avatar": "https://img.itch.zone/aW1nLzIwNjUxMjUyLnBuZw==/original/KUsoYC.png",
+    "bio": "Passionate game developer, technical artist, and tools programmer specializing in gameplay systems, shader development, and workflow tools in Unity and Godot. Dedicated to building interactive experiences and empowering creators with development utilities.",
+    "email": "xtremezero@proton.me",
+    "skills": [
+      {
+        "name": "Game Design & Dev",
+        "level": 95
+      },
+      {
+        "name": "Unity & C#",
+        "level": 90
+      },
+      {
+        "name": "Godot & GDScript",
+        "level": 90
+      },
+      {
+        "name": "Shader Programming",
+        "level": 85
+      }
+    ]
+  },
+  "links": [
+    {
+      "id": "itch",
+      "title": "itch.io Profile",
+      "url": "https://xtremezero.itch.io",
+      "category": "STOREFRONT",
+      "clicks": 0
+    },
+    {
+      "id": "website",
+      "title": "Official Website",
+      "url": "https://xtremezero.net",
+      "category": "HOMEPAGE",
+      "clicks": 0
+    },
+    {
+      "id": "github",
+      "title": "GitHub Profile",
+      "url": "https://github.com/xtremezero",
+      "category": "CODE",
+      "clicks": 0
+    },
+    {
+      "id": "steam",
+      "title": "Steam Store",
+      "url": "https://steamcommunity.com/id/mohammedzero43",
+      "category": "STOREFRONT",
+      "clicks": 0
+    },
+    {
+      "id": "gog",
+      "title": "GOG Profile",
+      "url": "https://www.gog.com/u/xtremezero_",
+      "category": "STOREFRONT",
+      "clicks": 0
+    },
+    {
+      "id": "x",
+      "title": "X / Twitter",
+      "url": "https://x.com/xtremezero_",
+      "category": "SOCIAL",
+      "clicks": 0
+    },
+    {
+      "id": "reddit",
+      "title": "Reddit Profile",
+      "url": "https://www.reddit.com/user/xtremezero_",
+      "category": "SOCIAL",
+      "clicks": 0
+    },
+    {
+      "id": "youtube",
+      "title": "YouTube Channel",
+      "url": "https://youtube.com/@xtremezero",
+      "category": "BROADCAST",
+      "clicks": 0
+    },
+    {
+      "id": "gamejolt",
+      "title": "Game Jolt",
+      "url": "https://gamejolt.com/@xtremezero",
+      "category": "COMMUNITY",
+      "clicks": 0
+    },
+    {
+      "id": "discord",
+      "title": "Discord Connection",
+      "url": "https://discord.gg/c4afFJ5b",
+      "category": "COMMUNITY",
+      "clicks": 0
+    },
+    {
+      "id": "twitch",
+      "title": "Twitch Channel",
+      "url": "https://twitch.tv/xtremezero_",
+      "category": "BROADCAST",
+      "clicks": 0
+    }
+  ],
+  "news": [
+    {
+      "id": "beat-slicer-update",
+      "title": "BEAT//SLICER VERSION 1.0 OUT NOW on Steam!",
+      "category": "UPDATE",
+      "date": "2026-07-17",
+      "image": "https://img.itch.zone/aW1nLzI4MjYzMDM2LmdpZg==/original/6B74sl.gif",
+      "summary": "Official release of the game on Steam! Go slash some beats!",
+      "likes": 124
+    },
+    {
+      "id": "devlog-1580691",
+      "title": "Added Controller Support",
+      "category": "DEVLOG",
+      "date": "2026-07-10",
+      "image": "https://img.itch.zone/aW1hZ2UvNDY4OTg2OS8yODI4ODE2NS5wbmc=/200x112%23c/t6MvRZ.png",
+      "summary": "You can play now with controller similar to keyboard, but there is a twist in the Challenging mode where you need to use Both Analogs to Slice the right beat...",
+      "likes": 1,
+      "url": "https://xtremezero.itch.io/beat-slicer/devlog/1580691/added-controller-support",
+      "gameTitle": "Beat//Slicer"
+    }
+  ],
+  "games": [
+    {
+      "id": "4689869",
+      "title": "Beat//Slicer",
+      "genre": "Rhythm",
+      "status": "Released",
+      "description": "Feel the rhythm and slice the beat in this fast-paced neon cyberpunk experience!",
+      "longDescription": "BEAT SLICER: Feel the Beat. Slice the Rhythm.\n\nTest your reflexes in Beat Slicer, a high-speed rhythm game where precision is everything. Swipe your mouse to slice through approaching notes, or combine mouse and keyboard controls (WASD/Arrows) to push the challenge and maximize your score.\n\nFeatures:\n- Infinite Replayability: Load your own music collection. The audio-analysis engine automatically generates custom, rhythmic levels for any track you choose.\n- Audio-Reactive Cyberpunk Visuals: Immerse yourself in a neon-drenched synthwave world. The environment pulses to the music, featuring dynamic lighting, explosive particle effects, and camera shakes on massive bass drops.\n- Master the Mechanics: Match your strikes to the beat. Slice Directional Arrows in the exact direction they point, or freestyle through Dots from any angle.\n- High-Stakes Scoring: String together perfect hits to build your combo multiplier. One miss resets your multiplier to zero.\n- Two Ways to Play: Choose Mouse-Only Mode for fluid, sweeping slices, or Mouse + Keyboard Mode for maximum challenge.\n- Buttery-Smooth Performance: Built from the ground up for minimal input lag and ultra-fluid frame rates.\n- Open Source & Community Driven: Shape the future of the game. Beat Slicer is fully open source and evolves directly alongside its community.",
+      "image": "https://img.itch.zone/aW1nLzI4MjYzMDM2LmdpZg==/315x250%23c/9BSzh9.gif",
+      "bannerImage": "https://img.itch.zone/aW1nLzI4NDA4ODI5LmpwZw==/original/hsgniM.jpg",
+      "screenshots": [
+        "https://img.itch.zone/aW1hZ2UvNDY4OTg2OS8yNzk1MDQxMy5wbmc=/original/b597xt.png",
+        "https://img.itch.zone/aW1hZ2UvNDY4OTg2OS8yNzk1MDQxNy5wbmc=/original/C10vRe.png",
+        "https://img.itch.zone/aW1hZ2UvNDY4OTg2OS8yODI4ODE2NC5wbmc=/original/WRrZk3.png",
+        "https://img.itch.zone/aW1hZ2UvNDY4OTg2OS8yODI4ODE2NS5wbmc=/original/1wKoC3.png",
+        "https://img.itch.zone/aW1hZ2UvNDY4OTg2OS8yODI4ODE2Ny5wbmc=/original/1HADZY.png",
+        "https://img.itch.zone/aW1hZ2UvNDY4OTg2OS8yODI4ODE2Ni5wbmc=/original/Xsu4HH.png"
+      ],
+      "price": "$5",
+      "url": "https://xtremezero.itch.io/beat-slicer",
+      "platforms": [
+        "Windows"
+      ],
+      "madeWith": "Phaser",
+      "tags": [
+        "beat",
+        "customizable",
+        "Cyberpunk",
+        "Music",
+        "Neon",
+        "Open Source",
+        "Procedural Generation"
+      ],
+      "rating": 5.0,
+      "ratingCount": 1,
+      "publishedDate": "2026-06-18",
+      "updatedDate": "2026-07-10",
+      "releaseDate": "2026-06-20",
+      "devlogs": [
+        {
+          "id": "1580691",
+          "title": "Added Controller Support",
+          "date": "2026-07-10",
+          "summary": "You can play now with controller similar to keyboard, but there is a twist in the Challenging mode where you need to use Both Analogs to Slice the right beat...",
+          "likes": 1,
+          "url": "https://xtremezero.itch.io/beat-slicer/devlog/1580691/added-controller-support",
+          "image": "https://img.itch.zone/aW1hZ2UvNDY4OTg2OS8yODI4ODE2NS5wbmc=/200x112%23c/t6MvRZ.png"
+        }
+      ]
+    },
+    {
+      "id": "2690434",
+      "title": "Naruto: Tree Climbing Training",
+      "genre": "Casual",
+      "status": "Released",
+      "description": "Infinite reflex-driven chakra control climbing training.",
+      "longDescription": "Relive classic ninja training in Naruto: Tree Climbing Training, inspired by classic anime mini-games. Guide your character up an endless, obstacle-strewn tree trunk, managing your momentum and dodging branches, kunai, and barriers along the way. Test your reflexes and see how high you can climb before losing focus.\n\nDisclaimer: This is a fan-made project. The trademark 'Naruto' belongs to Masashi Kishimoto, Viz, and Bandai Namco. No copyright infringement is intended.",
+      "image": "https://img.itch.zone/aW1nLzIxMjMwNDE1LnBuZw==/315x250%23c/h5P%2FIK.png",
+      "bannerImage": "https://img.itch.zone/aW1nLzE2MDM4NzMzLmpwZw==/original/x%2BiP3D.jpg",
+      "screenshots": [
+        "https://img.itch.zone/aW1nLzIxMjMwNDE1LnBuZw==/original/24aT83.png"
+      ],
+      "price": "FREE",
+      "url": "https://xtremezero.itch.io/naruto-tree-climbing-training",
+      "platforms": [
+        "Windows",
+        "Linux"
+      ],
+      "madeWith": "",
+      "tags": [
+        "3D",
+        "Anime",
+        "Casual",
+        "climb",
+        "naruto",
+        "Time Attack"
+      ],
+      "rating": 3.0,
+      "ratingCount": 2,
+      "publishedDate": "",
+      "updatedDate": "",
+      "releaseDate": "2024",
+      "devlogs": []
+    },
+    {
+      "id": "3552266",
+      "title": "رماة حطين",
+      "genre": "Action",
+      "status": "Released",
+      "description": "لعبة قتال تاريخية تكتيكية تدور أحداثها خلال معركة حطين التاريخية.",
+      "longDescription": "رماة حطين هي لعبة قتال تاريخية مليئة بالإثارة، تدور أحداثها خلال معركة حطين الأسطورية عام 1187. يلعب اللاعب دور محارب ماهر في جيش صلاح الدين، ويستخدم مجموعة متنوعة من الأسلحة العربية الأصيلة مثل الأقواس الطويلة، الأقواس المركبة، والسهام النارية لمواجهة قوات الصليبيين. تقدم اللعبة مواجهات سريعة بالرماة، وغارات تكتيكية للفرسان، وبيئات معركة غامرة، وتحدّي اللاعب لتغيير مسار الحرب واستعادة الأرض المقدسة. الاستراتيجية، الدقة، وإتقان فنون القتال في العصور الوسطى هي مفاتيح النصر.",
+      "image": "https://img.itch.zone/aW1nLzIxMTUxOTc4LnBuZw==/315x250%23c/cepSVy.png",
+      "bannerImage": "https://img.itch.zone/aW1nLzIxMTUxOTc4LnBuZw==/315x250%23c/cepSVy.png",
+      "screenshots": [
+        "https://img.itch.zone/aW1nLzIxMTUxOTc4LnBuZw==/original/17KuTM.png"
+      ],
+      "price": "FREE",
+      "url": "https://xtremezero.itch.io/archers-of-hitteen",
+      "platforms": [
+        "Windows"
+      ],
+      "madeWith": "",
+      "tags": [
+        "3D",
+        "FPS"
+      ],
+      "rating": 5.0,
+      "ratingCount": 0,
+      "publishedDate": "",
+      "updatedDate": "",
+      "releaseDate": "2024",
+      "devlogs": []
+    },
+    {
+      "id": "2352677",
+      "title": "Undead X Hunt",
+      "genre": "Puzzle",
+      "status": "Prototype",
+      "description": "A bullet-bending, time-stretching tactical puzzle game.",
+      "longDescription": "Undead X Hunt challenges you to eliminate multiple targets using a single, highly-controlled bullet. Harness gravity, bend trajectories, and manipulate time to maneuver your projectile around obstacles and hit every target in one clean shot. Developed for the Game Off Jam under the theme 'Scale'.\n\nControls:\n- Arrow Keys: Bend bullet trajectory in real-time\n- Space / Shift: Slow down time for precise adjustments",
+      "image": "https://img.itch.zone/aW1nLzEzOTM2NDg2LnBuZw==/315x250%23c/1WJadk.png",
+      "bannerImage": "https://img.itch.zone/aW1nLzEzOTM2NTI2LnBuZw==/original/SFVk6L.png",
+      "screenshots": [
+        "https://img.itch.zone/aW1hZ2UvMjM1MjY3Ny8xMzkzNjQ5MS5wbmc=/original/V2Xd49.png",
+        "https://img.itch.zone/aW1hZ2UvMjM1MjY3Ny8xMzkzNjUwNi5wbmc=/original/dpEdrO.png",
+        "https://img.itch.zone/aW1hZ2UvMjM1MjY3Ny8xMzkzNjUwNy5wbmc=/original/CGz2sL.png"
+      ],
+      "price": "FREE",
+      "url": "https://xtremezero.itch.io/undead-x-hunt",
+      "platforms": [],
+      "madeWith": "",
+      "tags": [
+        "bullet",
+        "time",
+        "Time Attack"
+      ],
+      "rating": 5.0,
+      "ratingCount": 1,
+      "publishedDate": "",
+      "updatedDate": "",
+      "releaseDate": "2024",
+      "devlogs": []
+    },
+    {
+      "id": "1229952",
+      "title": "SkyTowers",
+      "genre": "General",
+      "status": "Released",
+      "description": "An elegant and satisfying physics-based block stacking challenge.",
+      "longDescription": "SkyTowers is a refined physics-based block stacking challenge. Your objective is simple but requires absolute precision: align and stack moving blocks to build the tallest tower possible. As the height increases, the tolerance for error drops, challenging your timing and focus.\n\nFeatures:\n- Satisfying timing mechanics\n- Clean, minimalist aesthetic\n- Intuitive one-tap/click controls suitable for all platforms\n- Audio-reactive elements that respond to successful placements",
+      "image": "https://img.itch.zone/aW1nLzcxNzIzNDcucG5n/315x250%23c/YSjl0M.png",
+      "bannerImage": "https://img.itch.zone/aW1nLzExMzAwODI5LnBuZw==/25x25%23/aABZPN.png",
+      "screenshots": [
+        "https://img.itch.zone/aW1hZ2UvMTIyOTk1Mi83MTcyMzUwLnBuZw==/original/A1P4kq.png",
+        "https://img.itch.zone/aW1hZ2UvMTIyOTk1Mi83MTcyMzUzLnBuZw==/original/VXEfMV.png",
+        "https://img.itch.zone/aW1hZ2UvMTIyOTk1Mi83MTcyMzU0LnBuZw==/original/coJu%2BV.png",
+        "https://img.itch.zone/aW1hZ2UvMTIyOTk1Mi83MTcyMzUxLnBuZw==/original/7VO0Tr.png"
+      ],
+      "price": "FREE",
+      "url": "https://xtremezero.itch.io/skytowers",
+      "platforms": [
+        "Web"
+      ],
+      "madeWith": "Godot",
+      "tags": [
+        "Arcade",
+        "Casual",
+        "mobile",
+        "stack"
+      ],
+      "rating": 4.3,
+      "ratingCount": 3,
+      "publishedDate": "",
+      "updatedDate": "",
+      "releaseDate": "2024",
+      "devlogs": []
+    },
+    {
+      "id": "902915",
+      "title": "CrashCourseThunderTrigger",
+      "genre": "Puzzle",
+      "status": "Prototype",
+      "description": "Decrypt the blackbox and restore flight controls in a severe storm.",
+      "longDescription": "A high-stakes puzzle thriller set aboard a passenger aircraft during a severe electrical storm. Following a lightning strike, a mysterious onboard blackbox is triggered, compromising the plane's controls. Decrypt the system, solve complex locking mechanisms, and restore flight control before the aircraft crashes.\n\nFeatures:\n- Tense, time-critical puzzle-solving gameplay\n- Rich atmospheric design and lighting\n- Exploring early experimentation with Unigine Engine",
+      "image": "https://img.itch.zone/aW1nLzUwOTgwOTAucG5n/315x250%23c/TzDfMQ.png",
+      "bannerImage": "https://img.itch.zone/aW1nLzUxMDEyMDQucG5n/original/92MFRZ.png",
+      "screenshots": [
+        "https://img.itch.zone/aW1nLzUwOTgwOTAucG5n/original/iOiSdk.png"
+      ],
+      "price": "FREE",
+      "url": "https://xtremezero.itch.io/crashcoursethundertrigger",
+      "platforms": [
+        "Windows",
+        "Linux"
+      ],
+      "madeWith": "",
+      "tags": [
+        "FPS",
+        "story"
+      ],
+      "rating": 4.0,
+      "ratingCount": 1,
+      "publishedDate": "",
+      "updatedDate": "",
+      "releaseDate": "2024",
+      "devlogs": []
+    },
+    {
+      "id": "725940",
+      "title": "Pandora's Box",
+      "genre": "Puzzle",
+      "status": "Released",
+      "description": "A psychological time-bending puzzle adventure.",
+      "longDescription": "Pandora's Box is an atmospheric puzzle experience where time becomes your greatest adversary. When you lose control of time, you realize you are a hostage to the box's complex reality. Solve intricate puzzles, manipulate temporal loops, and discover a way out of the box before time runs out.",
+      "image": "https://img.itch.zone/aW1nLzQwMzA1MzcuZ2lm/315x250%23c/SU9SjC.gif",
+      "bannerImage": "https://img.itch.zone/aW1nLzQwMjgzOTQucG5n/original/tVUQcn.png",
+      "screenshots": [
+        "https://img.itch.zone/aW1hZ2UvNzI1OTQwLzQwMjgzMTQucG5n/original/t5%2B9gc.png",
+        "https://img.itch.zone/aW1hZ2UvNzI1OTQwLzQwMjgzMTUucG5n/original/J7%2F%2BGf.png",
+        "https://img.itch.zone/aW1hZ2UvNzI1OTQwLzQwMjgzMTcucG5n/original/Q6z5mP.png"
+      ],
+      "price": "FREE",
+      "url": "https://xtremezero.itch.io/pandorasbox",
+      "platforms": [
+        "Windows"
+      ],
+      "madeWith": "Blender, Godot",
+      "tags": [
+        "Mystery",
+        "Time Attack"
+      ],
+      "rating": 5.0,
+      "ratingCount": 0,
+      "publishedDate": "",
+      "updatedDate": "",
+      "releaseDate": "2024",
+      "devlogs": []
+    },
+    {
+      "id": "502176",
+      "title": "SpotLightLogo",
+      "genre": "Puzzle",
+      "status": "",
+      "description": "Manipulate 3D shapes to project logo silhouettes.",
+      "longDescription": "A creative perspective-based puzzle game submitted to the Godot Wild Jam (Theme: Shadows). Rotate intricate 3D shapes on three axes to project light, casting shadows that form recognizable logos and symbols. Train your spatial awareness and perspective to find order in the dark.\n\nControls:\n- W/S, A/D, Q/E: Rotate the 3D model in three dimensions\n- Focus on aligning the silhouette with the target",
+      "image": "https://img.itch.zone/aW1nLzI1OTkyMDcucG5n/315x250%23c/dVvaed.png",
+      "bannerImage": "https://img.itch.zone/aW1nLzI1OTkyMDcucG5n/315x250%23c/dVvaed.png",
+      "screenshots": [
+        "https://img.itch.zone/aW1hZ2UvNTAyMTc2LzI1OTkyMjguanBn/original/MjAEP1.jpg",
+        "https://img.itch.zone/aW1hZ2UvNTAyMTc2LzI1OTkyMjkuanBn/original/oysr21.jpg"
+      ],
+      "price": "FREE",
+      "url": "https://xtremezero.itch.io/spotlightlogo",
+      "platforms": [
+        "Windows"
+      ],
+      "madeWith": "",
+      "tags": [],
+      "rating": 5.0,
+      "ratingCount": 0,
+      "publishedDate": "",
+      "updatedDate": "",
+      "releaseDate": "2024",
+      "devlogs": []
+    },
+    {
+      "id": "2557095",
+      "title": "humpty-dumpty-finding-beans",
+      "genre": "Strategy",
+      "status": "In development",
+      "description": "2-Player hidden object grid game inspired by classic strategy board games.",
+      "longDescription": "الهدف من اللعبة :\nعلى كل لاعب ايجاد البذور المخفية في حقل اللاعب الاخر \n\nBattleShip و Plants Vs Zombies  اللعبة مستوحاة من لعبة ",
+      "image": "https://img.itch.zone/aW1nLzE1MjQyMjI2LnBuZw==/315x250%23c/lwGG6u.png",
+      "bannerImage": "https://img.itch.zone/aW1nLzE1MjQyMjI2LnBuZw==/315x250%23c/lwGG6u.png",
+      "screenshots": [
+        "https://img.itch.zone/aW1hZ2UvMjU1NzA5NS8xNTI1NTkzMC5wbmc=/original/lqk4KO.png",
+        "https://img.itch.zone/aW1hZ2UvMjU1NzA5NS8xNTI1NjA2MS5wbmc=/original/RYO0uw.png",
+        "https://img.itch.zone/aW1hZ2UvMjU1NzA5NS8xNTI1NjE1Mi5wbmc=/original/%2BmhJ0e.png",
+        "https://img.itch.zone/aW1hZ2UvMjU1NzA5NS8xNTI1NjE3MC5wbmc=/original/0ywWEE.png",
+        "https://img.itch.zone/aW1hZ2UvMjU1NzA5NS8xNTI1NjIzMy5wbmc=/original/Xq2hfO.png"
+      ],
+      "price": "FREE",
+      "url": "https://xtremezero.itch.io/humpty-dumpty-finding-beans",
+      "platforms": [],
+      "madeWith": "",
+      "tags": [
+        "finding",
+        "hiding",
+        "minigames",
+        "search",
+        "Two Player"
+      ],
+      "rating": 5.0,
+      "ratingCount": 0,
+      "publishedDate": "",
+      "updatedDate": "",
+      "releaseDate": "2024",
+      "devlogs": [
+        {
+          "id": "691451",
+          "title": "Level design",
+          "date": "2024-03-02",
+          "summary": "finally done with level design , got much work left, and less time :/...",
+          "likes": 0,
+          "url": "https://xtremezero.itch.io/humpty-dumpty-finding-beans/devlog/691451/level-design",
+          "image": "https://img.itch.zone/aW1nLzE1MjQyMjcxLnBuZw==/200x112%23c/9oPj6v.png"
+        },
+        {
+          "id": "691302",
+          "title": "change of scope",
+          "date": "2024-03-02",
+          "summary": "Due to the vague vision of the original idea , I had to strip it down to the following : 2 players in separate farms have to hide 3 objects each, then turn by turn they have to find them , but in each...",
+          "likes": 0,
+          "url": "https://xtremezero.itch.io/humpty-dumpty-finding-beans/devlog/691302/change-of-scope",
+          "image": ""
+        },
+        {
+          "id": "690183",
+          "title": "Current Idea",
+          "date": "2024-03-02",
+          "summary": "Genre : Action , Survival , Strategy , PVP goal : players have to conquest the largest area of the map challenges : Map Tiles can be : Dark / Light / Desert / River/ Pond , players have to choose the...",
+          "likes": 0,
+          "url": "https://xtremezero.itch.io/humpty-dumpty-finding-beans/devlog/690183/current-idea",
+          "image": ""
+        },
+        {
+          "id": "690199",
+          "title": "Interface Design",
+          "date": "2024-03-02",
+          "summary": "an initial plan for the UI / GameArea (might include Split Screen)...",
+          "likes": 0,
+          "url": "https://xtremezero.itch.io/humpty-dumpty-finding-beans/devlog/690199/interface-design",
+          "image": "https://img.itch.zone/aW1nLzE1MjE3NTE3LmpwZw==/200x112%23c/b2lio8.jpg"
+        },
+        {
+          "id": "690315",
+          "title": "grid movement",
+          "date": "2024-03-02",
+          "summary": "Managed to make the character move on a grid, and plant a flower (that looks like a poop) satisfied with the feel of the game , more like bomber man :3...",
+          "likes": 0,
+          "url": "https://xtremezero.itch.io/humpty-dumpty-finding-beans/devlog/690315/grid-movement",
+          "image": "https://img.itch.zone/aW1nLzE1MjIwMTk0LnBuZw==/200x112%23c/aSTeEJ.png"
+        },
+        {
+          "id": "690643",
+          "title": "Initial visuals",
+          "date": "2024-03-01",
+          "summary": "initial visual assets used in the game :...",
+          "likes": 1,
+          "url": "https://xtremezero.itch.io/humpty-dumpty-finding-beans/devlog/690643/initial-visuals",
+          "image": "https://img.itch.zone/aW1nLzE1MjI2NzQ2LnBuZw==/200x112%23c/16UdE4.png"
+        },
+        {
+          "id": "690179",
+          "title": "Theme Revealed",
+          "date": "2024-02-29",
+          "summary": "the theme is : Planting games that come to mind : Super Mario (Platforming) Plants vs Zombies (Fighting/Strategy/Survival) Stardew valley (Survival/Cozy) Farmville (Cozy/Strategy)...",
+          "likes": 1,
+          "url": "https://xtremezero.itch.io/humpty-dumpty-finding-beans/devlog/690179/theme-revealed",
+          "image": ""
+        }
+      ]
+    },
+    {
+      "id": "752070",
+      "title": "Gates of Avalon",
+      "genre": "Card Game",
+      "status": "Released",
+      "description": "A strategic tactical card game inspired by Tokyo Xanadu.",
+      "longDescription": "A faithful, fan-made recreation of the mini-card-game 'Gates of Avalon' featured in Nihon Falcom's Tokyo Xanadu. Play against a cunning AI opponent, managing a hand of five cards. Place cards strategically to keep the sum of your side higher than your opponent's, using special abilities to turn the tide. A draw clears the field and triggers a redraw.\n\nSpecial Thanks: Nihon Falcom, XOiRD",
+      "image": "https://img.itch.zone/aW1nLzQxOTg3NjQucG5n/315x250%23c/VFSKb2.png",
+      "bannerImage": "https://img.itch.zone/aW1nLzQxOTg3NjQucG5n/315x250%23c/VFSKb2.png",
+      "screenshots": [
+        "https://img.itch.zone/aW1nLzQxOTg3NjQucG5n/original/KtGlJ0.png"
+      ],
+      "price": "FREE",
+      "url": "https://xtremezero.itch.io/gates-of-avalon",
+      "platforms": [
+        "Web",
+        "Windows"
+      ],
+      "madeWith": "Godot",
+      "tags": [
+        "Game Boy",
+        "Pixel Art",
+        "Singleplayer"
+      ],
+      "rating": 2.0,
+      "ratingCount": 2,
+      "publishedDate": "",
+      "updatedDate": "",
+      "releaseDate": "2024",
+      "devlogs": []
+    },
+    {
+      "id": "1461837",
+      "title": "خمسة",
+      "genre": "Card Game",
+      "status": "Released",
+      "description": "لعبة بطاقات سريعة ومسلية تعتمد على سرعة البديهة وتصنيف الكلمات.",
+      "longDescription": "خمسة هي لعبة بطاقات تفاعلية مستوحاة من اللعبة التقليدية الشهيرة (اسم، حيوان، نبات، جماد، بلاد). اختبر سرعة بديهتك ومهاراتك اللغوية في تحدٍّ شيق وحماسي للبحث عن الكلمات المناسبة قبل انتهاء الوقت المتاح، مصممة للمتعة العائلية واللعب الجماعي عبر الويب.",
+      "image": "https://img.itch.zone/aW1nLzI0NzUzMzQ3LnBuZw==/315x250%23c/TLHmgi.png",
+      "bannerImage": "https://img.itch.zone/aW1nLzI0NzUzMzQ3LnBuZw==/315x250%23c/TLHmgi.png",
+      "screenshots": [
+        "https://img.itch.zone/aW1hZ2UvMTQ2MTgzNy8yNDc1MjY4Mi5wbmc=/original/PiEQ%2BP.png"
+      ],
+      "price": "FREE",
+      "url": "https://xtremezero.itch.io/5amsa",
+      "platforms": [
+        "Web"
+      ],
+      "madeWith": "",
+      "tags": [
+        "Casual",
+        "Singleplayer"
+      ],
+      "rating": 5.0,
+      "ratingCount": 0,
+      "publishedDate": "",
+      "updatedDate": "",
+      "releaseDate": "2024",
+      "devlogs": []
+    },
+    {
+      "id": "504816",
+      "title": "AV Rebel",
+      "genre": "Racing",
+      "status": "Prototype",
+      "description": "Local 1 or 2 player drone racing simulator.",
+      "longDescription": "Experience drone racing in AV Rebel, a simulator offering single-player time trials and head-to-head local multiplayer. Master flight dynamics, control your speed, and navigate through challenging aerial courses with precise drone controls.",
+      "image": "https://img.itch.zone/aW1nLzI2MTUxNTEuanBn/315x250%23c/QYAIQS.jpg",
+      "bannerImage": "https://img.itch.zone/aW1nLzI2MTUyMDUuanBn/original/dpa5tM.jpg",
+      "screenshots": [
+        "https://img.itch.zone/aW1hZ2UvNTA0ODE2LzI2MTUxNjguanBn/original/gSm1M8.jpg",
+        "https://img.itch.zone/aW1hZ2UvNTA0ODE2LzI2MTUxNzEuanBn/original/A0iOVy.jpg"
+      ],
+      "price": "FREE",
+      "url": "https://xtremezero.itch.io/av-rebel",
+      "platforms": [
+        "Windows"
+      ],
+      "madeWith": "",
+      "tags": [
+        "2-players",
+        "bge",
+        "Blender",
+        "drone",
+        "race",
+        "upbge"
+      ],
+      "rating": 5.0,
+      "ratingCount": 0,
+      "publishedDate": "",
+      "updatedDate": "",
+      "releaseDate": "2024",
+      "devlogs": []
+    },
+    {
+      "id": "320327",
+      "title": "Hexecal",
+      "genre": "Role Playing",
+      "status": "Released",
+      "description": "Arcade color-matching shield defense of the Hex-Core.",
+      "longDescription": "Protect the critical Hex-Core from incoming waves of colored attacks in this fast-paced, arcade-style color-matching defense game. Rotate the defensive shields to match incoming threats, build combo multipliers, and post your high score.\n\nNote: For web-based play, running in fullscreen mode is recommended.",
+      "image": "https://img.itch.zone/aW1nLzE1ODAxNDkucG5n/315x250%23c/EAC7%2BJ.png",
+      "bannerImage": "https://img.itch.zone/aW1nLzE1ODAxNDkucG5n/315x250%23c/EAC7%2BJ.png",
+      "screenshots": [
+        "https://img.itch.zone/aW1hZ2UvMzIwMzI3LzE1ODAxNTEuanBlZw==/original/naXyw0.jpeg",
+        "https://img.itch.zone/aW1hZ2UvMzIwMzI3LzE1ODAxNTIuanBlZw==/original/j34oru.jpeg",
+        "https://img.itch.zone/aW1hZ2UvMzIwMzI3LzE1ODAxNTQuanBlZw==/original/Ey0p3P.jpeg",
+        "https://img.itch.zone/aW1hZ2UvMzIwMzI3LzE1ODAxNTcuanBlZw==/original/GCx4Zq.jpeg",
+        "https://img.itch.zone/aW1hZ2UvMzIwMzI3LzE1ODAxNTYuanBlZw==/original/MFawqw.jpeg",
+        "https://img.itch.zone/aW1hZ2UvMzIwMzI3LzE1ODAxNTUuanBlZw==/original/geUM93.jpeg"
+      ],
+      "price": "FREE",
+      "url": "https://xtremezero.itch.io/hexecal",
+      "platforms": [
+        "Web",
+        "Windows",
+        "Linux",
+        "Android"
+      ],
+      "madeWith": "Godot",
+      "tags": [
+        "block",
+        "color",
+        "core",
+        "defend",
+        "Endless",
+        "game",
+        "hex",
+        "hexecal",
+        "protect",
+        "switch"
+      ],
+      "rating": 5.0,
+      "ratingCount": 0,
+      "publishedDate": "",
+      "updatedDate": "",
+      "releaseDate": "2024",
+      "devlogs": []
+    },
+    {
+      "id": "858650",
+      "title": "Eat Me",
+      "genre": "Platformer",
+      "status": "Prototype",
+      "description": "A whimsical, physics-based racing platformer up Wafer Mountain.",
+      "longDescription": "Join a cute candy corn character in a high-stakes, physics-based race to climb Wafer Mountain. Avoid obstacles, master wafer platforms, and utilize momentum in this challenging and lighthearted platformer.\n\nRequirements:\n- OS: Windows 7 or above (64-bit)\n- RAM: 4 GB minimum\n- GPU: Dedicated graphics processor recommended for stable performance",
+      "image": "https://img.itch.zone/aW1nLzQ4MTk2MzEucG5n/315x250%23c/NL4aFS.png",
+      "bannerImage": "https://img.itch.zone/aW1nLzQ4MTk0MzcuanBn/original/xi2GCP.jpg",
+      "screenshots": [
+        "https://img.itch.zone/aW1hZ2UvODU4NjUwLzQ4MTk0MzAucG5n/original/zpie%2F7.png",
+        "https://img.itch.zone/aW1hZ2UvODU4NjUwLzQ4MTk0MzQucG5n/original/J6axfs.png"
+      ],
+      "price": "FREE",
+      "url": "https://xtremezero.itch.io/eat-me",
+      "platforms": [
+        "Windows"
+      ],
+      "madeWith": "",
+      "tags": [
+        "3D Platformer",
+        "Cute",
+        "Parkour",
+        "Singleplayer"
+      ],
+      "rating": 5.0,
+      "ratingCount": 0,
+      "publishedDate": "",
+      "updatedDate": "",
+      "releaseDate": "2024",
+      "devlogs": []
+    },
+    {
+      "id": "720933",
+      "title": "Showdown Duel",
+      "genre": "Fighting",
+      "status": "",
+      "description": "A local multiplayer reflex shootout duel.",
+      "longDescription": "A minimalist local multiplayer party game testing your raw reflexes. Face off against a friend in a classic western shootout duel. The player with the faster reaction time pulls the trigger and wins. Simple, fast-paced, and highly competitive.\n\nControls:\n- Player 1 (Left): A, S, D keys\n- Player 2 (Right): Left, Down, Right arrow keys",
+      "image": "https://img.itch.zone/aW1nLzM5OTY4NzYucG5n/315x250%23c/ROxL5s.png",
+      "bannerImage": "https://img.itch.zone/aW1nLzM5OTY4NzYucG5n/315x250%23c/ROxL5s.png",
+      "screenshots": [
+        "https://img.itch.zone/aW1nLzM5OTY4NzYucG5n/original/RehPhe.png"
+      ],
+      "price": "FREE",
+      "url": "https://xtremezero.itch.io/showdown-duel",
+      "platforms": [],
+      "madeWith": "",
+      "tags": [],
+      "rating": 5.0,
+      "ratingCount": 0,
+      "publishedDate": "",
+      "updatedDate": "",
+      "releaseDate": "2024",
+      "devlogs": []
+    },
+    {
+      "id": "441108",
+      "title": "ShockWaveZ",
+      "genre": "Platformer",
+      "status": "Prototype",
+      "description": "Endless side-scrolling platformer with gravity manipulation.",
+      "longDescription": "Control gravity and guide your character through an unpredictable, hazard-filled corridor in ShockWaveZ. Flip gravity on the fly to dodge obstacles, slide on ceilings, and survive as long as possible in this challenging retro-arcade game.",
+      "image": "https://img.itch.zone/aW1nLzIyMTg1NjYucG5n/315x250%23c/s%2FWpsL.png",
+      "bannerImage": "https://img.itch.zone/aW1nLzIyMTg1NjYucG5n/315x250%23c/s%2FWpsL.png",
+      "screenshots": [
+        "https://img.itch.zone/aW1hZ2UvNDQxMTA4LzIyMTg1NjcucG5n/original/qZYlN%2B.png"
+      ],
+      "price": "FREE",
+      "url": "https://xtremezero.itch.io/shockwavez",
+      "platforms": [],
+      "madeWith": "",
+      "tags": [
+        "2D",
+        "8-Bit",
+        "Arcade",
+        "Endless",
+        "Game Jam",
+        "godot-engine",
+        "Pixel Art",
+        "Retro"
+      ],
+      "rating": 5.0,
+      "ratingCount": 0,
+      "publishedDate": "",
+      "updatedDate": "",
+      "releaseDate": "2024",
+      "devlogs": []
+    },
+    {
+      "id": "602793",
+      "title": "DoomVR",
+      "genre": "Shooter",
+      "status": "Prototype",
+      "description": "Look-to-move virtual reality shooter prototype.",
+      "longDescription": "A simple virtual reality action prototype inspired by classic first-person shooters. Navigate the environment and eliminate enemies using a look-to-move navigation system and gaze-based targeting. Built to experiment with immersive VR control schemes.",
+      "image": "https://img.itch.zone/aW1nLzMxOTYwMzYucG5n/315x250%23c/OUOEvV.png",
+      "bannerImage": "https://img.itch.zone/aW1nLzMxOTYxMzMuanBn/original/nUX9v2.jpg",
+      "screenshots": [
+        "https://img.itch.zone/aW1hZ2UvNjAyNzkzLzMxOTYwNDEucG5n/original/A7ZikF.png",
+        "https://img.itch.zone/aW1hZ2UvNjAyNzkzLzMxOTYwNDAucG5n/original/ssj8kD.png"
+      ],
+      "price": "FREE",
+      "url": "https://xtremezero.itch.io/doomvr",
+      "platforms": [
+        "Windows",
+        "Android"
+      ],
+      "madeWith": "",
+      "tags": [
+        "android",
+        "boss",
+        "Doom",
+        "Virtual Reality (VR)"
+      ],
+      "rating": 5.0,
+      "ratingCount": 0,
+      "publishedDate": "",
+      "updatedDate": "",
+      "releaseDate": "2024",
+      "devlogs": []
+    },
+    {
+      "id": "354892",
+      "title": "Count Up",
+      "genre": "Puzzle",
+      "status": "Released",
+      "description": "Rushed math addition puzzle game.",
+      "longDescription": "How To Play:\nClick on the buttons that contain numbers to add them to the counter (in the middle). You must reach the target sum before the timer runs out.",
+      "image": "https://img.itch.zone/aW1nLzE5ODg5MjUuanBn/315x250%23c/bOLh%2F4.jpg",
+      "bannerImage": "https://img.itch.zone/aW1nLzE5ODg5MjUuanBn/315x250%23c/bOLh%2F4.jpg",
+      "screenshots": [
+        "https://img.itch.zone/aW1nLzE5ODg5MjUuanBn/original/hF4zFB.jpg"
+      ],
+      "price": "FREE",
+      "url": "https://xtremezero.itch.io/count-up",
+      "platforms": [
+        "Web"
+      ],
+      "madeWith": "",
+      "tags": [],
+      "rating": 5.0,
+      "ratingCount": 0,
+      "publishedDate": "",
+      "updatedDate": "",
+      "releaseDate": "2024",
+      "devlogs": []
+    },
+    {
+      "id": "578566",
+      "title": "Cannon Balloon",
+      "genre": "Platformer",
+      "status": "Prototype",
+      "description": "Navigate a balloon using cannons in this physics-based platformer.",
+      "longDescription": "Control a balloon launched from cannons in a physics-based navigational puzzle platformer. Dodge obstacles, adjust your trajectory, and master momentum to safely reach the goal.",
+      "image": "https://img.itch.zone/aW1nLzMwNDcwMDkucG5n/315x250%23c/TPgfqZ.png",
+      "bannerImage": "https://img.itch.zone/aW1nLzMwNDcwNDUucG5n/original/csaTj4.png",
+      "screenshots": [
+        "https://img.itch.zone/aW1hZ2UvNTc4NTY2LzMwNDcwMTEucG5n/original/xVNijS.png"
+      ],
+      "price": "FREE",
+      "url": "https://xtremezero.itch.io/cannon-balloon",
+      "platforms": [],
+      "madeWith": "Blender, Godot, GIMP",
+      "tags": [
+        "3D",
+        "3D Platformer",
+        "Physics"
+      ],
+      "rating": 5.0,
+      "ratingCount": 0,
+      "publishedDate": "",
+      "updatedDate": "",
+      "releaseDate": "2024",
+      "devlogs": []
+    },
+    {
+      "id": "294811",
+      "title": "Lost Chroma (GAME JAM ENTRY)",
+      "genre": "Puzzle",
+      "status": "Prototype",
+      "description": "Dark Souls flavored color puzzle game.",
+      "longDescription": "Story: A mystical griffin extracts the colors from the world. A brave wizard attempts to return the colors back by solving the griffin's puzzles.",
+      "image": "https://img.itch.zone/aW1hZ2UvMjk0ODExLzE0Mzg5MTcucG5n/315x250%23c/TYkMlU.png",
+      "bannerImage": "https://img.itch.zone/aW1hZ2UvMjk0ODExLzE0Mzg5MTcucG5n/315x250%23c/TYkMlU.png",
+      "screenshots": [
+        "https://img.itch.zone/aW1hZ2UvMjk0ODExLzE0MzkwMTkucG5n/original/aYWTt9.png",
+        "https://img.itch.zone/aW1hZ2UvMjk0ODExLzE0MzkwMjAucG5n/original/wPOxNl.png"
+      ],
+      "price": "FREE",
+      "url": "https://xtremezero.itch.io/lost-chroma",
+      "platforms": [
+        "Windows"
+      ],
+      "madeWith": "Blender",
+      "tags": [
+        "chroma",
+        "Dark",
+        "dark-souls",
+        "gamezanga",
+        "gamezanga8",
+        "hard",
+        "lost"
+      ],
+      "rating": 5.0,
+      "ratingCount": 0,
+      "publishedDate": "",
+      "updatedDate": "",
+      "releaseDate": "2024",
+      "devlogs": []
+    },
+    {
+      "id": "4140653",
+      "title": "Al Taibeen Restaurant",
+      "genre": "Simulation",
+      "status": "Released",
+      "description": "A charming culinary simulation celebrating traditional Arabian recipes.",
+      "longDescription": "Manage a bustling kitchen in Al Taibeen Restaurant, a culinary simulation dedicated to traditional Gulf recipes. Coordinate orders, prepare authentic local dishes, and satisfy hungry diners in this retro-styled restaurant management game.",
+      "image": "https://img.itch.zone/aW1nLzI0Njc0MzcyLnBuZw==/315x250%23c/ZV75A%2B.png",
+      "bannerImage": "https://img.itch.zone/aW1nLzI0Njc0MzcyLnBuZw==/315x250%23c/ZV75A%2B.png",
+      "screenshots": [
+        "https://img.itch.zone/aW1hZ2UvNDE0MDY1My8yNDY3NDQ1MC5wbmc=/original/hifaXk.png",
+        "https://img.itch.zone/aW1hZ2UvNDE0MDY1My8yNDY3NDQ2OS5wbmc=/original/1Pofll.png",
+        "https://img.itch.zone/aW1hZ2UvNDE0MDY1My8yNDY3NDQ3Mi5wbmc=/original/V%2Bml2i.png",
+        "https://img.itch.zone/aW1hZ2UvNDE0MDY1My8yNDY3NDQ5OC5wbmc=/original/1Lu%2Fgp.png"
+      ],
+      "price": "FREE",
+      "url": "https://raneem.itch.io/al-taibeen-restaurant",
+      "platforms": [
+        "Windows"
+      ],
+      "madeWith": "Unity, Blender, Adobe Photoshop",
+      "tags": [
+        "3D",
+        "Funny",
+        "Photorealistic",
+        "restaurant",
+        "Story Rich"
+      ],
+      "rating": 5.0,
+      "ratingCount": 0,
+      "publishedDate": "",
+      "updatedDate": "",
+      "releaseDate": "2024",
+      "devlogs": []
+    }
+  ],
+  "tools": [
+    {
+      "id": "2355597",
+      "title": "PNG Sequence to Transparent Webm converter For Unity",
+      "genre": "Tool",
+      "status": "Released",
+      "description": "Unity editor extension converting PNG sequences to transparent VP8 WebM videos.",
+      "longDescription": "Requires FFMPEG to be installed.\nTested on Unity 6\n\nThe PNG to WebM Converter is a Unity plugin that makes it super easy to turn a series of PNG images (like sprite sheets or frame sequences) into a WebM video with transparency. WebM is great for web apps, especially when you need videos with see-through backgrounds. This plugin uses VP8 encoding to keep the alpha (transparency) intact.\n\nKey Features:\n- Convert PNG Sequences to WebM: Turn PNG image sequences (like image1.png, image2.png, etc.) into a WebM video while keeping the transparency. Perfect for animated sprites, UI elements, and effects in games or web apps.\n- Auto File Name Detection: The plugin automatically figures out your file naming pattern from the first selected PNG image, saving you time.\n- Adjustable Frame Rate: Set the frame rate for your WebM video, so you control how fast or slow your animation plays.\n- FFmpeg Integration: Uses FFmpeg (a popular video tool) to handle the conversion and keep the alpha transparency in the WebM file.\n- Custom File Name: Choose a name for the output WebM file, making it easy to organize your projects.\n- Optional FFmpeg Path: If FFmpeg isn’t set up on your system, you can manually point the plugin to its location.\n- Easy UI: The user-friendly interface in Unity lets you select your first frame, adjust the frame rate, set the file name, and more—all with just a few clicks.\n- Clear Feedback: After converting, the plugin will either show you success with the output folder opening, or an error message to help fix any issues.\n\nTip: Don’t forget to enable transcoding and the \"Keep Alpha\" option in the video player to preserve transparency in the final video.",
+      "image": "https://img.itch.zone/aW1nLzE5NDE3MzQ0LnBuZw==/315x250%23c/MDxrkh.png",
+      "bannerImage": "https://img.itch.zone/aW1nLzE5NDE3MzQ0LnBuZw==/315x250%23c/MDxrkh.png",
+      "screenshots": [
+        "https://img.itch.zone/aW1hZ2UvMjM1NTU5Ny8xOTQxNzM0OC5wbmc=/original/t3Tu%2BT.png"
+      ],
+      "price": "$2.99",
+      "url": "https://xtremezero.itch.io/png-sequence-to-transparent-webm-converter",
+      "platforms": [],
+      "madeWith": "",
+      "tags": [
+        "addon",
+        "converter",
+        "image",
+        "image-sequence",
+        "PNG",
+        "sequence",
+        "transparency",
+        "Unity",
+        "webm"
+      ],
+      "rating": 5.0,
+      "ratingCount": 0,
+      "publishedDate": "",
+      "updatedDate": "2026-07-02",
+      "releaseDate": "2024",
+      "devlogs": []
+    },
+    {
+      "id": "771584",
+      "title": "Atlas Tile Wrapper",
+      "genre": "Tool",
+      "status": "Released",
+      "description": "Seamless tile wrapper shader for Atlas textures in Blender and Godot.",
+      "longDescription": "Atlas Tile Wrapper\n\nThe Atlas Tile Wrapper is a specialized utility designed to enable seamless texture repetition for individual tiles within an atlas. Much like the functionality of trim sheets, it allows you to repeat sub-textures in both directions while maintaining the efficiency of a single texture sheet.\n\nBenefits:\n- Performance Optimization: Significantly reduces draw calls by batching multiple objects into a single material.\n- Enhanced Resolution: Achieve higher visual fidelity using smaller source textures through tiled repetition.\n- Workflow Efficiency: Streamlines material management and accelerates the baking process for complex assets.",
+      "image": "https://img.itch.zone/aW1nLzQ2NDgzMTcuZ2lm/315x250%23c/62K19a.gif",
+      "bannerImage": "https://img.itch.zone/aW1nLzQ2NDgzMTcuZ2lm/315x250%23c/62K19a.gif",
+      "screenshots": [
+        "https://img.itch.zone/aW1hZ2UvNzcxNTg0LzQ2NDc4NjguZ2lm/original/L8a2JG.gif",
+        "https://img.itch.zone/aW1hZ2UvNzcxNTg0LzQ2NDc4ODQuZ2lm/original/YIU0rR.gif"
+      ],
+      "price": "FREE",
+      "url": "https://xtremezero.itch.io/atlas-tile-wrapper",
+      "platforms": [],
+      "madeWith": "",
+      "tags": [
+        "atlas",
+        "Blender",
+        "Godot",
+        "texture",
+        "Tilemap"
+      ],
+      "rating": 5.0,
+      "ratingCount": 1,
+      "publishedDate": "",
+      "updatedDate": "",
+      "releaseDate": "2024",
+      "devlogs": []
+    },
+    {
+      "id": "806406",
+      "title": "CSG Mesh Exporter - GodotEngine",
+      "genre": "Tool",
+      "status": "Released",
+      "description": "Export Godot CSG meshes to .OBJ files in one click.",
+      "longDescription": "Export CSG Meshes with a single click\n\nHow to use:\nCombine all your CSGMeshes under a CSGCombiner node then press (Export to OBJ) in the Spatial Container Menu.\n\nLimitations:\n- Only works when you select 1 CSGCombiner node (Cant multiselect)\n- Only material diffuse and emission colors will be exported (Textures and maps wont be exported, but you can add them manually in your 3D editing software)\n- CSG Combiner should only contain children made of CSG type (Dont add any other node types)\n\nPlease report bugs if you find any.\n\nGithub Repository:\nhttps://github.com/mohammedzero43/CSGExport-Godot",
+      "image": "https://img.itch.zone/aW1nLzY1NTc2NjcucG5n/315x250%23c/WkMIkq.png",
+      "bannerImage": "https://img.itch.zone/aW1nLzQ1MTg4MTcucG5n/original/zAWl8Q.png",
+      "screenshots": [
+        "https://img.itch.zone/aW1hZ2UvODA2NDA2LzQ1MTg3NTgucG5n/original/6kO2Eb.png",
+        "https://img.itch.zone/aW1hZ2UvODA2NDA2LzQ1MTg3NzIucG5n/original/kwXayY.png"
+      ],
+      "price": "FREE",
+      "url": "https://xtremezero.itch.io/csg-exporter",
+      "platforms": [],
+      "madeWith": "",
+      "tags": [
+        "csg",
+        "export",
+        "Godot",
+        "mesh",
+        "Modeling",
+        "plugin"
+      ],
+      "rating": 5.0,
+      "ratingCount": 0,
+      "publishedDate": "",
+      "updatedDate": "",
+      "releaseDate": "2024",
+      "devlogs": []
+    },
+    {
+      "id": "866090",
+      "title": "Selection Tools Addon for Godot Engine",
+      "genre": "Tool",
+      "status": "Released",
+      "description": "Advanced select/deselect node hierarchy workflow utility for Godot.",
+      "longDescription": "This addon will give you more control over selecting and deselecting objects.\n\nFeatures:\n- Select / Deselect all nodes.\n- Select / Deselect children of currently selected nodes.\n- Select/ Deselect objects by name or node type (class).\n- Filter Name and Type Selection to children of currently selected nodes.\n- Invert current selection.",
+      "image": "https://img.itch.zone/aW1nLzQ4NjM4OTEucG5n/315x250%23c/YCalV1.png",
+      "bannerImage": "https://img.itch.zone/aW1nLzQ4NjM5MDcucG5n/original/zV4p%2Fa.png",
+      "screenshots": [
+        "https://img.itch.zone/aW1hZ2UvODY2MDkwLzQ4NjM5NTEucG5n/original/XOp0tq.png"
+      ],
+      "price": "FREE",
+      "url": "https://xtremezero.itch.io/selection-tools-addon",
+      "platforms": [],
+      "madeWith": "",
+      "tags": [],
+      "rating": 5.0,
+      "ratingCount": 0,
+      "publishedDate": "",
+      "updatedDate": "",
+      "releaseDate": "2024",
+      "devlogs": []
+    },
+    {
+      "id": "806940",
+      "title": "Blender (UPBGE) Sprites",
+      "genre": "Tool",
+      "status": "Released",
+      "description": "Custom sprite animation scripts for Blender Game Engine.",
+      "longDescription": "Steps to setup:\n1. Import a sprite sheet where every frame is in a separate column and every different sprite (stand,jump,walk) is in a separate row\n2. Resize your mesh in edit mode to fit the size you desire\n3. Resize the UVs to fit the first frame only\n4. Create a PythonController in the Sprite Object and connect it to an always sensor with Positive Trigger on\n5. Create properties: sprite_index, image_index, sprite_len, sprite_speed, spr_loop\n\nDemo files and sonic controller examples are included in the package.\n\n* Please Give Credits if used\n\nDisclaimer: All Sonic visuals used in the examples belong to SEGA and I don't own any of them.",
+      "image": "https://img.itch.zone/aW1nLzQ1MjI1MTQuanBn/315x250%23c/1DRf1k.jpg",
+      "bannerImage": "https://img.itch.zone/aW1nLzQ1MjI1MTQuanBn/315x250%23c/1DRf1k.jpg",
+      "screenshots": [
+        "https://img.itch.zone/aW1nLzQ1MjI1MTQuanBn/original/gaWWCW.jpg"
+      ],
+      "price": "FREE",
+      "url": "https://xtremezero.itch.io/blender-upbge-sprites",
+      "platforms": [],
+      "madeWith": "",
+      "tags": [
+        "2D",
+        "Sprites",
+        "upbge"
+      ],
+      "rating": 5.0,
+      "ratingCount": 0,
+      "publishedDate": "",
+      "updatedDate": "",
+      "releaseDate": "2024",
+      "devlogs": []
+    }
+  ],
+  "assets": [
+    {
+      "id": "4505857",
+      "title": "Gulf/Emarati Arab Humanoid Models",
+      "genre": "Assets",
+      "status": "Released",
+      "description": "Rigged Arab Emirati 3D characters in local dress with blendshapes.",
+      "longDescription": "Fully rigged 3D models of Emirati male characters wearing Kandora (traditional male dress) and female characters wearing Abaya (traditional female dress) in FBX format, featuring facial blendshapes.\n\nList of Models in the Pack:\n- Character 001 - Police Officer\n- Character 002 - Military 1\n- Character 003 - Military 2\n- Character 004 to 011 - Male civilian variants\n- Character 012 & 013 - Female civilian variants",
+      "image": "https://img.itch.zone/aW1nLzI2ODYzMzQzLnBuZw==/315x250%23c/iSfIZ2.png",
+      "bannerImage": "https://img.itch.zone/aW1nLzI2ODYzMzQzLnBuZw==/315x250%23c/iSfIZ2.png",
+      "screenshots": [
+        "https://img.itch.zone/aW1nLzI2ODYzMzQzLnBuZw==/original/9KJGHD.png"
+      ],
+      "price": "$25",
+      "url": "https://xtremezero.itch.io/gulf-emarati-arab-humanoid-models",
+      "platforms": [],
+      "madeWith": "",
+      "tags": [],
+      "rating": 5.0,
+      "ratingCount": 0,
+      "publishedDate": "",
+      "updatedDate": "2026-07-07",
+      "releaseDate": "2024",
+      "devlogs": []
+    },
+    {
+      "id": "897219",
+      "title": "Darth Vader - Graphics Showcase",
+      "genre": "General",
+      "status": "Released",
+      "description": "Godot dynamic lighting and material showcase featuring Darth Vader.",
+      "longDescription": "An interactive real-time rendering showcase featuring Darth Vader, built using Godot Engine. Highlights dynamic lighting, metallic reflections, and cinematic post-processing on high-fidelity humanoid models.\n\nDisclaimer: Some assets were pulled from SketchFab.",
+      "image": "https://img.itch.zone/aW1nLzUwNjM4NTkucG5n/315x250%23c/rJTrzi.png",
+      "bannerImage": "https://img.itch.zone/aW1nLzIwNjUxMTYyLnBuZw==/25x25%23/cS72rS.png",
+      "screenshots": [
+        "https://img.itch.zone/aW1nLzUwNjM4NTkucG5n/original/mx7rRa.png"
+      ],
+      "price": "FREE",
+      "url": "https://xtremezero.itch.io/darth-vader-graphics-showcase",
+      "platforms": [
+        "Windows",
+        "Linux"
+      ],
+      "madeWith": "",
+      "tags": [],
+      "rating": 5.0,
+      "ratingCount": 1,
+      "publishedDate": "",
+      "updatedDate": "",
+      "releaseDate": "2024",
+      "devlogs": []
+    },
+    {
+      "id": "720991",
+      "title": "Sorcerer House - Graphics Showcase",
+      "genre": "General",
+      "status": "Released",
+      "description": "Volumetric lighting and atmospheric shader showcase cottage built in Godot.",
+      "longDescription": "Explore a detailed wizard's cottage in this real-time graphics showcase built in Godot Engine. Features atmospheric volumetric lighting, PBR materials, custom shaders, and particle effects.",
+      "image": "https://img.itch.zone/aW1nLzM5OTczMDAucG5n/315x250%23c/f2Q7Dt.png",
+      "bannerImage": "https://img.itch.zone/aW1nLzM5OTc0MDYucG5n/original/renIb5.png",
+      "screenshots": [
+        "https://img.itch.zone/aW1nLzM5OTczMDAucG5n/original/v48nN4.png"
+      ],
+      "price": "FREE",
+      "url": "https://xtremezero.itch.io/sorcerer-house-showcase",
+      "platforms": [
+        "Windows"
+      ],
+      "madeWith": "",
+      "tags": [],
+      "rating": 5.0,
+      "ratingCount": 0,
+      "publishedDate": "",
+      "updatedDate": "",
+      "releaseDate": "2024",
+      "devlogs": []
+    }
+  ]
+}

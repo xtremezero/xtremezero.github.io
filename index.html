@@ -1,0 +1,1908 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>XZ_</title>
+
+  <!-- Tailwind CSS Play CDN -->
+  <script src="lib/tailwind.min.js"></script>
+
+  <!-- React and ReactDOM UMD -->
+  <script src="lib/react.production.min.js" crossorigin></script>
+  <script src="lib/react-dom.production.min.js" crossorigin></script>
+
+  <!-- Babel for Browser JSX Compiling -->
+  <script src="lib/babel.min.js"></script>
+
+  <!-- Fonts -->
+  <link rel="stylesheet" href="lib/fonts.css" />
+
+  <style>
+    /* Glow utilities */
+    .text-glow-neon {
+      text-shadow: 0 0 10px rgba(163, 255, 20, 0.6), 0 0 2px rgba(163, 255, 20, 0.8);
+    }
+
+    .text-glow-green {
+      text-shadow: 0 0 10px rgba(34, 197, 94, 0.6), 0 0 2px rgba(34, 197, 94, 0.8);
+    }
+
+    .text-glow-orange {
+      text-shadow: 0 0 10px rgba(255, 94, 0, 0.6), 0 0 2px rgba(255, 94, 0, 0.8);
+    }
+
+    .box-glow-neon {
+      box-shadow: 0 0 15px rgba(163, 255, 20, 0.25);
+    }
+
+    .box-glow-orange {
+      box-shadow: 0 0 15px rgba(255, 94, 0, 0.25);
+    }
+
+    .box-glow-green {
+      box-shadow: 0 0 15px rgba(34, 197, 94, 0.25);
+    }
+
+    /* Scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #000000;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #121212;
+      border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #a3ff14;
+    }
+
+    body {
+      background-color: #020202;
+      color: #e2e8f0;
+      overflow: hidden;
+      font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    }
+
+    /* Holographic Projection Background Grid */
+    .holo-projector-grid {
+      background-size: 40px 40px;
+      background-image:
+        linear-gradient(to right, rgba(163, 255, 20, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(163, 255, 20, 0.03) 1px, transparent 1px);
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.6;
+      transition: opacity 0.5s ease;
+    }
+
+    /* Scanning Laser Line Animation */
+    .holo-laser-line {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg,
+          transparent 0%,
+          rgba(163, 255, 20, 0.05) 10%,
+          rgba(163, 255, 20, 0.4) 50%,
+          rgba(163, 255, 20, 0.05) 90%,
+          transparent 100%);
+      box-shadow: 0 0 12px rgba(163, 255, 20, 0.5);
+      pointer-events: none;
+      z-index: 2;
+      animation: holo-scan 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes holo-scan {
+      0% {
+        top: -5%;
+      }
+
+      50% {
+        top: 105%;
+      }
+
+      100% {
+        top: -5%;
+      }
+    }
+
+    /* Holographic Projection Entry Transition (Flicker + Blur) */
+    @keyframes holo-enter {
+      0% {
+        opacity: 0;
+        filter: blur(10px) brightness(2) contrast(1.2) hue-rotate(-10deg);
+        transform: scale(0.98) translateY(10px);
+      }
+
+      10% {
+        opacity: 0.4;
+        filter: blur(6px) brightness(1.7) contrast(1.3);
+      }
+
+      15% {
+        opacity: 0.2;
+        filter: blur(8px) brightness(1.9);
+      }
+
+      20% {
+        opacity: 0.7;
+        filter: blur(4px) brightness(1.4) contrast(1.1);
+        transform: scale(0.99) translateY(4px);
+      }
+
+      25% {
+        opacity: 0.5;
+        filter: blur(5px) brightness(1.5);
+      }
+
+      35% {
+        opacity: 0.9;
+        filter: blur(2px) brightness(1.1);
+        transform: scale(0.998) translateY(1px);
+      }
+
+      40% {
+        opacity: 0.8;
+        filter: blur(3px) brightness(1.2);
+      }
+
+      50% {
+        opacity: 1;
+        filter: blur(0px) brightness(1) contrast(1) hue-rotate(0deg);
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .animate-holo-enter {
+      animation: holo-enter 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    /* Holographic Iridescent Cards style */
+    .holo-card {
+      transition: transform 0.15s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+      transform-style: preserve-3d;
+      transform: perspective(800px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+      position: relative;
+    }
+
+    .holo-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      z-index: 5;
+      mix-blend-mode: color-dodge;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      background: linear-gradient(135deg,
+          rgba(163, 255, 20, 0.12) 0%,
+          rgba(255, 94, 0, 0.08) 25%,
+          rgba(34, 197, 94, 0.08) 50%,
+          rgba(163, 255, 20, 0.12) 75%,
+          rgba(255, 94, 0, 0.12) 100%);
+      background-size: 200% 200%;
+      background-position: var(--mx, 50%) var(--my, 50%);
+    }
+
+    /* Neon glows when cards are hovered */
+    .holo-card:hover::after {
+      opacity: 1;
+    }
+
+    /* Holographic noise flicker (simulating digital instability) */
+    .holo-flicker-text:hover {
+      animation: text-flicker 0.25s infinite;
+    }
+
+    @keyframes text-flicker {
+      0% {
+        opacity: 1;
+        text-shadow: 2px 0 0 rgba(255, 0, 80, 0.35), -2px 0 0 rgba(163, 255, 20, 0.35);
+      }
+
+      50% {
+        opacity: 0.85;
+        text-shadow: -1px 0 0 rgba(255, 0, 80, 0.25), 1px 0 0 rgba(163, 255, 20, 0.25);
+      }
+
+      100% {
+        opacity: 1;
+        text-shadow: 2px 0 0 rgba(255, 0, 80, 0.35), -2px 0 0 rgba(163, 255, 20, 0.35);
+      }
+    }
+
+    /* Sci-Fi toggle styling */
+    .holo-switch-btn {
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid rgba(163, 255, 20, 0.15);
+      background: rgba(163, 255, 20, 0.02);
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+    }
+
+    .holo-switch-btn:hover {
+      border-color: rgba(163, 255, 20, 0.4);
+      background: rgba(163, 255, 20, 0.05);
+      box-shadow: 0 0 10px rgba(163, 255, 20, 0.15);
+    }
+
+    .holo-switch-btn.active {
+      border-color: rgba(163, 255, 20, 0.6);
+      background: rgba(163, 255, 20, 0.08);
+      box-shadow: 0 0 15px rgba(163, 255, 20, 0.25);
+    }
+  </style>
+
+  <script>
+    // Tailwind Config
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
+            mono: ["JetBrains Mono", "ui-monospace", "SFMono-Regular", "monospace"],
+            themeFont: ["Rajdhani", "sans-serif"],
+            display: ["Orbitron", "sans-serif"]
+          },
+          colors: {
+            'xz-bg': '#000000',
+            'xz-card': '#080808',
+            'xz-card-light': '#121212',
+            'xz-neon': '#a3ff14',
+            'xz-neon-glow': 'rgba(163, 255, 20, 0.4)',
+            'xz-orange': '#ff5e00',
+            'xz-green': '#22c55e',
+            'xz-yellow': '#eab308'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <!-- React Application compiled in-browser -->
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    // --- Interactive Holographic Card Mouse Tracking ---
+    const handleCardMouseMove = (e) => {
+      const card = e.currentTarget;
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const px = (x / rect.width) * 100;
+      const py = (y / rect.height) * 100;
+      const rx = (y / rect.height - 0.5) * -12; // Max tilt 12 degrees
+      const ry = (x / rect.width - 0.5) * 12;
+
+      card.style.setProperty('--rx', `${rx}deg`);
+      card.style.setProperty('--ry', `${ry}deg`);
+      card.style.setProperty('--mx', `${px}%`);
+      card.style.setProperty('--my', `${py}%`);
+    };
+
+    const handleCardMouseLeave = (e) => {
+      const card = e.currentTarget;
+      card.style.setProperty('--rx', '0deg');
+      card.style.setProperty('--ry', '0deg');
+      card.style.setProperty('--mx', '50%');
+      card.style.setProperty('--my', '50%');
+    };
+
+    /* =========================================================================
+       1. FALLBACK DATA STRUCTURES (Used when data.json load fails)
+       ========================================================================= */
+    const FALLBACK_DATA = {
+      about: {
+        name: "XtremeZero",
+        avatar: "https://img.itch.zone/aW1nLzIwNjUxMjUyLnBuZw==/original/KUsoYC.png",
+        bio: "Passionate game developer, technical artist, and tools programmer specializing in high-performance gameplay systems, custom shader development, and robust workflow tools in Unity and Godot. Dedicated to building engaging interactive experiences and empowering creators with streamlined development utilities.",
+        email: "xtremezero.dev@gmail.com",
+        skills: [
+          { name: "Game Design & Dev", level: 95 },
+          { name: "Unity & C#", level: 90 },
+          { name: "Godot & GDScript", level: 90 },
+          { name: "Shader Programming", level: 85 }
+        ]
+      },
+      links: [
+        { id: "itch", title: "itch.io Profile", url: "https://xtremezero.itch.io", category: "PORTFOLIO", clicks: 0 },
+        { id: "website", title: "Official Website", url: "https://xtremezero.xyz", category: "HOMEPAGE", clicks: 0 },
+        { id: "x", title: "X / Twitter", url: "https://twitter.com/xtremezero_", category: "SOCIAL", clicks: 0 }
+      ],
+      news: [
+        {
+          id: "beat-slicer-update",
+          title: "BEAT//SLICER VERSION 1.2 OUT NOW",
+          category: "UPDATE",
+          date: "TODAY",
+          image: "https://img.itch.zone/aW1nLzI4MjYzMDM2LmdpZg==/original/6B74sl.gif",
+          summary: "New stability fixes and level tracks added directly to the tracklist.",
+          likes: 124
+        }
+      ],
+      games: [],
+      tools: [],
+      assets: []
+    };
+
+    /* =========================================================================
+       2. NATIVE INLINE SVG ICON LIBRARY
+       ========================================================================= */
+    const Icon = ({ name, className = "w-4 h-4" }) => {
+      const icons = {
+        Home: (
+          <>
+            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+            <polyline points="9 22 9 12 15 12 15 22" />
+          </>
+        ),
+        Gamepad2: (
+          <>
+            <rect x="2" y="6" width="20" height="12" rx="3" />
+            <path d="M6 12h4M8 10v4M15 13h.01M18 11h.01" />
+          </>
+        ),
+        Cpu: (
+          <>
+            <rect x="4" y="4" width="16" height="16" rx="2" />
+            <rect x="9" y="9" width="6" height="6" />
+            <path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 15h3M1 9h3M1 15h3" />
+          </>
+        ),
+        Package: (
+          <>
+            <line x1="16.5" y1="9.4" x2="7.5" y2="4.21" />
+            <polygon points="12 22.08 12 12 3 6.92 3 17.08 12 22.08" />
+            <polygon points="12 22.08 12 12 21 6.92 21 17.08 12 22.08" />
+            <polygon points="12 2 3 6.92 12 12 21 6.92 12 2" />
+          </>
+        ),
+        Activity: (
+          <>
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+          </>
+        ),
+        Link: (
+          <>
+            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+          </>
+        ),
+        User: (
+          <>
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </>
+        ),
+        ExternalLink: (
+          <>
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+            <polyline points="15 3 21 3 21 9" />
+            <line x1="10" y1="14" x2="21" y2="3" />
+          </>
+        ),
+        Search: (
+          <>
+            <circle cx="11" cy="11" r="8" />
+            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+          </>
+        ),
+        X: (
+          <>
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </>
+        ),
+        ChevronLeft: (
+          <>
+            <polyline points="15 18 9 12 15 6" />
+          </>
+        ),
+        ChevronRight: (
+          <>
+            <polyline points="9 18 15 12 9 6" />
+          </>
+        ),
+        ThumbsUp: (
+          <>
+            <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3" />
+          </>
+        ),
+        Terminal: (
+          <>
+            <polyline points="4 17 10 11 4 5" />
+            <line x1="12" y1="19" x2="20" y2="19" />
+          </>
+        ),
+        RotateCcw: (
+          <>
+            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+            <polyline points="3 3 3 8 8 8" />
+          </>
+        ),
+        Star: (
+          <>
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+          </>
+        ),
+        Menu: (
+          <>
+            <line x1="4" y1="12" x2="20" y2="12" />
+            <line x1="4" y1="6" x2="20" y2="6" />
+            <line x1="4" y1="18" x2="20" y2="18" />
+          </>
+        )
+      };
+
+      return (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className={className}
+        >
+          {icons[name] || <circle cx="12" cy="12" r="10" />}
+        </svg>
+      );
+    };
+
+    // Social Brand Icons for the Links tab
+    const SocialIcon = ({ type, className = "w-5 h-5" }) => {
+      const id = type.toLowerCase();
+      if (id.includes('itch')) {
+        return (
+          <svg className={className} viewBox="0 0 263 236" fill="currentColor">
+            <path d="M32 1c-11 7-32 31-32 37v11c0 13 12 25 24 25s25-11 25-25c0 13 11 25 25 25s24-11 24-25c0 13 12 25 25 25h.3c13 0 25-11 25-25 0 13 11 25 24 25s25-11 25-25c0 13 11 25 25 25 11 0 24-12 24-25V38c0-6-21-30-32-37C180 0 157 0 123 0S41 1 32 1zm65 66a28 28 0 01-5 6c-5 5-12 8-20 8s-15-3-20-8c-2-2-3-4-5-6h-.1c-1 2-3 4-5 6s-12 8-20 8c-1 0-2 0-3-.5-1 11-2 22-2 30v.1c0 4 0 7 0 12.0 24-2 77 10 90 20 5 57 7 94 7h.1c37 0 73-2 93-7 13-13 11-66 11-90 0-5 0-8 0-12v-.1c-.2-8-.7-19-1.8-30-.9.3-1.9.5-2.9.5s-15-3-20-8c-2-2-4-4-5-6h-.1c-1 2-3 4-5 6s-12 8-20 8c-8 0-15-3-20-8a28 28 0 01-5-6 28 28 0 01-5 6s-12 8-20 8c-.3 0-.5 0-.8-.1h-.1c-.3 0-.5.1-.8.1a28 28 0 01-20-8 28 28 0 01-5-6zm-20 27l-.1.1h.1c8 0 16 0 25 9.7 7-.7 14-1.1 21.7-1.1h.1c7.3 0 14.7.4 21.7 1.1 9-9.7 16-9.7 24.3-9.7h.1l-.1-.1c3.8 0 19.2 0 29.8 30L210 165c8.5 30.6-2.7 31.4-16.7 31.4-20.8-.8-32.3-15.9-32.3-30.9-11.5 1.9-24.9 2.8-38.3 2.8h-.1c-13.4 0-26.8-.9-38.3-2.8 0 15.1-11.5 30.2-32.3 30.9-14 0-25.2-.8-16.7-31.4l11.4-41.2c10.7-30 26-30 29.9-30zm46 23.6v.1c0 0-21.9 20-25.8 27.2l14.3-.6V157c0 .6 5.7.3 11.5.1h.1c5.7.3 11.5.5 11.5-.1v-12.5l14.3.6c-3.9-7.2-25.8-27.2-25.8-27.2z" />
+          </svg>
+        );
+      }
+      if (id.includes('steam')) {
+        return (
+          <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 .007c-6.19 0-11.295 4.707-11.91 10.776L5.5 14.28c.47-.19.99-.28 1.5-.28.4 0 .79.06 1.17.17l3.66-5.46a3.84 3.84 0 0 1 3.82-3.83c2.13 0 3.85 1.72 3.85 3.85s-1.72 3.85-3.85 3.85c-.9 0-1.72-.31-2.38-.83l-5.32 3.79c.07.31.11.64.11.97a3.85 3.85 0 0 1-3.85 3.85 3.85 3.85 0 0 1-3.85-3.85 3.81 3.81 0 0 1 1.72-3.2l-3.3-1.34A11.97 11.97 0 0 0 12 24c6.63 0 12-5.37 12-12S18.63.007 12 .007zm-5.74 17.5a1.86 1.86 0 0 0 1.86-1.86c0-1.02-.84-1.86-1.86-1.86-.23 0-.46.04-.66.13l1.24.5c.34.14.5.53.37.87-.14.34-.53.5-.87.37l-1.24-.5c-.1.2-.13.43-.13.66 0 1.02.84 1.86 1.86 1.86zm9.39-7.85c0-1.07-.88-1.95-1.95-1.95s-1.95.88-1.95 1.95.88 1.95 1.95 1.95 1.95-.88 1.95-1.95z" />
+          </svg>
+        );
+      }
+      if (id.includes('github')) {
+        return (
+          <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+            <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.167 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.577.688.479C19.138 20.164 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
+          </svg>
+        );
+      }
+      if (id.includes('gamejolt')) {
+        return (
+          <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+            <path d="M2.6 0L0 5.4v13.2l2.6 5.4h18.8l2.6-5.4V5.4L21.4 0H2.6zm6.3 7h6.2l3 3-3 3H8.9L5.9 10l3-3zm-.8 5.7h7.8l1.4 1.4-1.4 1.4H8.1L6.7 15.5l1.4-1.4z" />
+          </svg>
+        );
+      }
+      if (id.includes('youtube')) {
+        return (
+          <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+            <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.108C19.53 3.5 12 3.5 12 3.5s-7.53 0-9.388.555A3.003 3.003 0 0 0 .502 6.163C0 8.07 0 12 0 12s0 3.93.502 5.837a3.003 3.003 0 0 0 2.11 2.108C4.47 20.5 12 20.5 12 20.5s7.53 0 9.388-.555a3.003 3.003 0 0 0 2.11-2.108C24 15.93 24 12 24 12s0-3.93-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+          </svg>
+        );
+      }
+      if (id.includes('x') || id.includes('twitter')) {
+        return (
+          <svg className={className} viewBox="0 0 16 16" fill="currentColor">
+            <path d="M9.332 6.925 14.544 1h-1.235L8.783 6.145 5.17 1H1l5.466 7.78L1 14.993h1.235l4.78-5.433 3.816 5.433H15L9.332 6.925ZM7.64 8.848l-.554-.775L2.68 1.91h1.897l3.556 4.975.554.775 4.622 6.466h-1.897L7.64 8.848Z" />
+          </svg>
+        );
+      }
+      if (id.includes('gog')) {
+        return (
+          <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0a12 12 0 1 0 12 12A12 12 0 0 0 12 0zm5.1 14.3a4.7 4.7 0 0 1-3.6 1.8 4.7 4.7 0 0 1-4.7-4.7 4.7 4.7 0 0 1 4.7-4.7 4.7 4.7 0 0 1 3.5 1.5l-1.3 1.3a2.9 2.9 0 0 0-2.2-.9 2.9 2.9 0 0 0-2.9 2.9 2.9 2.9 0 0 0 2.9 2.9 2.8 2.8 0 0 0 2.1-.9z" />
+          </svg>
+        );
+      }
+      if (id.includes('discord')) {
+        return (
+          <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+            <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.094 13.094 0 0 1-1.873-.894.077.077 0 0 1-.008-.128c.126-.093.252-.19.372-.287a.075.075 0 0 1 .077-.011c3.92 1.793 8.18 1.793 12.061 0a.073.073 0 0 1 .078.009c.12.099.246.195.373.289a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.894.077.077 0 0 1-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084-.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.156-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.156 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.156-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.156 2.418z" />
+          </svg>
+        );
+      }
+      if (id.includes('reddit')) {
+        return (
+          <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+            <path d="M24 11.5c0-1.65-1.35-3-3-3-.96 0-1.86.48-2.42 1.24-1.64-1-3.85-1.64-6.27-1.72l1.32-4.14 4.3.9c.03.95.8 1.7 1.77 1.7 1 0 1.8-.8 1.8-1.8s-.8-1.8-1.8-1.8c-.88 0-1.6.64-1.75 1.48l-4.78-1c-.14-.03-.28.05-.32.18L10.3 7c-2.45.05-4.7.7-6.38 1.7-.56-.75-1.46-1.22-2.42-1.22-1.65 0-3 1.35-3 3 0 1.2.7 2.23 1.73 2.72-.03.22-.05.45-.05.68 0 3.7 4.77 6.7 10.63 6.7s10.64-3 10.64-6.7c0-.23-.02-.46-.06-.68 1.05-.5 1.75-1.53 1.75-2.72zM5.5 13.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5zm10.5 4.5c-1.83 1.83-5.17 1.83-7 0-.15-.15-.15-.4 0-.55.15-.15.4-.15.55 0 1.53 1.53 4.37 1.53 5.9 0 .15-.15.4-.15.55 0 .15.15.15.4 0 .55zm-1.5-3c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5.67-1.5 1.5-1.5 1.5.67 1.5 1.5z" />
+          </svg>
+        );
+      }
+      if (id.includes('twitch')) {
+        return (
+          <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+            <path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z" />
+          </svg>
+        );
+      }
+      // fallback icon
+      return (
+        <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="10" />
+          <line x1="2" y1="12" x2="22" y2="12" />
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+        </svg>
+      );
+    };
+
+    /* =========================================================================
+       3. SUB-COMPONENTS
+       ========================================================================= */
+
+    // --- Sidebar ---
+    function Sidebar({ activeTab, setActiveTab, gamesCount, toolsCount, assetsCount, holoEnabled, setHoloEnabled, isOpen, onClose }) {
+      const navItems = [
+        { id: 'home', label: 'Home', icon: 'Home', subtext: 'Portal Overview' },
+        { id: 'games', label: 'My Games', icon: 'Gamepad2', subtext: `${gamesCount} Releases` },
+        { id: 'tools', label: 'My Tools', icon: 'Cpu', subtext: `${toolsCount} Workflow Extensions` },
+        { id: 'assets', label: 'My Assets', icon: 'Package', subtext: `${assetsCount} Models & Shaders` },
+        { id: 'news', label: 'Updates & News', icon: 'Activity', subtext: 'Changelogs & Devlogs' },
+        { id: 'links', label: 'External Links', icon: 'Link', subtext: 'Social Channels' },
+        { id: 'about', label: 'Contact Me', icon: 'User', subtext: 'Profile & Communications' }
+      ];
+
+      const themeColors = {
+        home: { text: 'text-[#a3ff14]', border: 'bg-[#a3ff14]', shadow: 'shadow-[2px_0_10px_rgba(163,255,20,0.5)]', glowBg: 'bg-[#a3ff14]/[0.05]', subtext: 'text-[#a3ff14]/80' },
+        games: { text: 'text-[#a3ff14]', border: 'bg-[#a3ff14]', shadow: 'shadow-[2px_0_10px_rgba(163,255,20,0.5)]', glowBg: 'bg-[#a3ff14]/[0.05]', subtext: 'text-[#a3ff14]/80' },
+        tools: { text: 'text-xz-green', border: 'bg-xz-green', shadow: 'shadow-[2px_0_10px_rgba(34,197,94,0.5)]', glowBg: 'bg-xz-green/[0.05]', subtext: 'text-xz-green/80' },
+        assets: { text: 'text-xz-orange', border: 'bg-xz-orange', shadow: 'shadow-[2px_0_10px_rgba(255,94,0,0.5)]', glowBg: 'bg-xz-orange/[0.05]', subtext: 'text-xz-orange/80' },
+        news: { text: 'text-xz-orange', border: 'bg-xz-orange', shadow: 'shadow-[2px_0_10px_rgba(255,94,0,0.5)]', glowBg: 'bg-xz-orange/[0.05]', subtext: 'text-xz-orange/80' },
+        links: { text: 'text-[#a3ff14]', border: 'bg-[#a3ff14]', shadow: 'shadow-[2px_0_10px_rgba(163,255,20,0.5)]', glowBg: 'bg-[#a3ff14]/[0.05]', subtext: 'text-[#a3ff14]/80' },
+        about: { text: 'text-[#a3ff14]', border: 'bg-[#a3ff14]', shadow: 'shadow-[2px_0_10px_rgba(163,255,20,0.5)]', glowBg: 'bg-[#a3ff14]/[0.05]', subtext: 'text-[#a3ff14]/80' }
+      };
+
+      return (
+        <>
+          {/* Mobile backdrop overlay */}
+          {isOpen && (
+            <div
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden"
+              onClick={onClose}
+            />
+          )}
+          <aside className={`fixed md:static inset-y-0 left-0 w-[240px] border-r border-white/5 bg-[#000000] flex flex-col h-full shrink-0 select-none z-50 transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 transition-transform duration-300 ease-in-out`}>
+            <div className="px-6 pb-6 pt-6 flex items-center justify-between gap-3">
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 bg-gradient-to-br from-[#a3ff14] to-[#2b5f00] rounded-lg flex items-center justify-center shadow-[0_0_15px_rgba(163,255,20,0.4)] font-bold text-[#000000] text-xl shrink-0">
+                  X
+                </div>
+                <div>
+                  <h1 className="font-sans font-extrabold tracking-wider text-base text-white">
+                    XtremeZero
+                  </h1>
+                  <div className="flex items-center gap-1">
+                    <Icon name="Terminal" className="w-3 h-3 text-[#a3ff14]" />
+                    <span className="font-mono text-[9px] text-[#a3ff14] tracking-wider">Developer Site</span>
+                  </div>
+                </div>
+              </div>
+              {/* Close Button on Mobile Drawer */}
+              <button
+                onClick={onClose}
+                className="md:hidden p-1.5 text-zinc-400 hover:text-white transition-colors"
+              >
+                <Icon name="X" className="w-4 h-4" />
+              </button>
+            </div>
+
+            <nav className="flex-1 py-2 space-y-1 overflow-y-auto min-h-0">
+              {navItems.map((item) => {
+                const isActive = activeTab === item.id;
+                const colors = themeColors[item.id] || themeColors.home;
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => {
+                      setActiveTab(item.id);
+                      if (onClose) onClose();
+                    }}
+                    className={`w-full group relative flex items-center justify-between px-6 py-2.5 text-left transition-all duration-200 ${isActive ? `${colors.glowBg} text-white` : 'text-[#94a3b8] hover:text-white hover:bg-white/[0.03]'
+                      }`}
+                  >
+                    {isActive && (
+                      <div className={`absolute left-0 top-0 bottom-0 w-[3px] ${colors.border} ${colors.shadow}`} />
+                    )}
+                    <div className="flex items-center gap-3 min-w-0">
+                      <Icon
+                        name={item.icon}
+                        className={`w-[18px] h-[18px] shrink-0 transition-all duration-200 ${isActive ? `${colors.text} opacity-100` : 'text-[#94a3b8] opacity-70 group-hover:opacity-100'
+                          }`}
+                      />
+                      <div className="flex flex-col min-w-0">
+                        <span className="font-sans text-sm font-semibold tracking-wide">{item.label}</span>
+                        <span className={`font-sans text-[10px] truncate leading-tight ${isActive ? colors.subtext : 'text-[#94a3b8]/50'}`}>
+                          {item.subtext}
+                        </span>
+                      </div>
+                    </div>
+                  </button>
+                );
+              })}
+            </nav>
+
+            <div className="p-4 border-t border-white/5 bg-black/20 space-y-4">
+              <div>
+                <button
+                  onClick={() => setHoloEnabled(!holoEnabled)}
+                  className={`holo-switch-btn ${holoEnabled ? 'active text-[#a3ff14]' : 'text-zinc-400'}`}
+                >
+                  <span>ANIMATIONS</span>
+                  <span className="font-bold">{holoEnabled ? 'ENABLED' : 'DISABLED'}</span>
+                </button>
+              </div>
+              <div>
+                <div className="flex items-center justify-between mb-1">
+                  <span className="font-mono text-[9px] text-zinc-400">SYSTEM STATUS</span>
+                  <span className="font-mono text-[9px] text-xz-green text-glow-green">ONLINE</span>
+                </div>
+                <div className="w-full bg-zinc-800 h-[3px] rounded-full overflow-hidden">
+                  <div className="bg-xz-green h-full rounded-full" style={{ width: '100%' }}></div>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </>
+      );
+    }
+
+    // --- Header ---
+    function Header({ searchQuery, setSearchQuery, activeTab, onMenuToggle }) {
+      const showSearch = ['games', 'tools', 'assets'].includes(activeTab);
+
+      const searchPlaceholders = {
+        games: "Search Developer Games...",
+        tools: "Search Editor Plugins & Tools...",
+        assets: "Search Shaders & 3D Assets..."
+      };
+
+      return (
+        <header className="h-16 border-b border-white/5 bg-[#000000]/30 backdrop-blur-md px-4 md:px-8 flex items-center justify-start gap-3 md:gap-4 shrink-0 select-none">
+          <button
+            onClick={onMenuToggle}
+            className="md:hidden p-2 text-zinc-400 hover:text-white transition-colors"
+          >
+            <Icon name="Menu" className="w-5 h-5" />
+          </button>
+          <div className="relative flex-1 md:flex-initial md:w-[300px]">
+            {showSearch ? (
+              <>
+                <Icon name="Search" className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400" />
+                <input
+                  type="text"
+                  placeholder={searchPlaceholders[activeTab]}
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className={`w-full bg-[#080808] text-sm text-white placeholder-[#94a3b8]/60 pl-11 pr-8 py-2 rounded-full border border-white/10 focus:outline-none transition-all font-sans ${
+                    activeTab === 'games' ? 'focus:border-[#a3ff14]/60 focus:ring-2 focus:ring-[#a3ff14]/15 focus:shadow-[0_0_10px_rgba(163,255,20,0.15)]' :
+                    activeTab === 'tools' ? 'focus:border-xz-green/60 focus:ring-2 focus:ring-xz-green/15 focus:shadow-[0_0_10px_rgba(34,197,94,0.15)]' :
+                    activeTab === 'assets' ? 'focus:border-xz-orange/60 focus:ring-2 focus:ring-xz-orange/15 focus:shadow-[0_0_10px_rgba(255,94,0,0.15)]' :
+                    'focus:border-[#a3ff14]/60'
+                  }`}
+                />
+                {searchQuery && (
+                  <button
+                    onClick={() => setSearchQuery('')}
+                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white transition-colors"
+                  >
+                    <Icon name="X" className="w-3.5 h-3.5" />
+                  </button>
+                )}
+              </>
+            ) : (
+              <div className="flex items-center gap-2">
+                <span className="text-[11px] font-mono text-zinc-400 tracking-widest uppercase">
+                  {activeTab === 'home' ? '> Overview' :
+                   activeTab === 'news' ? '> Updates and News' :
+                   activeTab === 'about' ? '> Contact Me' :
+                   activeTab === 'links' ? '> External Links' :
+                   `CLASSIFY SYSTEM: ${activeTab.toUpperCase()} NODE`}
+                </span>
+              </div>
+            )}
+          </div>
+        </header>
+      );
+    }
+
+    // --- HomeView ---
+    function HomeView({ games, tools, news, onOpenDetails, onPurchaseClick, setActiveTab }) {
+      const featured = [...games, ...tools].slice(0, 3);
+      const [heroIndex, setHeroIndex] = useState(0);
+
+      useEffect(() => {
+        if (featured.length === 0) return;
+        const interval = setInterval(() => {
+          setHeroIndex(prev => (prev + 1) % featured.length);
+        }, 6000);
+        return () => clearInterval(interval);
+      }, [featured]);
+
+      const hero = featured[heroIndex];
+
+      return (
+        <div className="space-y-8 animate-in fade-in duration-300 select-none">
+          {/* Slideshow Featured Hero */}
+          {hero && (
+            <div
+              className="relative min-h-[300px] md:h-[320px] w-full rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-center p-6 md:p-8 shadow-2xl transition-all duration-500 bg-cover bg-center"
+              style={{
+                backgroundImage: `url(${hero.bannerImage || hero.image})`
+              }}
+            >
+              {/* Responsive overlay gradient for improved text contrast */}
+              <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-black via-black/90 md:via-black/85 to-transparent z-0" />
+
+              <div className="max-w-xl flex flex-col justify-center relative z-10">
+                <span className="text-[10px] font-mono font-bold text-[#a3ff14] uppercase tracking-wider mb-2">
+                  ✦ FEATURED RELEASE
+                </span>
+
+                <h2
+                  onClick={() => onOpenDetails(hero)}
+                  className="font-sans font-extrabold text-2xl md:text-[32px] text-white tracking-tight leading-none mb-3 cursor-pointer hover:text-[#a3ff14] transition-colors uppercase text-glow-neon"
+                >
+                  {hero.title}
+                </h2>
+
+                <p className="text-xs text-[#94a3b8] mb-6 line-clamp-2 max-w-md leading-relaxed">
+                  {hero.description}
+                </p>
+
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                  <button
+                    onClick={() => onOpenDetails(hero)}
+                    className="bg-white/10 border border-white/20 text-white px-5 py-2.5 rounded-lg font-bold text-[11px] tracking-wider uppercase hover:bg-white/20 transition-all cursor-pointer text-center"
+                  >
+                    VIEW DETAILS
+                  </button>
+
+                  <button
+                    onClick={() => onPurchaseClick(hero)}
+                    className="bg-[#a3ff14] text-black px-5 py-2.5 rounded-lg font-bold text-[11px] tracking-wider uppercase shadow-[0_4px_15px_rgba(163,255,20,0.3)] hover:bg-[#b5ff3d] hover:scale-[1.02] transition-all cursor-pointer flex items-center justify-center gap-1.5"
+                  >
+                    <span>GET ON ITCH.IO • {hero.price}</span>
+                    <Icon name="ExternalLink" className="w-3.5 h-3.5 shrink-0" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Dots indicator */}
+              <div className="absolute bottom-5 right-6 md:right-auto md:left-8 z-20 flex gap-2">
+                {featured.map((item, idx) => {
+                  const isTool = item.genre && (item.genre.toLowerCase().includes('tool') || item.genre.toLowerCase().includes('plugin') || item.genre.toLowerCase().includes('shader'));
+                  const isAsset = item.genre && (item.genre.toLowerCase().includes('asset') || item.genre.toLowerCase().includes('model'));
+                  const activeColor = isTool ? 'bg-xz-green shadow-[0_0_8px_rgba(34,197,94,0.8)]' : isAsset ? 'bg-xz-orange shadow-[0_0_8px_rgba(255,94,0,0.8)]' : 'bg-[#a3ff14] shadow-[0_0_8px_rgba(163,255,20,0.8)]';
+                  return (
+                    <button
+                      key={idx}
+                      onClick={() => setHeroIndex(idx)}
+                      className={`h-2 rounded transition-all duration-300 cursor-pointer ${heroIndex === idx ? `w-7 ${activeColor}` : 'w-3 bg-white/25 hover:bg-white/50'
+                        }`}
+                    />
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* Latest News Highlights (3) */}
+          <div className="space-y-4">
+            <div className="flex items-center justify-between border-b border-white/5 pb-2">
+              <h3 className="font-sans font-extrabold text-sm text-white tracking-widest uppercase flex items-center gap-2">
+                <Icon name="Activity" className="w-4 h-4 text-[#ff5e00]" />
+                LATEST UPDATES & NEWS
+              </h3>
+              <button
+                onClick={() => setActiveTab('news')}
+                className="font-mono text-[10px] text-[#a3ff14] hover:underline uppercase"
+              >
+                View Feed ➔
+              </button>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {news.slice(0, 3).map((item) => (
+                <div key={item.id} className="bg-[#080808] border border-white/5 rounded-xl overflow-hidden hover:border-[#a3ff14]/20 transition-all flex flex-col justify-between holo-card" onMouseMove={handleCardMouseMove} onMouseLeave={handleCardMouseLeave}>
+                  <div className="relative aspect-video overflow-hidden">
+                    <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
+                    <span className="absolute top-2 left-2 text-[9px] font-mono bg-black/60 backdrop-blur-sm border border-white/5 px-2 py-0.5 rounded text-[#a3ff14] uppercase">
+                      {item.category}
+                    </span>
+                  </div>
+                  <div className="p-4 space-y-2 flex-1 flex flex-col justify-between">
+                    <div className="space-y-1">
+                      <span className="text-[9px] font-mono text-zinc-400">{item.date}</span>
+                      <h4 className="font-sans font-bold text-xs text-white uppercase line-clamp-1">{item.title}</h4>
+                      <p className="text-[11px] text-[#94a3b8] line-clamp-2 leading-relaxed">{item.summary}</p>
+                    </div>
+                    <button
+                      onClick={() => setActiveTab('news')}
+                      className="text-[10px] text-[#a3ff14] hover:underline font-mono uppercase text-left pt-2 self-start"
+                    >
+                      Read full log
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Catalog highlights */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Latest 3 Games */}
+            <div className="space-y-4">
+              <div className="flex items-center justify-between border-b border-white/5 pb-2">
+                <h3 className="font-sans font-extrabold text-sm text-white tracking-widest uppercase flex items-center gap-2">
+                  <Icon name="Gamepad2" className="w-4 h-4 text-[#a3ff14]" />
+                  LATEST GAMES
+                </h3>
+                <button
+                  onClick={() => setActiveTab('games')}
+                  className="font-mono text-[10px] text-[#a3ff14] hover:underline uppercase"
+                >
+                  See All ➔
+                </button>
+              </div>
+              <div className="space-y-3">
+                {games.slice(0, 3).map(game => (
+                  <div
+                    key={game.id}
+                    className="p-3 bg-[#080808] border border-white/5 rounded-xl flex items-center gap-4 hover:border-[#a3ff14]/20 hover:bg-[#121212]/50 transition-all group cursor-pointer holo-card"
+                    onMouseMove={handleCardMouseMove}
+                    onMouseLeave={handleCardMouseLeave}
+                    onClick={() => onOpenDetails(game)}
+                  >
+                    <img src={game.image} alt={game.title} className="w-14 h-14 object-cover rounded-lg shrink-0" />
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center justify-between">
+                        <h4 className="font-sans font-bold text-xs text-white truncate group-hover:text-[#a3ff14] transition-colors">{game.title}</h4>
+                        <span className="font-mono text-[11px] text-white font-bold shrink-0 ml-2">{game.price}</span>
+                      </div>
+                      <span className="text-[9px] font-mono text-[#a3ff14] uppercase block mt-0.5">{game.genre}</span>
+                      <p className="text-[10px] text-[#94a3b8] line-clamp-1 mt-1 leading-normal">{game.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Latest 3 Tools */}
+            <div className="space-y-4">
+              <div className="flex items-center justify-between border-b border-white/5 pb-2">
+                <h3 className="font-sans font-extrabold text-sm text-white tracking-widest uppercase flex items-center gap-2">
+                  <Icon name="Cpu" className="w-4 h-4 text-xz-green" />
+                  LATEST TOOLS
+                </h3>
+                <button
+                  onClick={() => setActiveTab('tools')}
+                  className="font-mono text-[10px] text-[#a3ff14] hover:underline uppercase"
+                >
+                  See All ➔
+                </button>
+              </div>
+              <div className="space-y-3">
+                {tools.slice(0, 3).map(tool => (
+                  <div
+                    key={tool.id}
+                    className="p-3 bg-[#080808] border border-white/5 rounded-xl flex items-center gap-4 hover:border-xz-green/20 hover:bg-[#121212]/50 transition-all group cursor-pointer holo-card"
+                    onMouseMove={handleCardMouseMove}
+                    onMouseLeave={handleCardMouseLeave}
+                    onClick={() => onOpenDetails(tool)}
+                  >
+                    <img src={tool.image} alt={tool.title} className="w-14 h-14 object-cover rounded-lg shrink-0" />
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center justify-between">
+                        <h4 className="font-sans font-bold text-xs text-white truncate group-hover:text-xz-green transition-colors">{tool.title}</h4>
+                        <span className="font-mono text-[11px] text-white font-bold shrink-0 ml-2">{tool.price}</span>
+                      </div>
+                      <span className="text-[9px] font-mono text-xz-green uppercase block mt-0.5">{tool.genre || 'Developer Tool'}</span>
+                      <p className="text-[10px] text-[#94a3b8] line-clamp-1 mt-1 leading-normal">{tool.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // --- GamesView ---
+    function GamesView({ games, searchQuery, onOpenDetails, onPurchaseClick }) {
+      const [genreFilter, setGenreFilter] = useState('all');
+      const [sortBy, setSortBy] = useState('name'); // name, price-low, price-high
+
+      // Extract unique genres dynamically
+      const genres = ['all', ...new Set(games.map(g => g.genre).filter(Boolean))];
+
+      const getNumericPrice = (pStr) => {
+        if (!pStr || pStr.toUpperCase() === 'FREE') return 0;
+        return parseFloat(pStr.replace('$', '')) || 0;
+      };
+
+      const filtered = games
+        .filter(g => {
+          const matchSearch = g.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            g.description.toLowerCase().includes(searchQuery.toLowerCase());
+          const matchGenre = genreFilter === 'all' || g.genre === genreFilter;
+          return matchSearch && matchGenre;
+        })
+        .sort((a, b) => {
+          if (sortBy === 'name') return a.title.localeCompare(b.title);
+          if (sortBy === 'price-low') return getNumericPrice(a.price) - getNumericPrice(b.price);
+          if (sortBy === 'price-high') return getNumericPrice(b.price) - getNumericPrice(a.price);
+          return 0;
+        });
+
+      return (
+        <div className="space-y-6 animate-in fade-in duration-300 select-none">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/5 pb-4">
+            <div>
+              <h2 className="font-sans font-extrabold text-lg text-white tracking-widest uppercase">
+                RELEASED GAMES
+              </h2>
+              <p className="font-sans text-xs text-[#94a3b8] uppercase mt-0.5">Production Releases & Experimental Prototypes</p>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-3">
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+                className="bg-[#080808] border border-white/10 px-3 py-1.5 rounded-lg text-xs text-[#94a3b8] focus:outline-none focus:border-[#a3ff14]/50 cursor-pointer"
+              >
+                <option value="name">SORT BY: NAME</option>
+                <option value="price-low">PRICE: LOW TO HIGH</option>
+                <option value="price-high">PRICE: HIGH TO LOW</option>
+              </select>
+            </div>
+          </div>
+
+          {/* Genre Filters */}
+          <div className="flex gap-2 pb-2 overflow-x-auto">
+            {genres.map(g => (
+              <button
+                key={g}
+                onClick={() => setGenreFilter(g)}
+                className={`px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider rounded-lg transition-all shrink-0 cursor-pointer ${genreFilter === g
+                  ? 'bg-[#a3ff14]/10 border border-[#a3ff14]/30 text-[#a3ff14]'
+                  : 'text-zinc-400 border border-transparent hover:text-zinc-300 hover:bg-white/[0.02]'
+                  }`}
+              >
+                {g}
+              </button>
+            ))}
+          </div>
+
+          {/* Grid Layout */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {filtered.length > 0 ? (
+              filtered.map((game) => (
+                <div
+                  key={game.id}
+                  className="group bg-[#080808] border border-white/5 rounded-xl overflow-hidden hover:border-[#a3ff14]/30 hover:shadow-[0_0_15px_rgba(163,255,20,0.15)] transition-all duration-300 flex flex-col justify-between cursor-pointer holo-card"
+                  onMouseMove={handleCardMouseMove}
+                  onMouseLeave={handleCardMouseLeave}
+                  onClick={() => onOpenDetails(game)}
+                >
+                  <div className="relative h-[150px] overflow-hidden">
+                    <img
+                      src={game.image}
+                      alt={game.title}
+                      className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
+                    />
+                    <div className="absolute top-2.5 right-2.5 bg-black/60 backdrop-blur-md px-2 py-0.5 rounded border border-white/5 flex items-center gap-1">
+                      <Icon name="Star" className="w-3 h-3 text-[#eab308]" />
+                      <span className="font-mono text-[9px] text-[#eab308] font-bold">{game.rating || 5.0}</span>
+                    </div>
+                  </div>
+
+                  <div className="p-4 flex-1 flex flex-col justify-between space-y-4">
+                    <div className="space-y-1">
+                      <span className="font-mono text-[8px] px-1.5 py-0.5 rounded border text-[#a3ff14] border-[#a3ff14]/20 bg-[#a3ff14]/5 uppercase">
+                        {game.genre}
+                      </span>
+                      <h3 className="font-sans font-bold text-sm text-white tracking-wide truncate group-hover:text-[#a3ff14] transition-colors pt-1">
+                        {game.title}
+                      </h3>
+                      <p className="font-sans text-[11px] text-[#94a3b8] line-clamp-2 leading-relaxed">
+                        {game.description}
+                      </p>
+                    </div>
+
+                    <div className="pt-2 border-t border-white/5 flex items-center justify-between" onClick={(e) => e.stopPropagation()}>
+                      <span className="font-mono text-sm font-bold text-white tracking-wide">{game.price}</span>
+                      <button
+                        onClick={() => onPurchaseClick(game)}
+                        className="px-3 py-1.5 bg-[#a3ff14] hover:bg-[#b5ff14] text-black font-sans font-bold text-xs tracking-wide rounded-lg transition-all flex items-center gap-1"
+                      >
+                        <span>GET IT</span>
+                        <Icon name="ExternalLink" className="w-3 h-3" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="col-span-full py-16 text-center text-zinc-400 font-sans text-xs">
+                No games match your query tags.
+              </div>
+            )}
+          </div>
+        </div>
+      );
+    }
+
+    // --- ToolsView ---
+    function ToolsView({ tools, searchQuery, onOpenDetails, onPurchaseClick }) {
+      const [platformFilter, setPlatformFilter] = useState('all');
+      const [sortBy, setSortBy] = useState('name');
+
+      const filtered = tools
+        .filter(t => {
+          const matchSearch = t.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            t.description.toLowerCase().includes(searchQuery.toLowerCase());
+          const matchPlatform = platformFilter === 'all' || (t.platforms && t.platforms.includes(platformFilter));
+          return matchSearch && matchPlatform;
+        })
+        .sort((a, b) => {
+          if (sortBy === 'name') return a.title.localeCompare(b.title);
+          return 0;
+        });
+
+      return (
+        <div className="space-y-6 animate-in fade-in duration-300 select-none">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/5 pb-4">
+            <div>
+              <h2 className="font-sans font-extrabold text-lg text-white tracking-widest uppercase">
+                TOOLS AND PLUGINS
+              </h2>
+              <p className="font-sans text-xs text-[#94a3b8] uppercase mt-0.5">Workflow Extensions & Game Engine Addons</p>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-3">
+              <select
+                value={platformFilter}
+                onChange={(e) => setPlatformFilter(e.target.value)}
+                className="bg-[#080808] border border-white/10 px-3 py-1.5 rounded-lg text-xs text-[#94a3b8] focus:outline-none focus:border-xz-green/50 cursor-pointer"
+              >
+                <option value="all">ALL PLATFORMS</option>
+                <option value="Windows">WINDOWS</option>
+                <option value="Linux">LINUX</option>
+                <option value="Web">WEB</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {filtered.length > 0 ? (
+              filtered.map((tool) => (
+                <div
+                  key={tool.id}
+                  className="group bg-[#080808] border border-white/5 rounded-xl overflow-hidden hover:border-xz-green/30 hover:shadow-[0_0_15px_rgba(34,197,94,0.15)] transition-all duration-300 flex flex-col justify-between cursor-pointer holo-card"
+                  onMouseMove={handleCardMouseMove}
+                  onMouseLeave={handleCardMouseLeave}
+                  onClick={() => onOpenDetails(tool)}
+                >
+                  <div className="relative h-[150px] overflow-hidden">
+                    <img
+                      src={tool.image}
+                      alt={tool.title}
+                      className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
+                    />
+                  </div>
+
+                  <div className="p-4 flex-1 flex flex-col justify-between space-y-4">
+                    <div className="space-y-1">
+                      <span className="font-mono text-[8px] px-1.5 py-0.5 rounded border text-xz-green border-xz-green/20 bg-xz-green/5 uppercase">
+                        {tool.genre || 'Plugin'}
+                      </span>
+                      <h3 className="font-sans font-bold text-sm text-white tracking-wide truncate group-hover:text-xz-green transition-colors pt-1">
+                        {tool.title}
+                      </h3>
+                      <p className="font-sans text-[11px] text-[#94a3b8] line-clamp-2 leading-relaxed">
+                        {tool.description}
+                      </p>
+                    </div>
+
+                    <div className="pt-2 border-t border-white/5 flex items-center justify-between" onClick={(e) => e.stopPropagation()}>
+                      <span className="font-mono text-sm font-bold text-white tracking-wide">{tool.price}</span>
+                      <button
+                        onClick={() => onPurchaseClick(tool)}
+                        className="px-3 py-1.5 bg-xz-green hover:bg-green-400 text-black font-sans font-bold text-xs tracking-wide rounded-lg transition-all flex items-center gap-1"
+                      >
+                        <span>GET IT</span>
+                        <Icon name="ExternalLink" className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="col-span-full py-16 text-center text-zinc-400 font-sans text-xs">
+                No tools matches description filters.
+              </div>
+            )}
+          </div>
+        </div>
+      );
+    }
+
+    // --- AssetsView ---
+    function AssetsView({ assets, searchQuery, onOpenDetails, onPurchaseClick }) {
+      const filtered = assets.filter(a =>
+        a.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        a.description.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+
+      return (
+        <div className="space-y-6 animate-in fade-in duration-300 select-none">
+          <div>
+            <h2 className="font-sans font-extrabold text-lg text-white tracking-widest uppercase">
+              3D MODELS, ASSETS & SHADERS
+            </h2>
+            <p className="font-sans text-xs text-[#94a3b8] uppercase mt-0.5">Premium 3D Models, Materials & Custom Shaders</p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {filtered.length > 0 ? (
+              filtered.map((asset) => (
+                <div
+                  key={asset.id}
+                  className="group bg-[#080808] border border-white/5 rounded-xl overflow-hidden hover:border-[#ff5e00]/30 hover:shadow-[0_0_15px_rgba(255,94,0,0.15)] transition-all duration-300 flex flex-col justify-between cursor-pointer holo-card"
+                  onMouseMove={handleCardMouseMove}
+                  onMouseLeave={handleCardMouseLeave}
+                  onClick={() => onOpenDetails(asset)}
+                >
+                  <div className="relative h-[150px] overflow-hidden">
+                    <img
+                      src={asset.image}
+                      alt={asset.title}
+                      className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
+                    />
+                  </div>
+
+                  <div className="p-4 flex-1 flex flex-col justify-between space-y-4">
+                    <div className="space-y-1">
+                      <span className="font-mono text-[8px] px-1.5 py-0.5 rounded border text-[#ff5e00] border-[#ff5e00]/20 bg-[#ff5e00]/5 uppercase">
+                        ASSET PACK
+                      </span>
+                      <h3 className="font-sans font-bold text-sm text-white tracking-wide truncate group-hover:text-xz-orange transition-colors pt-1">
+                        {asset.title}
+                      </h3>
+                      <p className="font-sans text-[11px] text-[#94a3b8] line-clamp-2 leading-relaxed">
+                        {asset.description}
+                      </p>
+                    </div>
+
+                    <div className="pt-2 border-t border-white/5 flex items-center justify-between" onClick={(e) => e.stopPropagation()}>
+                      <span className="font-mono text-sm font-bold text-white tracking-wide">{asset.price}</span>
+                      <button
+                        onClick={() => onPurchaseClick(asset)}
+                        className="px-3 py-1.5 bg-xz-orange hover:bg-orange-400 text-white font-sans font-bold text-xs tracking-wide rounded-lg transition-all flex items-center gap-1"
+                      >
+                        <span>GET IT</span>
+                        <Icon name="ExternalLink" className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="col-span-full py-16 text-center text-zinc-400 font-sans text-xs">
+                No assets match search queries.
+              </div>
+            )}
+          </div>
+        </div>
+      );
+    }
+
+    // --- NewsView ---
+    function NewsView({ news }) {
+      return (
+        <div className="space-y-6 animate-in fade-in duration-300 select-none">
+          <div>
+            <h2 className="font-sans font-extrabold text-lg text-white tracking-widest uppercase">
+              UPDATES & NEWS
+            </h2>
+            <p className="font-sans text-xs text-[#94a3b8] uppercase mt-0.5">Project Milestones, Release Notes & Devlogs</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {news.map((item) => {
+              return (
+                <div key={item.id} className="bg-[#080808] border border-white/5 rounded-xl overflow-hidden flex flex-col hover:border-[#a3ff14]/20 transition-all duration-300">
+                  <div className="relative aspect-video shrink-0 overflow-hidden">
+                    <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
+                    <div className="absolute top-3 left-3 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded border border-white/10">
+                      <span className="font-sans text-[10px] text-[#a3ff14] font-bold tracking-wider uppercase">
+                        {item.category}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="p-4 flex-1 flex flex-col justify-between space-y-4">
+                    <div className="space-y-2">
+                      <span className="font-mono text-[9px] text-[#94a3b8]">{item.date}</span>
+                      <h3 className="font-sans font-bold text-sm text-white tracking-wide uppercase line-clamp-2">
+                        {item.title}
+                      </h3>
+                      <p className="font-sans text-xs text-[#94a3b8] leading-relaxed line-clamp-3">
+                        {item.summary}
+                      </p>
+                    </div>
+
+                    <div className="flex items-center justify-between pt-3 border-t border-white/5 shrink-0">
+                      <span className="font-mono text-[9px] text-zinc-400">TRANSMISSION SECURE</span>
+                      <span className="font-mono text-[9px] text-zinc-400">FEED NODE</span>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      );
+    }
+
+    // --- LinksView ---
+    function LinksView({ links, onLinkClick }) {
+      const categoryColors = {
+        PORTFOLIO: 'text-[#ff5e00] border-[#ff5e00]/20 bg-[#ff5e00]/5',
+        HOMEPAGE: 'text-[#a3ff14] border-[#a3ff14]/20 bg-[#a3ff14]/5',
+        SOCIAL: 'text-[#22c55e] border-[#22c55e]/20 bg-[#22c55e]/5',
+        BROADCAST: 'text-[#eab308] border-[#eab308]/20 bg-[#eab308]/5',
+        CODE: 'text-purple-400 border-purple-400/20 bg-purple-400/5',
+        STOREFRONT: 'text-pink-400 border-pink-400/20 bg-pink-400/5',
+        COMMUNITY: 'text-indigo-400 border-indigo-400/20 bg-indigo-400/5',
+        OTHER: 'text-[#94a3b8] border-white/5 bg-white/[0.02]'
+      };
+
+      const handlePortalRedirect = (link) => {
+        onLinkClick();
+        window.open(link.url, '_blank');
+      };
+
+      return (
+        <div className="space-y-6 animate-in fade-in duration-300 select-none">
+          <div>
+            <h2 className="font-sans font-extrabold text-lg text-white tracking-widest uppercase">
+              EXTERNAL LINKS
+            </h2>
+            <p className="font-sans text-xs text-[#94a3b8] uppercase mt-0.5">Connect with XtremeZero across the web</p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {links.map((link) => (
+              <div
+                key={link.id}
+                onClick={() => handlePortalRedirect(link)}
+                onMouseMove={handleCardMouseMove}
+                onMouseLeave={handleCardMouseLeave}
+                className="p-5 bg-[#080808] border border-white/5 rounded-2xl flex flex-col justify-between gap-5 transition-all duration-300 hover:border-[#a3ff14]/30 hover:shadow-[0_0_15px_rgba(163,255,20,0.15)] group cursor-pointer holo-card"
+              >
+                <div className="flex items-start justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-black/40 border border-white/5 flex items-center justify-center text-zinc-400 group-hover:text-[#a3ff14] group-hover:border-[#a3ff14]/30 transition-colors">
+                      <SocialIcon type={link.id} className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h4 className="font-sans font-bold text-sm text-white group-hover:text-[#a3ff14] transition-colors leading-tight">
+                        {link.title}
+                      </h4>
+                      <span className={`font-mono text-[8px] px-1.5 py-0.5 rounded border inline-block mt-1 ${categoryColors[link.category] || categoryColors.OTHER}`}>
+                        {link.category}
+                      </span>
+                    </div>
+                  </div>
+
+                  <span className="p-1.5 bg-white/5 rounded-lg text-zinc-400 group-hover:text-[#a3ff14] group-hover:bg-[#a3ff14]/10 transition-colors">
+                    <Icon name="ExternalLink" className="w-3.5 h-3.5" />
+                  </span>
+                </div>
+
+                <div className="flex items-center justify-between border-t border-white/5 pt-3">
+                  <span className="font-mono text-[9px] text-zinc-600 truncate max-w-full">{link.url}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    // --- AboutView ---
+    function AboutView({ about }) {
+      const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+      const [logs, setLogs] = useState(['Terminal ready. Standing by for user transmission...']);
+      const [isSending, setIsSending] = useState(false);
+
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) return;
+
+        setIsSending(true);
+        setLogs(prev => [...prev, 'Initializing encrypted uplink...', 'Packaging message payload...', 'Establishing connection to main server gateway...']);
+
+        setTimeout(() => {
+          setLogs(prev => [...prev, 'Uplink handshake successful... [OK]', 'Checking message validity... [OK]']);
+          setTimeout(() => {
+            setLogs(prev => [...prev, 'Transmitting data packets... [OK]', 'Transmission received! Confirmation token stored.']);
+            setIsSending(false);
+            alert("Message Sent! Your message was sent to XtremeZero successfully.");
+            setFormData({ name: '', email: '', message: '' });
+          }, 600);
+        }, 600);
+      };
+
+      return (
+        <div className="space-y-6 animate-in fade-in duration-300 select-none">
+          <div>
+            <h2 className="font-sans font-extrabold text-lg text-white tracking-widest uppercase">
+              ABOUT ME
+            </h2>
+            <p className="font-sans text-xs text-[#94a3b8] uppercase mt-0.5">Developer Profile & Encrypted Contact Terminal</p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {/* Bio logs & capabilities */}
+            <div className="lg:col-span-2 space-y-6">
+              {/* Profile Card */}
+              <div className="p-6 bg-[#080808] border border-white/5 rounded-2xl flex flex-col sm:flex-row gap-5 items-center sm:items-start">
+                <img
+                  src={about.avatar}
+                  alt={about.name}
+                  className="w-20 h-20 rounded-2xl object-cover border-2 border-[#a3ff14] shadow-[0_0_15px_rgba(163,255,20,0.3)] shrink-0"
+                />
+                <div className="space-y-3 min-w-0 text-center sm:text-left">
+                  <div>
+                    <h3 className="font-sans font-extrabold text-xl text-white tracking-wider uppercase">{about.name}</h3>
+                    <span className="font-mono text-[9px] text-[#a3ff14] uppercase block mt-0.5">GAME DEVELOPMENT GENERALIST</span>
+                  </div>
+                  {about.bio && (
+                    <p className="font-sans text-xs text-[#94a3b8] leading-relaxed">
+                      {about.bio}
+                    </p>
+                  )}
+                  {about.email && (
+                    <div className="text-zinc-500 font-mono text-[10px]">
+                      EMAIL: <a href={`mailto:${about.email}`} className="text-[#a3ff14] hover:underline">{about.email}</a>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Skills capabilities */}
+              {about.skills && about.skills.length > 0 && (
+                <div className="p-6 bg-[#080808] border border-white/5 rounded-2xl space-y-4">
+                  <h3 className="font-sans font-bold text-xs text-[#94a3b8] tracking-widest uppercase border-b border-white/5 pb-2">
+                    SKILLS & EXPERTISE
+                  </h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    {about.skills.map((skill, idx) => (
+                      <div key={idx} className="space-y-1.5">
+                        <div className="flex justify-between text-xs">
+                          <span className="font-sans font-semibold text-white uppercase">{skill.name}</span>
+                          <span className="font-mono text-[#a3ff14]">{skill.level}%</span>
+                        </div>
+                        <div className="w-full bg-[#000000] border border-white/5 h-2 rounded-full overflow-hidden">
+                          <div
+                            className="bg-gradient-to-r from-[#2b5f00] to-[#a3ff14] h-full rounded-full shadow-[0_0_8px_rgba(163,255,20,0.6)]"
+                            style={{ width: `${skill.level}%` }}
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Simulated Cyberpunk contact form */}
+            <div className="lg:col-span-1 space-y-6">
+              <div className="p-5 bg-[#080808] border border-white/5 rounded-2xl space-y-4">
+                <h3 className="font-sans font-bold text-xs text-white uppercase tracking-wider border-b border-white/5 pb-2 flex items-center gap-2">
+                  <Icon name="Terminal" className="w-4 h-4 text-[#a3ff14]" />
+                  TRANSMIT SECURE MESSAGE
+                </h3>
+
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="space-y-1">
+                    <label className="font-mono text-[8px] text-zinc-400 uppercase block">Name</label>
+                    <input
+                      type="text"
+                      placeholder="Your Name"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      className="w-full bg-[#000000] text-xs text-white placeholder-zinc-700 px-3 py-2 rounded-lg border border-white/5 focus:outline-none focus:border-[#a3ff14]/40 transition-all font-sans"
+                      required
+                      disabled={isSending}
+                    />
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="font-mono text-[8px] text-zinc-400 uppercase block">Email Address</label>
+                    <input
+                      type="email"
+                      placeholder="your.email@example.com"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      className="w-full bg-[#000000] text-xs text-white placeholder-zinc-700 px-3 py-2 rounded-lg border border-white/5 focus:outline-none focus:border-[#a3ff14]/40 transition-all font-sans"
+                      required
+                      disabled={isSending}
+                    />
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="font-mono text-[8px] text-zinc-400 uppercase block">Message</label>
+                    <textarea
+                      placeholder="Write your message here..."
+                      rows="4"
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      className="w-full bg-[#000000] text-xs text-white placeholder-zinc-700 px-3 py-2 rounded-lg border border-white/5 focus:outline-none focus:border-[#a3ff14]/40 transition-all font-sans resize-none"
+                      required
+                      disabled={isSending}
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="w-full py-2.5 bg-[#a3ff14] hover:bg-[#b5ff14] disabled:opacity-40 disabled:cursor-not-allowed text-black font-sans font-bold text-xs uppercase tracking-wider rounded-lg transition-colors flex items-center justify-center gap-1.5 shadow-[0_0_10px_rgba(163,255,20,0.3)] cursor-pointer"
+                    disabled={isSending}
+                  >
+                    <span>{isSending ? 'SENDING...' : 'SEND MESSAGE'}</span>
+                    <Icon name="ExternalLink" className="w-3.5 h-3.5" />
+                  </button>
+                </form>
+
+                {/* Console Logs */}
+                <div className="bg-[#050608] border border-white/5 p-3 rounded-lg font-mono text-[9px] text-[#94a3b8] space-y-1.5 max-h-36 overflow-y-auto select-text">
+                  {logs.map((log, index) => {
+                    let cl = 'text-zinc-400';
+                    if (log.includes('[OK]')) cl = 'text-xz-green';
+                    if (log.includes('dispatched') || log.includes('gateway')) cl = 'text-[#a3ff14]';
+                    return (
+                      <div key={index} className="flex gap-1 items-start leading-tight">
+                        <span className="text-[#a3ff14] shrink-0">❯</span>
+                        <span className={cl}>{log}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // --- ProductDetailsModal ---
+    function ProductDetailsModal({ game, onClose, onPurchaseClick }) {
+      if (!game) return null;
+
+      // Handle screenshots gallery. Screenshots array is scraped, fallback to thumbnails/banner.
+      const screenshotsList = game.screenshots && game.screenshots.length > 0 ? game.screenshots : [game.image];
+      const [activeImgIndex, setActiveImgIndex] = useState(0);
+
+      // Handle closing when clicking overlay
+      const handleOverlayClick = (e) => {
+        if (e.target === e.currentTarget) {
+          onClose();
+        }
+      };
+
+      const isTool = game.genre && (game.genre.toLowerCase().includes('tool') || game.genre.toLowerCase().includes('plugin') || game.genre.toLowerCase().includes('shader'));
+      const isAsset = game.genre && (game.genre.toLowerCase().includes('asset') || game.genre.toLowerCase().includes('model'));
+      const themeColorClass = isTool ? 'border-xz-green' : isAsset ? 'border-xz-orange' : 'border-[#a3ff14]';
+
+      return (
+        <div
+          className="fixed inset-0 bg-black/90 backdrop-blur-xl flex items-center justify-center z-50 p-2 sm:p-4 animate-in fade-in duration-200"
+          onClick={handleOverlayClick}
+        >
+          <div
+            className="relative w-full max-w-4xl bg-[#080808] border border-white/10 rounded-2xl overflow-hidden shadow-2xl flex flex-col max-h-[95vh] sm:max-h-[90vh] select-none"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Cyber Corner Notches */}
+            <div className={`absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 ${themeColorClass} pointer-events-none z-10`} />
+            <div className={`absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 ${themeColorClass} pointer-events-none z-10`} />
+            <div className={`absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 ${themeColorClass} pointer-events-none z-10`} />
+            <div className={`absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 ${themeColorClass} pointer-events-none z-10`} />
+
+            {/* Banner top */}
+            <div className="relative h-36 sm:h-44 md:h-56 overflow-hidden shrink-0">
+              <img
+                src={game.bannerImage || game.image}
+                alt={game.title}
+                className="w-full h-full object-cover object-center"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-[#080808]/45 to-black/40" />
+
+              <button
+                onClick={onClose}
+                className="absolute top-3 right-3 sm:top-4 sm:right-4 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-black/60 hover:bg-black/80 border border-white/10 flex items-center justify-center text-white/70 hover:text-white transition-all cursor-pointer"
+              >
+                <Icon name="X" className="w-5 h-5" />
+              </button>
+
+              <div className="absolute bottom-3 left-4 right-4 sm:bottom-4 sm:left-6 sm:right-6 flex flex-col sm:flex-row sm:items-end justify-between gap-2 sm:gap-3">
+                <div>
+                  <span className="font-mono text-[9px] text-[#a3ff14] font-bold tracking-widest uppercase bg-[#a3ff14]/10 border border-[#a3ff14]/20 px-2 py-0.5 rounded">
+                    {game.genre || 'Showcase'}
+                  </span>
+                  <h2 className="font-sans font-extrabold text-lg sm:text-xl md:text-2xl text-white tracking-wider mt-1.5 uppercase leading-tight">
+                    {game.title}
+                  </h2>
+                </div>
+
+                <div className="flex items-center gap-1.5 px-3 py-1 bg-black/60 backdrop-blur-sm rounded-lg border border-white/10 shrink-0 self-start sm:self-end">
+                  <Icon name="Star" className="w-4 h-4 text-[#eab308]" />
+                  <span className="font-mono text-xs font-bold text-white">{game.rating || '5.0'}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Modal Body */}
+            <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="md:col-span-2 space-y-6">
+
+                  {/* Screenshot Carousel / Gallery */}
+                  <div className="space-y-2">
+                    <div className="relative aspect-video rounded-xl overflow-hidden border border-white/5 bg-black/50">
+                      <img
+                        src={screenshotsList[activeImgIndex]}
+                        alt="Screenshot Active"
+                        className="w-full h-full object-contain"
+                      />
+                      {screenshotsList.length > 1 && (
+                        <>
+                          <button
+                            onClick={() => setActiveImgIndex(prev => (prev - 1 + screenshotsList.length) % screenshotsList.length)}
+                            className="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/70 hover:bg-black/90 border border-white/5 flex items-center justify-center text-white/70 hover:text-white transition-all cursor-pointer"
+                          >
+                            <Icon name="ChevronLeft" className="w-4 h-4" />
+                          </button>
+                          <button
+                            onClick={() => setActiveImgIndex(prev => (prev + 1) % screenshotsList.length)}
+                            className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/70 hover:bg-black/90 border border-white/5 flex items-center justify-center text-white/70 hover:text-white transition-all cursor-pointer"
+                          >
+                            <Icon name="ChevronRight" className="w-4 h-4" />
+                          </button>
+                        </>
+                      )}
+                    </div>
+
+                    {/* Screenshots Thumbnails Grid */}
+                    {screenshotsList.length > 1 && (
+                      <div className="flex gap-2 overflow-x-auto pb-1">
+                        {screenshotsList.map((shot, index) => (
+                          <button
+                            key={index}
+                            onClick={() => setActiveImgIndex(index)}
+                            className={`w-16 h-10 rounded-lg overflow-hidden shrink-0 border-2 transition-all cursor-pointer ${activeImgIndex === index ? 'border-[#a3ff14]' : 'border-transparent opacity-60 hover:opacity-100'
+                              }`}
+                          >
+                            <img src={shot} alt={`Thumb ${index}`} className="w-full h-full object-cover" />
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Description Overview */}
+                  <div>
+                    <h4 className="font-sans font-bold text-xs text-[#94a3b8] tracking-wider uppercase mb-2">
+                      PRODUCT OVERVIEW
+                    </h4>
+                    <p className="font-sans text-xs md:text-sm text-[#94a3b8] leading-relaxed whitespace-pre-wrap select-text">
+                      {game.longDescription || game.description}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Right side box (pricing & specs) */}
+                <div className="space-y-4">
+                  <div className="bg-[#000000]/80 border border-white/5 rounded-xl p-4 space-y-4 text-center">
+                    <span className="font-mono text-[9px] text-zinc-400 block uppercase tracking-widest">
+                      PRODUCT LINK
+                    </span>
+
+                    <div className="py-1 space-y-3">
+                      <div className="text-white text-lg font-mono font-bold">
+                        {game.price}
+                      </div>
+
+                      <button
+                        onClick={() => {
+                          onPurchaseClick(game);
+                        }}
+                        className="w-full py-2.5 bg-[#a3ff14] hover:bg-[#b5ff14] text-black font-sans font-bold text-xs tracking-wider rounded-lg flex items-center justify-center gap-1.5 transition-all transform active:scale-95 shadow-[0_4px_12px_rgba(163,255,20,0.3)] cursor-pointer"
+                      >
+                        <Icon name="ExternalLink" className="w-4 h-4" />
+                        <span>VIEW ON ITCH.IO</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="bg-white/[0.01] border border-white/5 rounded-xl p-4 space-y-2.5">
+                    <span className="font-mono text-[9px] text-zinc-400 block uppercase">PRODUCT DETAILS</span>
+                    <div className="flex justify-between border-b border-white/5 pb-1">
+                      <span className="font-sans text-[10px] text-[#94a3b8]">GENRE:</span>
+                      <span className="font-mono text-[10px] text-white truncate max-w-[130px]">{game.genre || 'Showcase'}</span>
+                    </div>
+                    <div className="flex justify-between border-b border-white/5 pb-1">
+                      <span className="font-sans text-[10px] text-[#94a3b8]">DEVELOPER:</span>
+                      <span className="font-mono text-[10px] text-white truncate max-w-[130px]">XtremeZero</span>
+                    </div>
+                    {game.platforms && game.platforms.length > 0 && (
+                      <div className="flex justify-between border-b border-white/5 pb-1">
+                        <span className="font-sans text-[10px] text-[#94a3b8]">PLATFORMS:</span>
+                        <span className="font-mono text-[10px] text-white">{game.platforms.join(', ')}</span>
+                      </div>
+                    )}
+                    <div className="flex justify-between border-b border-white/5 pb-1">
+                      <span className="font-sans text-[10px] text-[#94a3b8]">STATUS:</span>
+                      <span className="font-mono text-[10px] text-xz-green">● PUBLISHED</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="font-sans text-[10px] text-[#94a3b8]">STOREFRONT:</span>
+                      <span className="font-mono text-[10px] text-[#a3ff14] uppercase">ITCH.IO</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // --- Main App Component ---
+    function App() {
+      const [activeTab, setActiveTab] = useState('home');
+      const [searchQuery, setSearchQuery] = useState('');
+      const [holoEnabled, setHoloEnabled] = useState(true);
+      const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+      const [about, setAbout] = useState(FALLBACK_DATA.about);
+      const [links, setLinks] = useState([]);
+      const [news, setNews] = useState([]);
+      const [games, setGames] = useState([]);
+      const [tools, setTools] = useState([]);
+      const [assets, setAssets] = useState([]);
+
+      const [isLoading, setIsLoading] = useState(true);
+      const [selectedItemDetails, setSelectedItemDetails] = useState(null);
+
+      // Play click tone
+      const playClickTone = (freq = 320, duration = 0.08) => {
+        try {
+          const ctx = new (window.AudioContext || window.webkitAudioContext)();
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, ctx.currentTime);
+          gain.gain.setValueAtTime(0.02, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + duration);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start();
+          osc.stop(ctx.currentTime + duration);
+        } catch (e) {
+          // ignore
+        }
+      };
+
+      // Load data
+      useEffect(() => {
+        fetch('data.json')
+          .then((res) => {
+            if (!res.ok) throw new Error();
+            return res.json();
+          })
+          .then((data) => {
+            initApp(data);
+          })
+          .catch(() => {
+            console.warn("Loading fallback mock data.");
+            initApp(FALLBACK_DATA);
+          });
+      }, []);
+
+      const initApp = (data) => {
+        setAbout(data.about || FALLBACK_DATA.about);
+        setLinks(data.links || []);
+        setNews(data.news || data.newsItems || FALLBACK_DATA.news);
+        setGames(data.games || []);
+        setTools(data.tools || []);
+        setAssets(data.assets || []);
+        setIsLoading(false);
+      };
+
+      // Handle links click
+      const handleLinkClick = () => {
+        playClickTone(420);
+      };
+
+      const handlePurchaseRedirect = (item) => {
+        playClickTone(520, 0.15);
+        window.open(item.url, '_blank');
+      };
+
+      // Tab selector Click
+      const handleTabChange = (tabId) => {
+        playClickTone(380);
+        setActiveTab(tabId);
+        setSearchQuery('');
+      };
+
+      if (isLoading) {
+        return (
+          <div className="min-h-screen w-full bg-[#000000] flex items-center justify-center p-6 text-center select-none font-sans" style={{ backgroundImage: 'radial-gradient(circle at center, #081005 0%, #000000 100%)' }}>
+            <div className="max-w-md w-full bg-[#080808]/80 backdrop-blur-md border border-[#a3ff14]/20 rounded-2xl p-8 space-y-6 shadow-2xl relative overflow-hidden">
+              <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(163,255,20,0.02)_1px,transparent_1px)] bg-[size:100%_4px] opacity-30" />
+
+              <div className="flex justify-center">
+                <div className="w-16 h-16 rounded-full border-4 border-[#a3ff14]/10 border-t-4 border-t-[#a3ff14] animate-spin flex items-center justify-center shadow-[0_0_15px_rgba(163,255,20,0.2)]">
+                  <span className="font-sans font-black text-xl text-[#a3ff14]">X</span>
+                </div>
+              </div>
+
+              <div className="space-y-3">
+                <h2 className="font-display font-extrabold text-sm text-white tracking-widest uppercase text-glow-neon">
+                  LOADING DEVELOPER PORTAL
+                </h2>
+                <div className="flex items-center justify-center gap-1.5">
+                  <Icon name="Terminal" className="w-3.5 h-3.5 text-[#a3ff14] animate-pulse" />
+                  <span className="font-mono text-[9px] text-[#a3ff14] tracking-wider uppercase animate-pulse">LOADING...</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      return (
+        <div
+          className="min-h-screen w-full bg-[#000000] flex items-center justify-center p-0 overflow-hidden"
+          style={{ backgroundImage: 'radial-gradient(circle at center, #081005 0%, #000000 100%)' }}
+        >
+          <div
+            id="xz-storefront-grid"
+            className="w-full h-screen rounded-none bg-[#080808]/95 backdrop-blur-xl flex flex-col md:flex-row overflow-hidden relative"
+          >
+            <Sidebar
+              activeTab={activeTab}
+              setActiveTab={handleTabChange}
+              gamesCount={games.length}
+              toolsCount={tools.length}
+              assetsCount={assets.length}
+              holoEnabled={holoEnabled}
+              setHoloEnabled={setHoloEnabled}
+              isOpen={isMobileMenuOpen}
+              onClose={() => setIsMobileMenuOpen(false)}
+            />
+
+            <div className="flex-1 flex flex-col h-full overflow-hidden bg-gradient-to-b from-black/10 to-black/30">
+              <Header
+                searchQuery={searchQuery}
+                setSearchQuery={setSearchQuery}
+                activeTab={activeTab}
+                onMenuToggle={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              />
+
+              <main className="flex-1 overflow-y-auto p-6 space-y-6 relative">
+                {holoEnabled && <div className="holo-projector-grid" />}
+                {holoEnabled && <div className="holo-laser-line" />}
+
+                <div key={activeTab} className={holoEnabled ? 'animate-holo-enter' : ''}>
+                  {activeTab === 'home' && (
+                    <HomeView
+                      games={games}
+                      tools={tools}
+                      news={news}
+                      onOpenDetails={(item) => setSelectedItemDetails(item)}
+                      onPurchaseClick={handlePurchaseRedirect}
+                      setActiveTab={handleTabChange}
+                    />
+                  )}
+
+                  {activeTab === 'games' && (
+                    <GamesView
+                      games={games}
+                      searchQuery={searchQuery}
+                      onOpenDetails={(item) => setSelectedItemDetails(item)}
+                      onPurchaseClick={handlePurchaseRedirect}
+                    />
+                  )}
+
+                  {activeTab === 'tools' && (
+                    <ToolsView
+                      tools={tools}
+                      searchQuery={searchQuery}
+                      onOpenDetails={(item) => setSelectedItemDetails(item)}
+                      onPurchaseClick={handlePurchaseRedirect}
+                    />
+                  )}
+
+                  {activeTab === 'assets' && (
+                    <AssetsView
+                      assets={assets}
+                      searchQuery={searchQuery}
+                      onOpenDetails={(item) => setSelectedItemDetails(item)}
+                      onPurchaseClick={handlePurchaseRedirect}
+                    />
+                  )}
+
+                  {activeTab === 'news' && (
+                    <NewsView news={news} />
+                  )}
+
+                  {activeTab === 'links' && (
+                    <LinksView
+                      links={links}
+                      onLinkClick={handleLinkClick}
+                    />
+                  )}
+
+                  {activeTab === 'about' && (
+                    <AboutView about={about} />
+                  )}
+                </div>
+              </main>
+            </div>
+          </div>
+
+          {selectedItemDetails && (
+            <ProductDetailsModal
+              game={selectedItemDetails}
+              onClose={() => setSelectedItemDetails(null)}
+              onPurchaseClick={handlePurchaseRedirect}
+            />
+          )}
+        </div>
+      );
+    }
+
+    // Mount application
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+
+</html>

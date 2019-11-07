@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SUPER RARE CARD</title>
+  <style>
+    :root {
+      --ratio-w: 848;
+      --ratio-h: 1264;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100dvh;
+      background-color: #0f031b;
+      overflow: hidden;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    /* Smooth Dark Purple Background */
+    .bg-animation {
+      position: absolute;
+      inset: -50%;
+      z-index: -2;
+      background: linear-gradient(45deg, #17042c, #350961, #17042c);
+      background-size: 200% 200%;
+      animation: ambient-drift 15s ease-in-out infinite alternate;
+    }
+
+    /* Card Wrapper & Responsive Constraints */
+    .card-scene {
+      position: relative;
+      width: 90vw;
+      height: 90dvh;
+      max-width: calc(90dvh * (var(--ratio-w) / var(--ratio-h)));
+      max-height: calc(90vw * (var(--ratio-h) / var(--ratio-w)));
+      perspective: 1500px;
+      animation: card-entry 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      opacity: 0;
+    }
+
+    /* Continuous floating effect - MUST preserve 3D space from parent */
+    .card-float {
+      width: 100%;
+      height: 100%;
+      animation: float 6s ease-in-out infinite;
+      transform-style: preserve-3d;
+    }
+
+    /* 3D Card Object */
+    .card {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      cursor: pointer;
+      transform-style: preserve-3d;
+      transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+    }
+
+    .card:hover {
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.1);
+    }
+
+    .card.flipped {
+      transform: rotateY(180deg);
+    }
+
+    /* Card Faces */
+    .card-face {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #1a1a1a;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .card-front {
+      transform: rotateY(0deg);
+    }
+
+    .card-back {
+      transform: rotateY(180deg);
+    }
+
+    .card-face img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+      filter: brightness(0.9) contrast(1.1);
+      transition: filter 0.4s ease, transform 0.4s ease;
+    }
+
+    .card:hover .card-face img {
+      filter: brightness(1) contrast(1.15);
+      transform: scale(1.02);
+    }
+
+    /* Dynamic Lighting Overlay */
+    .lighting {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 40%, rgba(0,0,0,0.4) 100%);
+      mix-blend-mode: overlay;
+      z-index: 2;
+      border-radius: 16px;
+      pointer-events: none;
+    }
+
+    /* Keyframes */
+    @keyframes ambient-drift {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      100% { transform: translate(-2%, -2%) rotate(1deg); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    @keyframes card-entry {
+      0% { 
+        opacity: 0; 
+        transform: translateY(60px) rotateX(10deg); 
+      }
+      100% { 
+        opacity: 1; 
+        transform: translateY(0) rotateX(0deg); 
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-animation"></div>
+
+  <div class="card-scene">
+    <div class="card-float">
+      <div class="card" id="flip-card">
+        
+        <div class="card-face card-front">
+          <div class="lighting"></div>
+          <img src="./salam.png" alt="Side A Image">
+        </div>
+
+        <div class="card-face card-back">
+          <div class="lighting"></div>
+          <img src="./salam master.png" alt="Side B Image">
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const card = document.getElementById('flip-card');
+      
+      card.addEventListener('click', () => {
+        card.classList.toggle('flipped');
+      });
+    });
+  </script>
+
+</body>
+</html>
