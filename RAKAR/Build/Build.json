@@ -9,7 +9,7 @@
 "webglContextAttributes": {"preserveDrawingBuffer": false},
 "splashScreenStyle": "Light",
 
-"developmentBuild": true,
+"developmentBuild": false,
 "multithreading": false,
 "unityVersion": "2019.4.33f1"
 }
