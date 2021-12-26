@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+ADD QR Scanner
+ADD ANIMATIONS
+SCALE SCREEN SIZE 
+ADD Text boxes and buttons
+
+<head>
+    <meta charset="UTF-8">
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <title>Model</title>
+
+	<style>
+		body{
+			overflow:hidden;
+		}
+		.fullscreen{
+			width : 100vw;
+			height: 100vh;
+		}
+		#playbutton{
+			position: absolute;
+			left: 35vw;
+			top: 15vh;
+			width: 30vw;
+			height:30vw;
+		}
+	</style>
+
+</head>
+
+<body>
+    <model-viewer id="modelviewer" class="fullscreen" src="ArabMan.glb" ar ar-button ar-modes="webxr scene-viewer quick-look" animation-name="talk" s-poster shadow-intensity="1" camera-orbit="0deg 75deg 3.5m" camera-target="0m 1m 0m" ></model-viewer>
+	<button id="playbutton" onmousedown="playanim()"></button>
+	<script>
+		function playanim(){
+			var model = document.getElementById("modelviewer");
+			var playbutton = document.getElementById("playbutton");
+			model.play();
+			if (model.canActivateAR)
+				model.activateAR();
+			playbutton.style.visibility="hidden";
+
+		}
+	</script>
+</body>
+
+</html>
