@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+ADD QR Scanner
+ADD Text boxes and buttons
+
+<head>
+    <meta charset="UTF-8">
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <title>Al Jazirah Al Hamra - Ras Al Khaimah</title>
+
+	<style>
+		body{
+			overflow:hidden;
+			padding: 0px;
+			margin: 0px;
+		}
+		.fullscreen{
+			width : 100vw;
+			height: 100vh;
+		}
+		#playbutton{
+			/*transform: translate(-50%,-50%);*/
+			background-image: url("images/playbutton.png");
+			background-size: 20vw;
+			background-repeat: no-repeat;
+			background-position: center;
+			background-color: #000000aa;
+			border: none;
+			position: absolute;
+			left: 0px;
+			top: 0px;
+			width: 100vw;
+			height:100vh;
+		}
+		#modelviewer{
+			width: 100vw;
+			height: 100vh;
+		}
+
+		#textbox{
+		font-size: 2vh;
+		visibility: hidden;
+		position: absolute;
+		left :50%;
+		top:80%;
+		width: 80%;
+		height: 25%;
+		background-color: #BCAC9F;
+		overflow-y: auto;
+		scrollbar-color:/* #BCAC9F */#754c2a #0000;
+		
+		/*border: 36px solid orange;*/
+		/*margin: 30px;*/
+		padding: 10px;
+		transform: translate(-50%,-50%);
+		border-image:
+			url("images/9patch.png")  /* source */
+			167 /                    /* slice */
+			50px /    /* width */
+			25px       /* outset */
+			round;                  /* repeat */
+
+		}
+		
+	</style>
+
+</head>
+
+<body>
+    <model-viewer id="modelviewer" class="fullscreen" src="geometry/ArabMan.glb" skybox-image ="images/hdr.jpg" ar ar-scale="fixed" touch-action="none" 
+	disable-zoom ar-button ar-modes="webxr scene-viewer quick-look" animation-name="talk" s-poster shadow-intensity="1"	camera-orbit="0deg 70deg 2m" 
+	camera-target="0m 1m 0m" ></model-viewer>
+	
+	<div id="textbox"> TEST BOX</div>
+
+	<button id="playbutton" onmousedown="playanim()"></button>
+	<script>
+		let topic = 1
+		function playanim(){
+			var model = document.getElementById("modelviewer");
+			var playbutton = document.getElementById("playbutton");
+			var textbox = document.getElementById("textbox");
+			if(model.loaded){
+				if (window.innerHeight < window.innerWidth)
+					model.cameraTarget = "0m 1.2m 0m";
+				model.play();
+				if (model.canActivateAR)
+					model.activateAR();
+				playbutton.style.visibility="hidden";
+				var audio = new Audio('audio/arabic/ar_introduction.mp3');
+				audio.play();
+				audio.onended = function() {
+					model.pause();
+					alert("The audio has ended");
+				}; 
+				textbox.style.visibility= "visible";
+				switch (topic){
+					case 1:
+						textbox.style.textAlign="right"
+						textbox.textContent="الجزيرة الحمراء هي قرية الصيد و الغوص على اللؤلؤ التاريخية الوحيدة في الخليج ، التي بقيت  كما هي و لم تطلها ايدي التطور والحداثة على الرغم من  التطور السريع بعد اكتشاف النفط. وهي تعد نموذجا   مثاليا    على العمارة التقليدية  وتخطيط المدن في الماضي ، وتشمل كل العناصر التقليدية للمدينة الخليجية سابقا:  حيث انها تضم حصن وأبراج مراقبة ،و مساجد و سوق شعبي وأعداد كبيرة من المنازل التقليدية  ذات الأفنية  ، والتي تمثل  المستوطنات  السكنية  في الشرق الأوسط منذ آلاف السنين ، وتعكس مختلف الطبقات الاجتماعية للإستيطان قبل اكتشاف النفط. فهي تضم بيوتا و مساكن  تتراوح بين المنازل البسيطة ،   ذات الأفنية  الصغيرة، ومباني مزخرفة من طابقين ، ومساكن ذات أفنية  كبيرة يملكها تجار اللؤلؤ الأثرياء. واستطاعت الجزيرة الحمرا الحفاظ على اصالتها  بصورة  فريدة من نوعها ،بالرغم من التطور السريع الذي  طرا  على المباني و العمارة بعد قيام    دولة الإمارات العربية المتحدة وانعكاسها على العمارة والإنشاءات الهيكلية لهذه المدينة المهجورة. الا ان   الجزيرة الحمراء  اعطت نظرة ساحرة على الحياة التقليدية السابقة على ساحل  الخليج "
+						break;
+				}
+			}
+		}
+	</script>
+
+	
+
+</body>
+
+</html>
