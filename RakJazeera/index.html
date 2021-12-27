@@ -30,9 +30,38 @@
 			height:100vh;
 		}
 		#modelviewer{
+			overflow-x: hidden;
 			width: 100vw;
 			height: 100vh;
 		}
+
+		model-viewer > #ar-prompt {
+		position: absolute;
+		left: 50%;
+		bottom: 175px;
+		animation: elongate 2s infinite ease-in-out alternate;
+		display: none;
+		}
+
+		model-viewer[ar-status="session-started"] > #ar-prompt {
+		display: block;
+		}
+
+		model-viewer > #ar-prompt > img {
+		animation: circle 4s linear infinite;
+		}
+
+		model-viewer > #ar-failure {
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+		bottom: 175px;
+		display: none;
+		}
+
+		model-viewer[ar-tracking="not-tracking"] > #ar-failure {
+		display: block;
+	}
 
 		#textbox{
 		font-size: 2vh;
@@ -45,11 +74,9 @@
 		background-color: #BCAC9F;
 		overflow-y: auto;
 		scrollbar-color:/* #BCAC9F */#754c2a #0000;
-		
-		/*border: 36px solid orange;*/
-		/*margin: 30px;*/
 		padding: 10px;
 		transform: translate(-50%,-50%);
+		border: 50px solid transparent;
 		border-image:
 			url("images/9patch.png")  /* source */
 			167 /                    /* slice */
@@ -58,17 +85,30 @@
 			round;                  /* repeat */
 
 		}
-		
+
+		#textbox::-webkit-scrollbar {
+			width: 7px;	
+			background: #0000;
+		}
+
+		::-webkit-scrollbar-thumb {
+		background: #754c2a;
+		border-radius: 20px;
+
+		}
 	</style>
 
 </head>
 
 <body>
     <model-viewer id="modelviewer" class="fullscreen" src="geometry/ArabMan.glb" skybox-image ="images/hdr.jpg" ar ar-scale="fixed" touch-action="none" 
-	disable-zoom ar-button ar-modes="webxr" animation-name="talk" s-poster shadow-intensity="1"	camera-orbit="0deg 70deg 2m" 
-	camera-target="0m 1m 0m" ></model-viewer>
+	disable-zoom ar-button ar-modes="webxr scene-viewer quick-look" animation-name="talk" s-poster shadow-intensity="1"	camera-orbit="0deg 70deg 2m" 
+	camera-target="0m 1m 0m" >
+
+
+		<div id="textbox"> TEST BOX</div>
+	</model-viewer>
 	
-	<div id="textbox"> TEST BOX</div>
 
 	<button id="playbutton" onmousedown="playanim()"></button>
 	<script>
