@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sketchfab
-    Annotations Example</title>
+  <title>Sketchfab Annotations Example</title>
+  <!-- STYLING ------------------------------------------------------------------------>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -23,38 +23,95 @@
     #annotation-panel {
       flex: 1;
       padding: 20px;
-      background-color: #f5f5f5;
+      background-color: #e8ded1;
       overflow-y: auto;
-      border-left: 1px solid #ccc;
+      border-left: 0px solid #ccc;
+    }
+
+    #annotation-title {
+      color: #2e3d4c;
+      background-color: #ffffff;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 10px;
+    }
+
+    video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      opacity: 0.7;
+      background: black;
+      z-index: 2;
+      /* Places the video behind other content */
+    }
+
+    img {
+      position: absolute;
+      width: 10%;
+      height: auto;
+      opacity: 0.8;
+      z-index: 1;
     }
 
     .annotation {
       margin-bottom: 10px;
       padding: 10px;
-      background-color: #fff;
-      border: 1px solid #ddd;
+      background-color: transparent;
+      border: 0px solid #ddd;
       cursor: pointer;
+      color: #2e3d4c
     }
 
     .annotation.selected {
-      background-color: #e0e0e0;
+      background-color: transparent;
+
+    }
+
+    h3 {
+      color: #2e3d4c;
+    }
+
+    h2 {
+      color: #2e3d4c;
+    }
+
+    p {
+      color: #2e3d4c;
     }
   </style>
 </head>
 
+<!-- Body ------------------------------------------------------------------------>
+
 <body>
-  <div id="viewer"></div>
+  <div id="viewer">
+
+    <img src="logo/logo.png" alt="DCT Logo">
+
+
+    <video id="tutorialvideo" autoplay loop muted onclick="removeVideo()">
+      <source src="./tutorial/tutorial.webm" type="video/webm">
+      Your browser does not support the video tag.
+    </video>
+  </div>
   <div id="annotation-panel"></div>
 
+  <div></div>
+  <!-- Scripts ------------------------------------------------------------------------>
   <script src="https://static.sketchfab.com/api/sketchfab-viewer-1.12.1.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script>
+    //--globals-----------------------------------------------------------------------------
     let selectedAnnotation = -1;
     let sketchfabModelData;
     let annotationList;
     let api_ref;
 
-
+    //--initialize sketchfab frame------------------------------------------------------------
     document.addEventListener('DOMContentLoaded', function () {
       const iframe = document.createElement('iframe');
       const viewerDiv = document.getElementById('viewer');
@@ -62,60 +119,78 @@
 
       const modelUrl = 'https://sketchfab.com/models/88c92677915f40de91ebd5b575640a1e/embed';
 
-      iframe.src = `${modelUrl}?ui_infos=0&ui_watermark_link=0&ui_watermark=0&dnt=1`; // Apply required URL parameters      iframe.width = '100%';
-      iframe.height = '100%';
+      iframe.src = `${modelUrl}?ui_infos=0&ui_watermark_link=0&ui_watermark=0&dnt=1`;
       iframe.width = '100%';
-      iframe.allow = 'autoplay; fullscreen; vr';
-      iframe.setAttribute('mozallowfullscreen', 'true');
-      iframe.setAttribute('webkitallowfullscreen', 'true');
-      iframe.setAttribute('allowfullscreen', 'true'); // Enable fullscreen for different browsers
-      iframe.setAttribute('frameborder', '0'); // Set frameborder to '0'
-
+      iframe.height = '100%';
+      iframe.setAttribute('allowfullscreen', 'true');
+      iframe.setAttribute('frameborder', '0');
       viewerDiv.appendChild(iframe);
 
       const client = new Sketchfab(iframe);
 
+      //--Sketchfab code ------------------------------------------------------------------
       client.init('88c92677915f40de91ebd5b575640a1e', {
         ui_infos: 0, ui_watermark_link: 0, ui_watermark: 0, dnt: 0, ui_settings: 0, ui_annotations: 0, ui_inspector: 0,
 
         success: function (api) {
-          api_ref = api
+          api_ref = api;
           api.start();
-          api.addEventListener('viewerready', function () {
+          api.addEventListener('viewerready', function () { //--start viewer ------------------------------------
 
-            api.setHighlightOptions({
+            api.setHighlightOptions({ //--default highlight ------------------------------------
               outlineWidth: 2,
               outlineColor: [1.0, 1.0, 0.0],
               outlineDuration: 1,
               highlightColor: [0.0, 0.0, 1.0],
               highlightDuration: 1
             });
-            api.addEventListener('nodeMouseEnter', function (info) {
-              if (info && info.material && /^\d+$/.test(info.material.name)  ) {
-                
+
+            api.addEventListener('nodeMouseEnter', function (info) { //--highlight colors ------------------------------
+              if (info && info.material && /^\d+$/.test(info.material.name)) {
+
+                new_highlight_color = [1.0, 1.0, 0.0];
+                switch (parseInt(info.material.name)) {
+                  case 0: new_highlight_color = [1.0, 1.0, 1.0]; break;
+                  case 1: new_highlight_color = [1.0, 0.0, 0.0]; break;
+                  case 2: new_highlight_color = [0.0, 1.0, 0.0]; break;
+                  case 3: new_highlight_color = [0.0, 0.0, 1.0]; break;
+                  case 4: new_highlight_color = [1.0, 1.0, 0.0]; break;
+                  case 5: new_highlight_color = [0.0, 1.0, 1.0]; break;
+                  case 6: new_highlight_color = [1.0, 0.0, 1.0]; break;
+                  case 7: new_highlight_color = [1.0, 1.0, 0.5]; break;
+                  case 8: new_highlight_color = [0.5, 1.0, 1.0]; break;
+                  case 9: new_highlight_color = [1.0, 0.5, 1.0]; break;
+                  case 10: new_highlight_color = [1.0, 1.0, 0.0]; break;
+                  case 11: new_highlight_color = [1.0, 1.0, 0.0]; break;
+                  case 12: new_highlight_color = [1.0, 1.0, 0.0]; break;
+                }
+                api.setHighlightOptions({ //-apply highlight colors ----------------------------------
+                  outlineWidth: 2,
+                  outlineColor: new_highlight_color,
+                  outlineDuration: 1,
+                  highlightColor: [0.0, 0.0, 1.0],
+                  highlightDuration: 1
+                });
+
                 api.highlightMaterial(info.material);
               } else {
                 api.highlightMaterial();
               }
-              setTimeout(function () {
-              }, 100);
             }, {
               pick: 'fast'
             });
 
-            api.addEventListener('click', function (info) {
-              if (info && info.material && /^\d+$/.test(info.material.name)  ) {
-                selectedAnnotation = parseInt(info.material.name)-1;
+            api.addEventListener('click', function (info) { //--annotations on click -----------------------------------
+              if (info && info.material && /^\d+$/.test(info.material.name)) {
+                selectedAnnotation = parseInt(info.material.name) - 1;
                 api.gotoAnnotation(selectedAnnotation);
-                updatePanel(annotationList[selectedAnnotation],selectedAnnotation,api_ref)
-              } 
-              setTimeout(function () {
-              }, 100);
+                updatePanel(annotationList[selectedAnnotation], selectedAnnotation, api_ref);
+              }
             }, {
               pick: 'fast'
             });
 
-            api.getAnnotationList(function (err, annotations) {
+            api.getAnnotationList(function (err, annotations) { //--annotations fetch -----------------------
               if (err) {
                 console.error('Error fetching annotations:', err);
                 return;
@@ -125,11 +200,17 @@
               getModelInfo();
             });
 
-            api.setTextureQuality('hd', function (err) {
+            api.setTextureQuality('hd', function (err) { //--Set default quality ------------------------
               if (!err) {
-                //alert('Texture quality set to high definition');
               }
             });
+
+            hideSurroundNodes(api); //--surrounding api ------------------------
+
+            //--annotation colors ----------------------------------
+            url = getNewPastilleURL('rgba(255,255,255,0.75)', 'black', 'black', 'none', 0, 100, 512, 512);
+            api.setAnnotationsTexture(url, function () { });
+
           });
         },
         error: function () {
@@ -137,6 +218,58 @@
         }
       });
 
+      //--compute annotation shapes ----------------------------------
+      function computePastilles(wCanvas, hCanvas, bgColor, bgBorderColor, fgColor, fgBorderColor, text, numHotspot, wPastille, hPastille) {
+        var wSize = wPastille / 10.0;
+        var col = wCanvas / wSize;
+        var row = hCanvas / wSize;
+        var padding = 2;
+        var w = wSize - padding;
+        var cx;
+        var cy = w * 0.5;
+        //var cy = 24;
+
+        var ty = cy + 8;
+        var pastille = '';
+        var num = 0;
+        for (var i = 0; i < row; i++) {
+          cx = wSize * 0.5;
+          for (var k = 0; k < col; k++) {
+            num++;
+            var letters = text === 0 ? num : text[num];
+            var circle = "<circle cx=\"".concat(cx, "\"\n            cy=\"").concat(cy, "\"\n            r=\"20\"\n            fill=\"").concat(bgColor, "\"\n            stroke=\"").concat(bgBorderColor, "\"\n            stroke-width=\"2\"/>");
+            var textVG = "<text font-size=\"26\"\n          stroke=\"".concat(fgBorderColor, "\"\n          fill=\"").concat(fgColor, "\"\n          font-family=\"sans-serif\"\n          text-anchor=\"middle\"\n          alignment-baseline=\"baseline\"\n          x=\"").concat(cx, "\"\n          y=\"").concat(ty, "\">").concat(letters, "</text>");
+            pastille += circle + textVG;
+            cx += wSize;
+          }
+          cy += wSize;
+          ty += wSize;
+        }
+        var s = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        s.setAttribute('version', '1.1');
+        s.setAttribute('baseProfile', 'full');
+        s.setAttribute('width', wPastille);
+        s.setAttribute('height', hPastille);
+        s.setAttribute('viewBox', "0 0 ".concat(wPastille, " ").concat(hPastille));
+        s.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+        s.innerHTML = pastille;
+        // make it base64
+        var svg64 = btoa(s.outerHTML);
+        var b64Start = 'data:image/svg+xml;base64,';
+        var image64 = b64Start + svg64;
+        var textureOptions = {
+          url: image64,
+          colNumber: col,
+          padding: padding,
+          iconSize: w
+        };
+        return textureOptions;
+      }
+      function getNewPastilleURL(bgColor, bgBorderColor, fgColor, fgBorderColor, text, numHotspot, w, h) {
+        var imageData;
+        imageData = computePastilles(w, h, bgColor, bgBorderColor, fgColor, fgBorderColor, text, numHotspot, w, h);
+        return imageData;
+      }
       function handleAnnotations(api, annotations) {
         annotations.forEach((annotation, index) => {
           api.hideAnnotationTooltip(index);
@@ -150,19 +283,16 @@
         });
       }
 
-
       function updatePanel(annotation, selectedIndex, api) {
         let content = "";
-        if (selectedIndex === -1) { // No annotation selected
-
+        if (selectedIndex === -1) {
           content = `<h3>${sketchfabModelData.name}</h3><p>${sketchfabModelData.description}</p>`;
-          content += `<h2>Annotations</h2>`;
+          content += `<h2></h2>`;
           annotationList.forEach((annotation, index) => {
             content += `<div class="annotation" data-index="${index}">${annotation.name}</div>`;
           });
           panel.innerHTML = content;
 
-          // Add event listener to annotations in the panel
           const annotationElements = document.querySelectorAll('.annotation');
           annotationElements.forEach(element => {
             element.addEventListener('click', () => {
@@ -176,7 +306,10 @@
         } else {
           api.getAnnotation(selectedIndex, function (err, information) {
             if (!err) {
-              content = `<strong>${information.name}</strong>`;
+
+              content = `<div " id="annotation-title">`;
+              content += `<strong " id="annotation-title">${information.name}</strong>`;
+              content += `</div>`;
               content += marked.parse(information.content.raw);
             }
             panel.innerHTML = `<div class="annotation selected">${content}</div>`;
@@ -185,22 +318,18 @@
       }
 
       function getModelInfo() {
-        // Fetch the data from Sketchfab API
         fetch('https://sketchfab.com/v3/models/88c92677915f40de91ebd5b575640a1e', {
           method: 'GET',
-          headers: {
-          }
+          headers: {}
         })
           .then(response => {
             if (!response.ok) {
               throw new Error(`HTTP error! Status: ${response.status}`);
             }
-            return response.json(); // Parse the JSON response
+            return response.json();
           })
           .then(data => {
-            // Store the fetched data in the global variable
             sketchfabModelData = data;
-            //console.log('Model Data:', sketchfabModelData); // Log the data for verification
             updatePanel(null, -1, api_ref);
           })
           .catch(error => {
@@ -208,8 +337,34 @@
           });
       }
 
+      // Function to hide all nodes with "surround" in their name
+      function hideSurroundNodes(api) {
+        api.getNodeMap(function (err, nodes) {
+          if (err) {
+            console.error('Error fetching node map:', err);
+            return;
+          }
+          console.log(nodes);
+          for (let nodeId in nodes) {
+            if (nodes[nodeId].name != undefined) {
+              if (nodes[nodeId].name.toLowerCase().includes('surround')) {
+                api.hide(nodeId); // Hide node
+              }
+            }
+          }
+        });
+      }
     });
   </script>
+
+  <script>
+    function removeVideo() {
+      var videoElement = document.getElementById("tutorialvideo");
+      videoElement.hidden = true;  // Remove the video element
+    }
+  </script>
+
+
 </body>
 
 </html>
