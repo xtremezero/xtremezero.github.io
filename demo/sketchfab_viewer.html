@@ -49,12 +49,24 @@
       /* Places the video behind other content */
     }
 
-    img {
+    #logoimg {
       position: absolute;
       width: 10%;
       height: auto;
       opacity: 0.8;
       z-index: 1;
+    }
+
+
+    #surroundingimg {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      width: 30px;
+      /* Adjust the size of the image */
+      height: auto;
+      z-index: 1;
+      /* Ensures it overlaps the content */
     }
 
     .annotation {
@@ -90,7 +102,8 @@
 <body>
   <div id="viewer">
 
-    <img src="logo/logo.png" alt="DCT Logo">
+    <img id="logoimg" src="logo/logo.png" alt="DCT Logo">
+    <img id="surroundingimg" src="icons/surroundings.png" alt="Surroudnings" onclick="hideSurroundNodes()">
 
 
     <video id="tutorialvideo" autoplay loop muted onclick="removeVideo()">
@@ -110,7 +123,7 @@
     let sketchfabModelData;
     let annotationList;
     let api_ref;
-
+    let hideSurroundings = false;
     //--initialize sketchfab frame------------------------------------------------------------
     document.addEventListener('DOMContentLoaded', function () {
       const iframe = document.createElement('iframe');
@@ -205,7 +218,6 @@
               }
             });
 
-            hideSurroundNodes(api); //--surrounding api ------------------------
 
             //--annotation colors ----------------------------------
             url = getNewPastilleURL('rgba(255,255,255,0.75)', 'black', 'black', 'none', 0, 100, 512, 512);
@@ -338,23 +350,39 @@
       }
 
       // Function to hide all nodes with "surround" in their name
-      function hideSurroundNodes(api) {
-        api.getNodeMap(function (err, nodes) {
-          if (err) {
-            console.error('Error fetching node map:', err);
-            return;
-          }
-          console.log(nodes);
-          for (let nodeId in nodes) {
-            if (nodes[nodeId].name != undefined) {
-              if (nodes[nodeId].name.toLowerCase().includes('surround')) {
+
+    });
+
+    function hideSurroundNodes() {
+      var api = api_ref;
+      api.getNodeMap(function (err, nodes) {
+        if (err) {
+          console.error('Error fetching node map:', err);
+          return;
+        }
+        console.log(nodes);
+        for (let nodeId in nodes) {
+          if (nodes[nodeId].name != undefined) {
+            if (nodes[nodeId].name.toLowerCase().includes('surround')) {
+
+
+              if (hideSurroundings === true) {
                 api.hide(nodeId); // Hide node
+                document.getElementById("surroundingimg").style.opacity = "0.5";
+
+              } else {
+                api.show(nodeId);
+                document.getElementById("surroundingimg").style.opacity = "1.0";
+
               }
+
             }
           }
-        });
-      }
-    });
+        }
+        hideSurroundings = !hideSurroundings;
+
+      });
+    }
   </script>
 
   <script>
