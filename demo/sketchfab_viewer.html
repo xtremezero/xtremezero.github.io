@@ -13,6 +13,7 @@
       margin: 0;
       padding: 0;
       height: 100vh;
+      overflow: hidden;
     }
 
     #viewer {
@@ -106,10 +107,6 @@
     <img id="surroundingimg" src="icons/surroundings.png" alt="Surroudnings" onclick="hideSurroundNodes()">
 
 
-    <video id="tutorialvideo" autoplay loop muted onclick="removeVideo()">
-      <source src="./tutorial/tutorial.webm" type="video/webm">
-      Your browser does not support the video tag.
-    </video>
   </div>
   <div id="annotation-panel"></div>
 
@@ -130,9 +127,10 @@
       const viewerDiv = document.getElementById('viewer');
       const panel = document.getElementById('annotation-panel');
 
-      const modelUrl = 'https://sketchfab.com/models/88c92677915f40de91ebd5b575640a1e/embed';
+      const modelUrl = 'https://sketchfab.com/models/a37a1d3ddbe248ff96064be1c8b8a50d/embed';
 
-      iframe.src = `${modelUrl}?ui_infos=0&ui_watermark_link=0&ui_watermark=0&dnt=1`;
+
+      iframe.src = `${modelUrl}?autostart=0&annotations_visible=1&preload=1&ui_animations=0&ui_infos=0&ui_inspector=0&ui_watermark_link=0&ui_watermark=0&ui_hint=2&ui_ar=1&ui_settings=0&ui_fullscreen=0&dnt=1`;
       iframe.width = '100%';
       iframe.height = '100%';
       iframe.setAttribute('allowfullscreen', 'true');
@@ -142,8 +140,8 @@
       const client = new Sketchfab(iframe);
 
       //--Sketchfab code ------------------------------------------------------------------
-      client.init('88c92677915f40de91ebd5b575640a1e', {
-        ui_infos: 0, ui_watermark_link: 0, ui_watermark: 0, dnt: 0, ui_settings: 0, ui_annotations: 0, ui_inspector: 0,
+      client.init('a37a1d3ddbe248ff96064be1c8b8a50d', {
+        autostart:0,ui_infos: 0, ui_watermark_link: 0, ui_watermark: 0, dnt: 1, ui_settings: 0, ui_annotations: 0, ui_inspector: 0,annotations_visible:1,preload:1,ui_animations:0,ui_hint:2,ui_ar:1,ui_fullscreen:0,
 
         success: function (api) {
           api_ref = api;
@@ -159,7 +157,7 @@
             });
 
             api.addEventListener('nodeMouseEnter', function (info) { //--highlight colors ------------------------------
-              if (info && info.material && /^\d+$/.test(info.material.name)) {
+              if (info && info.material && /^\d+$/.test(info.material.name.replace(/_/g, ""))) {
 
                 new_highlight_color = [1.0, 1.0, 0.0];
                 switch (parseInt(info.material.name)) {
@@ -330,7 +328,7 @@
       }
 
       function getModelInfo() {
-        fetch('https://sketchfab.com/v3/models/88c92677915f40de91ebd5b575640a1e', {
+        fetch('https://sketchfab.com/v3/models/a37a1d3ddbe248ff96064be1c8b8a50d', {
           method: 'GET',
           headers: {}
         })
@@ -385,12 +383,6 @@
     }
   </script>
 
-  <script>
-    function removeVideo() {
-      var videoElement = document.getElementById("tutorialvideo");
-      videoElement.hidden = true;  // Remove the video element
-    }
-  </script>
 
 
 </body>
