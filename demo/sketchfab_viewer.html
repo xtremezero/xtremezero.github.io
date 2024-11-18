@@ -14,27 +14,37 @@
       padding: 0;
       height: 100vh;
       overflow: hidden;
+      background-color: #f4f4f4;
+      /* Neutral background */
     }
 
     #viewer {
       flex: 2;
       height: 100%;
+      position: relative;
+      /* For positioning children elements like video */
     }
 
     #annotation-panel {
       flex: 1;
       padding: 20px;
-      background-color: #e8ded1;
+      background-color: #fdfcfb;
       overflow-y: auto;
-      border-left: 0px solid #ccc;
+      border-left: 1px solid #ccc;
+      /* Subtle border for separation */
+      box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+      /* Soft shadow for depth */
     }
 
     #annotation-title {
       color: #2e3d4c;
-      background-color: #ffffff;
-      box-sizing: border-box;
-      margin: 0;
-      padding: 10px;
+      margin: 0 0 10px 0;
+      /* Add bottom spacing */
+      padding: 15px 0;
+      font-size: 1.2em;
+      font-weight: bold;
+      border-bottom: 2px solid #ddd;
+      /* Subtle underline */
     }
 
     video {
@@ -43,59 +53,77 @@
       left: 0;
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      object-fit: cover;
+      /* Ensures video covers the area nicely */
       opacity: 0.7;
       background: black;
-      z-index: 2;
-      /* Places the video behind other content */
+      z-index: 1;
+      /* Keeps the video in the background */
     }
 
     #logoimg {
       position: absolute;
-      width: 10%;
+      top: 10px;
+      /* Place at top */
+      left: 10px;
+      width: 8%;
+      /* Slightly smaller for elegance */
       height: auto;
-      opacity: 0.8;
-      z-index: 1;
+      opacity: 0.9;
+      z-index: 2;
+      /* Ensures visibility above video */
     }
-
 
     #surroundingimg {
       position: absolute;
       bottom: 10px;
       left: 10px;
-      width: 30px;
-      /* Adjust the size of the image */
+      width: 40px;
+      /* Slightly larger for better visibility */
       height: auto;
-      z-index: 1;
-      /* Ensures it overlaps the content */
+      z-index: 2;
     }
 
     .annotation {
-      margin-bottom: 10px;
-      padding: 10px;
-      background-color: transparent;
-      border: 0px solid #ddd;
+      margin-bottom: 15px;
+      /* Space between items */
+      padding: 15px;
+      background-color: #f9f9f9;
+      /* Light background for better contrast */
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      /* Smooth edges */
       cursor: pointer;
-      color: #2e3d4c
+      transition: background-color 0.3s, box-shadow 0.3s;
+      /* Smooth hover effect */
+      color: #2e3d4c;
+    }
+
+    .annotation:hover {
+      background-color: #e8ded1;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      /* Slight elevation */
     }
 
     .annotation.selected {
-      background-color: transparent;
-
+      background-color: #e8ded1;
+      border: 1px solid #ccc;
     }
 
+    h2,
     h3 {
       color: #2e3d4c;
-    }
-
-    h2 {
-      color: #2e3d4c;
+      margin: 10px 0;
+      /* Consistent spacing */
     }
 
     p {
       color: #2e3d4c;
+      line-height: 1.6;
+      /* Improve readability */
     }
   </style>
+
 </head>
 
 <!-- Body ------------------------------------------------------------------------>
@@ -128,7 +156,7 @@
       const panel = document.getElementById('annotation-panel');
 
       const id = new URLSearchParams(window.location.search).get('id');
-      const modelUrl = 'https://sketchfab.com/models/'+id+'/embed';
+      const modelUrl = 'https://sketchfab.com/models/' + id + '/embed';
 
 
       iframe.src = `${modelUrl}?autostart=0&annotations_visible=1&preload=1&ui_animations=0&ui_infos=0&ui_inspector=0&ui_watermark_link=0&ui_watermark=0&ui_hint=2&ui_ar=1&ui_settings=0&ui_fullscreen=0&dnt=1`;
@@ -142,7 +170,7 @@
 
       //--Sketchfab code ------------------------------------------------------------------
       client.init(id, {
-        autostart:0,ui_infos: 0, ui_watermark_link: 0, ui_watermark: 0, dnt: 1, ui_settings: 0, ui_annotations: 0, ui_inspector: 0,annotations_visible:1,preload:1,ui_animations:0,ui_hint:2,ui_ar:1,ui_fullscreen:0,
+        autostart: 0, ui_infos: 0, ui_watermark_link: 0, ui_watermark: 0, dnt: 1, ui_settings: 0, ui_annotations: 0, ui_inspector: 0, annotations_visible: 1, preload: 1, ui_animations: 0, ui_hint: 2, ui_ar: 1, ui_fullscreen: 0,
 
         success: function (api) {
           api_ref = api;
@@ -162,19 +190,17 @@
 
                 new_highlight_color = [1.0, 1.0, 0.0];
                 switch (parseInt(info.material.name)) {
-                  case 0: new_highlight_color = [1.0, 1.0, 1.0]; break;
-                  case 1: new_highlight_color = [1.0, 0.0, 0.0]; break;
-                  case 2: new_highlight_color = [0.0, 1.0, 0.0]; break;
-                  case 3: new_highlight_color = [0.0, 0.0, 1.0]; break;
-                  case 4: new_highlight_color = [1.0, 1.0, 0.0]; break;
-                  case 5: new_highlight_color = [0.0, 1.0, 1.0]; break;
-                  case 6: new_highlight_color = [1.0, 0.0, 1.0]; break;
-                  case 7: new_highlight_color = [1.0, 1.0, 0.5]; break;
-                  case 8: new_highlight_color = [0.5, 1.0, 1.0]; break;
-                  case 9: new_highlight_color = [1.0, 0.5, 1.0]; break;
-                  case 10: new_highlight_color = [1.0, 1.0, 0.0]; break;
-                  case 11: new_highlight_color = [1.0, 1.0, 0.0]; break;
-                  case 12: new_highlight_color = [1.0, 1.0, 0.0]; break;
+                  case 0: new_highlight_color = [1.0, 1.0, 1.0]; break;//white
+                  case 1: new_highlight_color = [1.0, 0.0, 0.0]; break;//red
+                  case 2: new_highlight_color = [0.0, 1.0, 0.0]; break;//green
+                  case 3: new_highlight_color = [0.0, 0.0, 1.0]; break;//blue
+                  case 4: new_highlight_color = [1.0, 1.0, 0.0]; break;//yellow
+                  case 5: new_highlight_color = [0.0, 1.0, 1.0]; break;//cyan
+                  case 6: new_highlight_color = [1.0, 0.0, 1.0]; break;//purple
+                  case 7: new_highlight_color = [1.0, 0.5, 0.5]; break;//pinkred
+                  case 8: new_highlight_color = [1.0, 0.3, 0.0]; break;//orange
+                  case 9: new_highlight_color = [1.0, 0.5, 1.0]; break;//pink
+                  case 10: new_highlight_color = [0.0, 0.5, 0.5]; break;//petrol blue
                 }
                 api.setHighlightOptions({ //-apply highlight colors ----------------------------------
                   outlineWidth: 2,
@@ -281,24 +307,30 @@
         imageData = computePastilles(w, h, bgColor, bgBorderColor, fgColor, fgBorderColor, text, numHotspot, w, h);
         return imageData;
       }
+
       function handleAnnotations(api, annotations) {
         annotations.forEach((annotation, index) => {
           api.hideAnnotationTooltip(index);
           api.addEventListener('annotationSelect', function (selected) {
             if (selectedAnnotation != selected) {
               selectedAnnotation = selected;
-              updatePanel(annotation, selected, api);
-              api.gotoAnnotation(selected);
+              if (selectedAnnotation != -1) {
+                updatePanel(annotation, selected, api);
+                api.gotoAnnotation(selected);
+              }
             }
           });
         });
       }
-
+      function resetPanel() {
+        updatePanel(null, -1, api_ref);
+      }
       function updatePanel(annotation, selectedIndex, api) {
         let content = "";
         if (selectedIndex === -1) {
-          content = `<h3>${sketchfabModelData.name}</h3><p>${sketchfabModelData.description}</p>`;
-          content += `<h2></h2>`;
+          //content = `<h3>${sketchfabModelData.name}</h3><p>${sketchfabModelData.description}</p>`;
+          //content += `<h2></h2>`;
+          content = ``;
           annotationList.forEach((annotation, index) => {
             content += `<div class="annotation" data-index="${index}">${annotation.name}</div>`;
           });
@@ -318,18 +350,50 @@
           api.getAnnotation(selectedIndex, function (err, information) {
             if (!err) {
 
-              content = `<div " id="annotation-title">`;
-              content += `<strong " id="annotation-title">${information.name}</strong>`;
+              // Define your content
+              let content = `<span id="annotation-back" style="cursor: pointer; color: brown;">Back<br></span>`;
+              content += `<div id="annotation-title">`;
+              content += `<strong id="annotation-title">${information.name}</strong>`;
               content += `</div>`;
               content += marked.parse(information.content.raw);
+              const regex = /\[v=([a-zA-Z0-9_-]{8,11})\]/g;
+
+              content = content.replace(regex, (match, videoId) => {
+                return `
+          <iframe 
+            src="https://www.youtube.com/embed/${videoId}" 
+            width="100%" 
+            height="220em" 
+            frameborder="0" 
+            allow="autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+          </iframe>`;
+              });
+
+              panel.innerHTML = `<div class="annotation selected">${content}</div>`;
+
+
+
+              // Select the back button
+              let backButton = document.querySelector('#annotation-back');
+              if (backButton) {
+                // Add a click event listener
+                backButton.addEventListener('click', () => {
+                  console.log('Back button clicked!');
+                  resetPanel(); // Ensure the function exists and is accessible
+                });
+              } else {
+                console.error('Element with ID not found.');
+              }
+
+
             }
-            panel.innerHTML = `<div class="annotation selected">${content}</div>`;
           });
         }
       }
 
       function getModelInfo() {
-        fetch('https://sketchfab.com/v3/models/'+id, {
+        fetch('https://sketchfab.com/v3/models/' + id, {
           method: 'GET',
           headers: {}
         })
