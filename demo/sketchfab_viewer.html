@@ -6,72 +6,60 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sketchfab Annotations Example</title>
   <!-- STYLING ------------------------------------------------------------------------>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Almarai', sans-serif;
       display: flex;
       margin: 0;
       padding: 0;
       height: 100vh;
       overflow: hidden;
       background-color: #f4f4f4;
-      /* Neutral background */
     }
 
     #viewer {
       flex: 2;
       height: 100%;
       position: relative;
-      /* For positioning children elements like video */
     }
 
     #annotation-panel {
       flex: 1;
-      padding: 20px;
-      background-color: #fdfcfb;
+      padding: 60px;
+      /* Big margin around the panel */
+      background-color: #e8ded1;
+      /* Beige background */
       overflow-y: auto;
       border-left: 1px solid #ccc;
-      /* Subtle border for separation */
       box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
-      /* Soft shadow for depth */
     }
 
     #annotation-title {
-      color: #2e3d4c;
-      margin: 0 0 10px 0;
-      /* Add bottom spacing */
-      padding: 15px 0;
-      font-size: 1.2em;
-      font-weight: bold;
-      border-bottom: 2px solid #ddd;
-      /* Subtle underline */
+      color: black;
+      padding: 4px 6px;
+      background-color: white;
+      /* White square background */
+      border-radius: 0;
+      box-shadow:0 2px 5px rgba(0, 0, 0, 0.1)
+      /* Square edges */
+      /* Border for definition */
     }
 
-    video {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      /* Ensures video covers the area nicely */
-      opacity: 0.7;
-      background: black;
-      z-index: 1;
-      /* Keeps the video in the background */
+    #annotation-title p{
+      box-shadow: none;
     }
 
     #logoimg {
       position: absolute;
       top: 10px;
-      /* Place at top */
       left: 10px;
       width: 8%;
-      /* Slightly smaller for elegance */
       height: auto;
       opacity: 0.9;
       z-index: 2;
-      /* Ensures visibility above video */
     }
 
     #surroundingimg {
@@ -79,50 +67,56 @@
       bottom: 10px;
       left: 10px;
       width: 40px;
-      /* Slightly larger for better visibility */
       height: auto;
       z-index: 2;
     }
 
     .annotation {
       margin-bottom: 15px;
-      /* Space between items */
       padding: 15px;
-      background-color: #f9f9f9;
-      /* Light background for better contrast */
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      /* Smooth edges */
+      background-color: transparent;
+      /* No background */
+      border: none;
+      border-radius: 0;
+      /* Square edges */
+      color: black;
       cursor: pointer;
       transition: background-color 0.3s, box-shadow 0.3s;
-      /* Smooth hover effect */
-      color: #2e3d4c;
     }
 
     .annotation:hover {
-      background-color: #e8ded1;
+      background-color: white;
+      /* White square background on hover */
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      /* Slight elevation */
+      border: 1px solid #ddd;
     }
 
-    .annotation.selected {
-      background-color: #e8ded1;
-      border: 1px solid #ccc;
+    .annotation-selected{
+      background-color: transparent;
     }
+
+    #annotation-back {
+      position: relative; /* Make it relative to adjust its position */
+      top: -2em; /* Move it up by approximately one line height */
+      cursor: pointer;
+      color: #989d97;
+    }
+
+
 
     h2,
     h3 {
-      color: #2e3d4c;
+      color: black;
       margin: 10px 0;
-      /* Consistent spacing */
     }
 
     p {
-      color: #2e3d4c;
+      color: black;
       line-height: 1.6;
-      /* Improve readability */
+      margin: 2px;
     }
-  </style>
+</style>
+
 
 </head>
 
@@ -351,11 +345,13 @@
             if (!err) {
 
               // Define your content
-              let content = `<span id="annotation-back" style="cursor: pointer; color: brown;">Back<br></span>`;
+              let content = `<span id="annotation-back">Back<br></span>`;
               content += `<div id="annotation-title">`;
-              content += `<strong id="annotation-title">${information.name}</strong>`;
+              content += `<p id="annotation-title">${information.name}</p>`;
               content += `</div>`;
+              content += `<br>`;
               content += marked.parse(information.content.raw);
+              
               const regex = /\[v=([a-zA-Z0-9_-]{8,11})\]/g;
 
               content = content.replace(regex, (match, videoId) => {
@@ -370,7 +366,7 @@
           </iframe>`;
               });
 
-              panel.innerHTML = `<div class="annotation selected">${content}</div>`;
+              panel.innerHTML = `<div class="annotation-selected">${content}</div>`;
 
 
 
