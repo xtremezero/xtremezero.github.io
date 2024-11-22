@@ -13,79 +13,96 @@
     body {
       font-family: 'Almarai', sans-serif;
       display: flex;
-      flex-direction: column; /* Default to column layout for small screens */
+      flex-direction: row; /* Default layout: row for desktop */
       margin: 0;
       padding: 0;
       height: 100vh;
       overflow: hidden;
-      background-color: #f4f4f4;
+      background: linear-gradient(to bottom right, #ffffff, #f0f0f5); /* Subtle gradient */
+      color: #333; /* Softer text color */
     }
 
     #viewer {
       flex: 2;
       height: 100%;
       position: relative;
+      background: #ffffff; /* White background for contrast */
+      border-radius: 15px; /* Rounded corners */
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Soft shadow */
+      overflow: hidden; /* Clip overflowing content */
+      margin: 10px; /* Add spacing */
     }
 
     #annotation-panel {
       flex: 1;
-      padding: 20px; /* Reduced padding for smaller screens */
-      background-color: #e8ded1;
+      height: 100%;
+      background: #f9f9f9; /* Subtle gray background */
+      border-radius: 15px; /* Rounded corners */
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Modern shadow */
+      padding: 20px;
+      margin: 10px;
       overflow-y: auto;
-      border-left: 1px solid #ccc;
-      box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease-in-out; /* Smooth animations */
     }
 
     #annotation-title {
-      color: black;
-      padding: 4px 6px;
-      background-color: white;
-      border-radius: 0;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    #annotation-title p {
-      box-shadow: none;
+      color: #333;
+      font-size: 1.5rem;
+      font-weight: bold;
+      padding: 10px;
+      background: #ffffff; /* Clean white background */
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Light shadow */
+      text-align: center; /* Center the title */
+      margin-bottom: 20px;
     }
 
     #logoimg {
       position: absolute;
-      top: 10px;
-      left: 10px;
-      width: 12%; /* Increased size for visibility on smaller screens */
+      top: 20px;
+      left: 20px;
+      width: 12%; 
       height: auto;
       opacity: 0.9;
       z-index: 2;
+      transition: transform 0.3s ease; /* Animation for hover */
+    }
+
+    #logoimg:hover {
+      transform: scale(1.1); /* Slight zoom effect */
     }
 
     #surroundingimg {
       position: absolute;
-      bottom: 10px;
-      left: 10px;
+      bottom: 20px;
+      left: 20px;
       width: 40px;
       height: auto;
       z-index: 2;
+      opacity: 0.8;
     }
 
     .annotation {
       margin-bottom: 15px;
-      padding: 10px; /* Adjust padding for smaller screens */
-      background-color: transparent;
-      border: none;
-      border-radius: 0;
-      color: black;
+      padding: 15px;
+      background: #ffffff;
+      border: 1px solid #ddd;
+      border-radius: 10px; /* Rounded edges */
+      color: #555;
       cursor: pointer;
-      transition: background-color 0.3s, box-shadow 0.3s;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .annotation:hover {
-      background-color: white;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      border: 1px solid #ddd;
+      background: #f0f0f5;
+      transform: translateY(-5px); /* Slight lift on hover */
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
 
     .annotation-selected {
-      background-color: transparent;
+      background: #e6e6ff; /* Light blue highlight for selected */
+      border: 1px solid #a8a8ff;
     }
 
     #annotation-back {
@@ -93,55 +110,75 @@
       top: -2em;
       cursor: pointer;
       color: #989d97;
+      font-size: 0.9rem;
+      text-decoration: underline;
     }
 
     h2,
     h3 {
-      color: black;
-      margin: 10px 0;
+      color: #333;
+      margin: 15px 0;
+      font-family: 'Poppins', sans-serif; /* Modern font */
     }
 
     p {
-      color: black;
-      line-height: 1.6;
-      margin: 2px;
+      color: #555;
+      line-height: 1.8; /* Improved readability */
+      margin: 10px 0;
+    }
+
+    /* Modern Button */
+    button {
+      background: linear-gradient(to right, #6a11cb, #2575fc); /* Gradient button */
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    button:hover {
+      background: linear-gradient(to right, #2575fc, #6a11cb);
+      transform: translateY(-3px); /* Hover lift */
     }
 
     /* Responsive Design */
     @media screen and (max-width: 768px) {
         body {
-          flex-direction: column; /* Stack viewer and annotation panel */
+          flex-direction: column; /* Stack viewer and panel vertically */
         }
 
         #viewer {
-          flex: none;
-          height: 60%; /* Take 60% of the height on smaller screens */
+          height: 60%; /* Occupy top portion */
+          width: 100%; /* Full width */
+          margin: 5px 0; /* Adjust margins */
         }
 
         #annotation-panel {
-          flex: none;
-          height: 40%; /* Take 40% of the height on smaller screens */
-          border-left: none;
-          border-top: 1px solid #ccc; /* Adjust border to top for better separation */
-          padding: 10px; /* Reduced padding */
+          height: 40%; /* Occupy bottom portion */
+          width: 100%; /* Full width */
+          margin: 0; /* Remove side margins for better fit */
+          border-radius: 15px 15px 0 0; /* Rounded corners at the top */
         }
 
         #logoimg {
-          width: 20%; /* Increase logo size for visibility */
+          width: 15%; /* Adjust logo size */
         }
 
         h2, h3 {
-          font-size: 1.2rem; /* Reduce font sizes for smaller screens */
+          font-size: 1.2rem;
         }
 
         p {
-          font-size: 0.9rem; /* Adjust paragraph font size */
+          font-size: 0.9rem;
         }
     }
 
     @media screen and (max-width: 480px) {
         #viewer {
-          height: 50%; /* Smaller portion for viewer on very small screens */
+          height: 50%; /* Smaller portion for viewer */
         }
 
         #annotation-panel {
@@ -149,18 +186,23 @@
         }
 
         #logoimg {
-          width: 25%; /* Further increase logo size */
+          width: 20%;
         }
 
         h2, h3 {
-          font-size: 1rem; /* Smaller font sizes for headers */
+          font-size: 1rem;
         }
 
         p {
-          font-size: 0.8rem; /* Smaller font size for text */
+          font-size: 0.8rem;
+        }
+
+        button {
+          font-size: 0.9rem; /* Adjust button size */
         }
     }
 </style>
+
 
 
 
