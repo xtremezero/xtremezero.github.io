@@ -13,6 +13,7 @@
     body {
       font-family: 'Almarai', sans-serif;
       display: flex;
+      flex-direction: column; /* Default to column layout for small screens */
       margin: 0;
       padding: 0;
       height: 100vh;
@@ -28,10 +29,8 @@
 
     #annotation-panel {
       flex: 1;
-      padding: 60px;
-      /* Big margin around the panel */
+      padding: 20px; /* Reduced padding for smaller screens */
       background-color: #e8ded1;
-      /* Beige background */
       overflow-y: auto;
       border-left: 1px solid #ccc;
       box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
@@ -41,14 +40,11 @@
       color: black;
       padding: 4px 6px;
       background-color: white;
-      /* White square background */
       border-radius: 0;
-      box-shadow:0 2px 5px rgba(0, 0, 0, 0.1)
-      /* Square edges */
-      /* Border for definition */
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
 
-    #annotation-title p{
+    #annotation-title p {
       box-shadow: none;
     }
 
@@ -56,7 +52,7 @@
       position: absolute;
       top: 10px;
       left: 10px;
-      width: 8%;
+      width: 12%; /* Increased size for visibility on smaller screens */
       height: auto;
       opacity: 0.9;
       z-index: 2;
@@ -73,12 +69,10 @@
 
     .annotation {
       margin-bottom: 15px;
-      padding: 15px;
+      padding: 10px; /* Adjust padding for smaller screens */
       background-color: transparent;
-      /* No background */
       border: none;
       border-radius: 0;
-      /* Square edges */
       color: black;
       cursor: pointer;
       transition: background-color 0.3s, box-shadow 0.3s;
@@ -86,23 +80,20 @@
 
     .annotation:hover {
       background-color: white;
-      /* White square background on hover */
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       border: 1px solid #ddd;
     }
 
-    .annotation-selected{
+    .annotation-selected {
       background-color: transparent;
     }
 
     #annotation-back {
-      position: relative; /* Make it relative to adjust its position */
-      top: -2em; /* Move it up by approximately one line height */
+      position: relative;
+      top: -2em;
       cursor: pointer;
       color: #989d97;
     }
-
-
 
     h2,
     h3 {
@@ -115,7 +106,62 @@
       line-height: 1.6;
       margin: 2px;
     }
+
+    /* Responsive Design */
+    @media screen and (max-width: 768px) {
+        body {
+          flex-direction: column; /* Stack viewer and annotation panel */
+        }
+
+        #viewer {
+          flex: none;
+          height: 60%; /* Take 60% of the height on smaller screens */
+        }
+
+        #annotation-panel {
+          flex: none;
+          height: 40%; /* Take 40% of the height on smaller screens */
+          border-left: none;
+          border-top: 1px solid #ccc; /* Adjust border to top for better separation */
+          padding: 10px; /* Reduced padding */
+        }
+
+        #logoimg {
+          width: 20%; /* Increase logo size for visibility */
+        }
+
+        h2, h3 {
+          font-size: 1.2rem; /* Reduce font sizes for smaller screens */
+        }
+
+        p {
+          font-size: 0.9rem; /* Adjust paragraph font size */
+        }
+    }
+
+    @media screen and (max-width: 480px) {
+        #viewer {
+          height: 50%; /* Smaller portion for viewer on very small screens */
+        }
+
+        #annotation-panel {
+          height: 50%; /* Adjust annotation panel height */
+        }
+
+        #logoimg {
+          width: 25%; /* Further increase logo size */
+        }
+
+        h2, h3 {
+          font-size: 1rem; /* Smaller font sizes for headers */
+        }
+
+        p {
+          font-size: 0.8rem; /* Smaller font size for text */
+        }
+    }
 </style>
+
 
 
 </head>
