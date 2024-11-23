@@ -11,206 +11,227 @@
   <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
   <style>
     body {
-      display: flex;
-      flex-direction: row;
-      margin: 0;
-      font-family: 'Almarai', sans-serif; /* Clean, modern font */
-      background: linear-gradient(135deg, #f8f8f8, #e2e2e2); /* Soft light gradient background */
-      height: 100vh;
-      overflow: hidden;
-      color: #333; /* Dark gray text for better readability */
-    }
+  font-family: 'Almarai', sans-serif;
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  padding: 0;
+  width: 100%; /* Ensures full width */
+  height: 100vh; /* Ensures full height */
+  overflow: hidden;
+  background: linear-gradient(to bottom right, #e4e5f1, #cfd1e0);
+  color: #333;
+}
+
   
     #viewer {
-      flex: 2; /* Two-thirds of the available space */
-      background: rgba(255, 255, 255, 0.85); /* Soft glass-like background */
-      box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.1);
-      border-radius: 12px;
-      backdrop-filter: blur(12px); /* Subtle glassmorphism effect */
+      flex: 2;
+      height: calc(100% - 20px); /* Prevents overflow */
+      position: relative;
+      background: #ffffff;
+      border-radius: 15px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+      margin: 10px;
+      transition: box-shadow 0.3s ease;
+    }
+  
+    #viewer:hover {
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
     }
   
     #annotation-panel {
-      flex: 1; /* One-third of the available space */
-      padding: 40px;
-      
-      background: rgba(255, 255, 255, 0.95); /* Lighter semi-transparent panel */
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      border-radius: 16px;
+      flex: 1;
+      height: calc(100% - 20px); /* Prevents overflow */
+      width:vh;
+      background: #f0f0f5;
+      border-radius: 15px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin: 10px;
       overflow-y: auto;
-      transition: box-shadow 0.3s ease, transform 0.3s ease;
+      transition: all 0.3s ease-in-out;
     }
   
-    #annotation-panel:hover {
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-      transform: translateY(-5px);
+    #annotation-title {
+      color: #222;
+      font-size: 1.8rem;
+      font-weight: bold;
+      padding: 15px;
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      margin-bottom: 20px;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+  
+    #annotation-title:hover {
+      background: #ffffff;
+      transform: translateY(-3px); /* Limited translation to avoid overflow */
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     }
   
     #logoimg {
       position: absolute;
       top: 20px;
       left: 20px;
-      width: 100px;
-      transition: opacity 0.3s ease, transform 0.3s ease;
-      cursor: pointer;
-      filter: drop-shadow(0 0 15px #d1d1d1); /* Subtle neutral glow */
+      width: 10%;
+      max-width: 100px;
+      height: auto;
+      opacity: 0.9;
+      z-index: 2;
+      transition: transform 0.3s ease, filter 0.3s ease;
     }
   
     #logoimg:hover {
-      transform: scale(1.1);
+      transform: scale(1.05); /* Reduced scaling */
+      filter: brightness(1.2);
     }
   
     #surroundingimg {
       position: absolute;
       bottom: 20px;
       left: 20px;
-      width: 30px;
+      width: 40px;
+      height: auto;
+      z-index: 2;
+      opacity: 0.8;
       transition: opacity 0.3s ease, transform 0.3s ease;
-      cursor: pointer;
-      filter: drop-shadow(0 0 4px #d1d1d1); /* Subtle neutral glow */
     }
   
     #surroundingimg:hover {
-      transform: scale(1.2);
+      opacity: 1;
+      transform: rotate(5deg); /* Reduced rotation */
     }
   
     .annotation {
-      margin: 15px 0;
-      padding: 20px;
-      border-radius: 12px;
-      background: rgba(245, 245, 245, 0.8); /* Soft, elegant background */
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(6px);
+      margin-bottom: 15px;
+      padding: 15px;
+      background: #ffffff;
+      border: 1px solid rgba(221, 221, 221, 0.8);
+      border-radius: 10px;
+      color: #555;
       cursor: pointer;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-      border: 1px solid rgba(0, 0, 0, 0.1); /* Subtle dark border */
     }
   
     .annotation:hover {
-      background: rgba(255, 255, 255, 1); /* Subtle white background on hover */
-      transform: scale(1.03);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    }
-  
-    .annotation-selected {
-      border: 2px solid #8c7b4f; /* Elegant gold-tone border */
-      box-shadow: 0 0 20px rgba(140, 123, 79, 0.4); /* Soft gold glow */
+      background: #f5f5fa;
+      transform: translateY(-3px); /* Reduced translation */
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
     }
   
     #annotation-back {
-      margin-top: 20px;
-      color: #8c7b4f; /* Elegant gold-tone text */
-      font-weight: bold;
+      position: relative;
       cursor: pointer;
-      text-decoration: none;
-      transition: color 0.3s ease, transform 0.3s ease;
+      color: #989d97;
+      font-size: 0.9rem;
+      text-decoration: underline;
+      transition: color 0.3s ease;
+      top: -1em;
     }
   
     #annotation-back:hover {
-      color: #5a4a32; /* Darker gold shade on hover */
-      transform: translateX(5px);
+      color: #666;
     }
   
-    h2, h3 {
-      color: #222; /* Dark text for titles */
-      margin-bottom: 20px;
-      font-weight: 600;
+    h2,
+    h3 {
+      color: #333;
+      margin: 15px 0;
+      font-family: 'Poppins', sans-serif;
+      font-weight: bold;
     }
   
     p {
-      color: #555; /* Soft dark for body text */
-      line-height: 1.7;
+      color: #555;
+      line-height: 1.8;
+      margin: 10px 0;
     }
   
     button {
-      padding: 15px 30px;
+      background: linear-gradient(to right, #6a11cb, #2575fc);
       border: none;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #8c7b4f, #e1c9a6); /* Elegant gold-to-beige gradient */
-      color: #ffffff;
+      color: white;
+      padding: 10px 20px;
+      font-size: 1rem;
       font-weight: bold;
+      border-radius: 30px;
       cursor: pointer;
       transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
     }
   
     button:hover {
-      background: linear-gradient(135deg, #e1c9a6, #8c7b4f);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      background: linear-gradient(to right, #2575fc, #6a11cb);
+      transform: translateY(-3px); /* Reduced translation */
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     }
   
-    button:active {
-      transform: translateY(0);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    }
-  
-    /* New .annotation-title style */
-    #annotation-title {
-      font-size: 1.6em; /* Large, elegant font size for titles */
-      font-weight: bold;
-      margin-bottom: 15px;
-      padding: 12px 25px;
-      color: #444; /* Darker gray text color for readability */
-      background: rgba(240, 240, 240, 0.8); /* Subtle light background */
-      border-radius: 10px;
-      text-align: center;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Soft shadow for depth */
-      border: 1px solid rgba(0, 0, 0, 0.15); /* Slightly darker border */
-      transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-    }
-    
-    #annotation-title p{
-      margin-top: 0em;
-      margin-bottom: 0em;
-    }
-    #annotation-title:hover {
-      background: rgba(255, 255, 255, 0.95); /* Lighter background on hover */
-      transform: scale(1.02);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
-      color: #333; /* Slightly darker text */
-    }
-  
-    #annotation-title:active {
-      transform: scale(1); /* Reset scale effect when clicked */
-      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2); /* Softer shadow on click */
-    }
-  
-    @media (max-width: 768px) {
+    @media screen and (max-width: 768px) {
       body {
         flex-direction: column;
       }
   
       #viewer {
-        border-radius: 0;
+        height: 60%;
+        width: calc(100% - 10px); /* Adjusted for margins */
+        margin: 5px;
       }
   
       #annotation-panel {
-        margin: 0;
-        padding: 30px;
+        height: 40%;
+        width: calc(100% - 10px); /* Adjusted for margins */
+        margin: 5px;
+        border-radius: 15px 15px 0 0;
       }
   
       #logoimg {
-        width: 80px;
-        top: 5px;
-        left: 5px;
+        width: 15%;
       }
   
-      #surroundingimg {
-        width: 40px;
-        bottom: 5px;
-        left: 5px;
+      h2,
+      h3 {
+        font-size: 1.2rem;
+      }
+  
+      p {
+        font-size: 0.9rem;
+      }
+    }
+  
+    @media screen and (max-width: 480px) {
+      #viewer {
+        height: 50%;
+      }
+  
+      #annotation-panel {
+        height: 50%;
+      }
+  
+      #logoimg {
+        width: 20%;
+      }
+  
+      h2,
+      h3 {
+        font-size: 1rem;
+      }
+  
+      p {
+        font-size: 0.8rem;
       }
   
       button {
-        width: 100%;
-        text-align: center;
+        font-size: 0.9rem;
       }
     }
-  </style>
+</style>
+
   
-  
-  
+
+
 
 
 </head>
@@ -221,8 +242,11 @@
   <div id="viewer">
 
     <img id="logoimg" src="logo/logo.png" alt="DCT Logo">
-    <img class="control" id="surroundingimg" src="icons/surroundings.png" alt="Surroudnings"
-      onclick="hideSurroundNodes()">
+
+
+  </div>
+  <div id="controls">
+    <img id="surroundingimg" src="icons/surroundings.png" alt="Surroudnings" onclick="hideSurroundNodes()">
   </div>
   <div id="annotation-panel"></div>
 
@@ -258,7 +282,7 @@
 
       //--Sketchfab code ------------------------------------------------------------------
       client.init(id, {
-        autostart: 0, ui_infos: 0, ui_watermark_link: 0, ui_watermark: 0, dnt: 1, ui_settings: 1, ui_annotations: 1, ui_inspector: 0, annotations_visible: 1, preload: 1, ui_animations: 0, ui_hint: 2, ui_ar: 1, ui_fullscreen: 1, ui_fadeout: 0,
+        autostart: 0, ui_infos: 0, ui_watermark_link: 0, ui_watermark: 0, dnt: 1, ui_settings: 1, ui_annotations: 0, ui_inspector: 0, annotations_visible: 1, preload: 1, ui_animations: 0, ui_hint: 2, ui_ar: 1, ui_fullscreen: 1,ui_fadeout:0 ,
 
         success: function (api) {
           api_ref = api;
@@ -268,9 +292,9 @@
             api.setHighlightOptions({ //--default highlight ------------------------------------
               outlineWidth: 2,
               outlineColor: [1.0, 1.0, 0.0],
-              outlineDuration: 99,
+              outlineDuration: 1,
               highlightColor: [0.0, 0.0, 1.0],
-              highlightDuration: 99
+              highlightDuration: 1
             });
 
             api.addEventListener('nodeMouseEnter', function (info) { //--highlight colors ------------------------------
@@ -293,9 +317,9 @@
                 api.setHighlightOptions({ //-apply highlight colors ----------------------------------
                   outlineWidth: 2,
                   outlineColor: new_highlight_color,
-                  outlineDuration: 99,
+                  outlineDuration: 1,
                   highlightColor: [0.0, 0.0, 1.0],
-                  highlightDuration: 99
+                  highlightDuration: 1
                 });
 
                 api.highlightMaterial(info.material);
@@ -451,7 +475,7 @@
             if (!err) {
 
               // Define your content
-              let content = `<div id="annotation-title">`;
+              let content =`<div id="annotation-title">`;
               content += `<p>${information.name}</p>`;
               content += `</div>`;
               content += `<p id="annotation-back">Back<br></p>`;
@@ -498,7 +522,7 @@
               } else {
                 console.error('Element with ID not found.');
               }
-
+              
 
 
             }
