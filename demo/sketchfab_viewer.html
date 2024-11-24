@@ -248,8 +248,7 @@
       iframe.height = '100%';
       iframe.setAttribute('allowfullscreen', 'true');
       iframe.setAttribute('frameborder', '0');
-      iframe.setAttribute('sandbox', 'allow-top-navigation');
-
+      
       viewerDiv.appendChild(iframe);
 
       const client = new Sketchfab(iframe);
@@ -540,6 +539,11 @@
             }
           });
         }
+        document.querySelectorAll('a').forEach(link => {
+        link.setAttribute('target', '_top');
+        });
+
+
       }
 
       function getModelInfo() {
