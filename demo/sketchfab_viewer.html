@@ -239,7 +239,6 @@
       const iframe = document.createElement('iframe');
       const viewerDiv = document.getElementById('viewer');
       const panel = document.getElementById('annotation-panel');
-
       const id = new URLSearchParams(window.location.search).get('id');
       const modelUrl = 'https://sketchfab.com/models/' + id + '/embed';
 
@@ -249,6 +248,8 @@
       iframe.height = '100%';
       iframe.setAttribute('allowfullscreen', 'true');
       iframe.setAttribute('frameborder', '0');
+      iframe.setAttribute('sandbox', 'allow-top-navigation');
+
       viewerDiv.appendChild(iframe);
 
       const client = new Sketchfab(iframe);
