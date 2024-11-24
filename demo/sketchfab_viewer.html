@@ -14,37 +14,45 @@
       display: flex;
       flex-direction: row;
       margin: 0;
-      font-family: 'Almarai', sans-serif; /* Clean, modern font */
-      background: linear-gradient(135deg, #f8f8f8, #e2e2e2); /* Soft light gradient background */
+      font-family: 'Almarai', sans-serif;
+      /* Clean, modern font */
+      background: linear-gradient(135deg, #f8f8f8, #e2e2e2);
+      /* Soft light gradient background */
       height: 100vh;
       overflow: hidden;
-      color: #333; /* Dark gray text for better readability */
+      color: #333;
+      /* Dark gray text for better readability */
     }
-  
+
     #viewer {
-      flex: 2; /* Two-thirds of the available space */
-      background: rgba(255, 255, 255, 0.85); /* Soft glass-like background */
+      flex: 2;
+      /* Two-thirds of the available space */
+      background: rgba(255, 255, 255, 0.85);
+      /* Soft glass-like background */
       box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.1);
       border-radius: 12px;
-      backdrop-filter: blur(12px); /* Subtle glassmorphism effect */
+      backdrop-filter: blur(12px);
+      /* Subtle glassmorphism effect */
     }
-  
+
     #annotation-panel {
-      flex: 1; /* One-third of the available space */
+      flex: 1;
+      /* One-third of the available space */
       padding: 40px;
-      
-      background: rgba(255, 255, 255, 0.95); /* Lighter semi-transparent panel */
+
+      background: rgba(255, 255, 255, 0.95);
+      /* Lighter semi-transparent panel */
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
       border-radius: 16px;
       overflow-y: auto;
       transition: box-shadow 0.3s ease, transform 0.3s ease;
     }
-  
+
     #annotation-panel:hover {
       box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
       transform: translateY(-5px);
     }
-  
+
     #logoimg {
       position: absolute;
       top: 20px;
@@ -52,10 +60,11 @@
       width: 100px;
       transition: opacity 0.3s ease, transform 0.3s ease;
       cursor: pointer;
-      filter: drop-shadow(0 0 15px #d1d1d1); /* Subtle neutral glow */
+      filter: drop-shadow(0 0 15px #d1d1d1);
+      /* Subtle neutral glow */
     }
-  
-  
+
+
     #surroundingimg {
       position: absolute;
       bottom: 20px;
@@ -63,151 +72,174 @@
       width: 30px;
       transition: opacity 0.3s ease, transform 0.3s ease;
       cursor: pointer;
-      filter: drop-shadow(0 0 4px #d1d1d1); /* Subtle neutral glow */
+      filter: drop-shadow(0 0 4px #d1d1d1);
+      /* Subtle neutral glow */
     }
-  
+
     #surroundingimg:hover {
       transform: scale(1.2);
     }
-  
+
     .annotation {
       margin: 15px 0;
       padding: 20px;
       border-radius: 12px;
-      background: rgba(245, 245, 245, 0.8); /* Soft, elegant background */
+      background: rgba(245, 245, 245, 0.8);
+      /* Soft, elegant background */
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
       backdrop-filter: blur(6px);
       cursor: pointer;
       transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-      border: 1px solid rgba(0, 0, 0, 0.1); /* Subtle dark border */
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      /* Subtle dark border */
     }
-  
+
     .annotation:hover {
-      background: rgba(255, 255, 255, 1); /* Subtle white background on hover */
+      background: rgba(255, 255, 255, 1);
+      /* Subtle white background on hover */
       transform: scale(1.03);
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     }
-  
+
     .annotation-selected {
-      border: 2px solid #8c7b4f; /* Elegant gold-tone border */
-      box-shadow: 0 0 20px rgba(140, 123, 79, 0.4); /* Soft gold glow */
+      border: 2px solid #8c7b4f;
+      /* Elegant gold-tone border */
+      box-shadow: 0 0 20px rgba(140, 123, 79, 0.4);
+      /* Soft gold glow */
     }
-  
+
     #annotation-back {
       margin-top: 20px;
-      color: #8c7b4f; /* Elegant gold-tone text */
+      color: #8c7b4f;
+      /* Elegant gold-tone text */
       font-weight: bold;
       cursor: pointer;
       text-decoration: none;
       transition: color 0.3s ease, transform 0.3s ease;
     }
-  
+
     #annotation-back:hover {
-      color: #5a4a32; /* Darker gold shade on hover */
+      color: #5a4a32;
+      /* Darker gold shade on hover */
       transform: translateX(5px);
     }
-  
-    h2, h3 {
-      color: #222; /* Dark text for titles */
+
+    h2,
+    h3 {
+      color: #222;
+      /* Dark text for titles */
       margin-bottom: 20px;
       font-weight: 600;
     }
-  
+
     p {
-      color: #555; /* Soft dark for body text */
+      color: #555;
+      /* Soft dark for body text */
       line-height: 1.7;
     }
-  
+
     button {
       padding: 15px 30px;
       border: none;
       border-radius: 12px;
-      background: linear-gradient(135deg, #8c7b4f, #e1c9a6); /* Elegant gold-to-beige gradient */
+      background: linear-gradient(135deg, #8c7b4f, #e1c9a6);
+      /* Elegant gold-to-beige gradient */
       color: #ffffff;
       font-weight: bold;
       cursor: pointer;
       transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
     }
-  
+
     button:hover {
       background: linear-gradient(135deg, #e1c9a6, #8c7b4f);
       transform: translateY(-2px);
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     }
-  
+
     button:active {
       transform: translateY(0);
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
-  
+
     /* New .annotation-title style */
     #annotation-title {
-      font-size: 1.6em; /* Large, elegant font size for titles */
+      font-size: 1.6em;
+      /* Large, elegant font size for titles */
       font-weight: bold;
       margin-bottom: 15px;
       padding: 12px 25px;
-      color: #444; /* Darker gray text color for readability */
-      background: rgba(240, 240, 240, 0.8); /* Subtle light background */
+      color: #444;
+      /* Darker gray text color for readability */
+      background: rgba(240, 240, 240, 0.8);
+      /* Subtle light background */
       border-radius: 10px;
       text-align: center;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Soft shadow for depth */
-      border: 1px solid rgba(0, 0, 0, 0.15); /* Slightly darker border */
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      /* Soft shadow for depth */
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      /* Slightly darker border */
       transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
       cursor: pointer;
     }
-    
-    #annotation-title p{
+
+    #annotation-title p {
       margin-top: 0em;
       margin-bottom: 0em;
     }
+
     #annotation-title:hover {
-      background: rgba(255, 255, 255, 0.95); /* Lighter background on hover */
+      background: rgba(255, 255, 255, 0.95);
+      /* Lighter background on hover */
       transform: scale(1.02);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
-      color: #333; /* Slightly darker text */
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+      /* Stronger shadow on hover */
+      color: #333;
+      /* Slightly darker text */
     }
-  
+
     #annotation-title:active {
-      transform: scale(1); /* Reset scale effect when clicked */
-      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2); /* Softer shadow on click */
+      transform: scale(1);
+      /* Reset scale effect when clicked */
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+      /* Softer shadow on click */
     }
-  
+
     @media (max-width: 768px) {
       body {
         flex-direction: column;
       }
-  
+
       #viewer {
         border-radius: 0;
       }
-  
+
       #annotation-panel {
         margin: 0;
         padding: 30px;
       }
-  
+
       #logoimg {
         width: 80px;
         top: 5px;
         left: 5px;
       }
-  
+
       #surroundingimg {
         width: 40px;
         bottom: 5px;
         left: 5px;
       }
-  
+
       button {
         width: 100%;
         text-align: center;
       }
     }
   </style>
-  
-  
-  
+
+
+
 
 
 </head>
@@ -248,7 +280,7 @@
       iframe.height = '100%';
       iframe.setAttribute('allowfullscreen', 'true');
       iframe.setAttribute('frameborder', '0');
-      
+
       viewerDiv.appendChild(iframe);
 
       const client = new Sketchfab(iframe);
@@ -371,17 +403,7 @@
             url = getNewPastilleURL('rgba(255,255,255,0.75)', 'black', 'black', 'none', 0, 100, 512, 512);
             api.setAnnotationsTexture(url, function () { });
 
-            //Setup GUI Controls
-            const sourceDiv = document.getElementById("controls");
-            const targetDiv = document.querySelector(".controls");
 
-            if (sourceDiv && targetDiv) {
-              while (sourceDiv.firstChild) {
-                targetDiv.appendChild(sourceDiv.firstChild);
-              }
-            } else {
-              console.error("Source or target div not found!");
-            }
 
           });
         },
@@ -493,6 +515,15 @@
               content += `<br>`;
               content += marked.parse(information.content.raw);
 
+              //Links
+              const parser = new DOMParser();
+              const doc = parser.parseFromString(content, 'text/html');
+              doc.querySelectorAll('a').forEach(anchor => {
+                anchor.setAttribute("target", "_top");
+              });
+
+
+              //youtube 
               const regex = /\[v=([a-zA-Z0-9_-]{8,11})\]/g;
 
               content = content.replace(regex, (match, videoId) => {
@@ -539,9 +570,6 @@
             }
           });
         }
-        document.querySelectorAll('a').forEach(link => {
-        link.setAttribute('target', '_top');
-        });
 
 
       }
