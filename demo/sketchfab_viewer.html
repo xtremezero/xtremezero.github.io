@@ -299,7 +299,7 @@
               outlineColor: [1.0, 1.0, 0.0],
               outlineDuration: 99,
               highlightColor: [0.0, 0.0, 1.0],
-              highlightDuration: 99
+              highlightDuration: 1
             });
 
             api.addEventListener('nodeMouseEnter', function (info) { //--highlight colors ------------------------------
@@ -322,9 +322,9 @@
                 api.setHighlightOptions({ //-apply highlight colors ----------------------------------
                   outlineWidth: 2,
                   outlineColor: new_highlight_color,
-                  outlineDuration: 99,
+                  outlineDuration: 1,
                   highlightColor: [0.0, 0.0, 1.0],
-                  highlightDuration: 99
+                  highlightDuration: 1
                 });
 
                 api.highlightMaterial(info.material);
@@ -359,7 +359,7 @@
                   outlineColor: new_highlight_color,
                   outlineDuration: 99,
                   highlightColor: [0.0, 0.0, 1.0],
-                  highlightDuration: 99
+                  highlightDuration: 1
                 });
 
                 api.highlightMaterial(info.material);
