@@ -271,7 +271,7 @@
             });
 
             api.addEventListener('nodeMouseEnter', function (info) { //--highlight colors ------------------------------
-              if (info && info.material && /^\d+$/.test(info.material.name.replace(/_/g, ""))) {
+              if (selectedAnnotation == -1 && info && info.material && /^\d+$/.test(info.material.name.replace(/_/g, ""))) {
 
                 new_highlight_color = [1.0, 1.0, 0.0];
                 switch (parseInt(info.material.name)) {
