@@ -519,8 +519,9 @@
               const parser = new DOMParser();
               const doc = parser.parseFromString(content, 'text/html');
               doc.querySelectorAll('a').forEach(anchor => {
-                anchor.setAttribute("target", "_top");
+                anchor.outerHTML = anchor.outerHTML.replace("href","target='_top' href")
               });
+              content = new XMLSerializer().serializeToString(doc);
 
 
               //youtube 
