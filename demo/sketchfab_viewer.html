@@ -25,7 +25,7 @@
     }
 
     #viewer {
-      flex: 2;
+      flex: 3;
       /* Two-thirds of the available space */
       background: rgba(255, 255, 255, 0.85);
       /* Soft glass-like background */
@@ -211,6 +211,7 @@
 
       #viewer {
         border-radius: 0;
+        flex:1;
       }
 
       #annotation-panel {
@@ -224,11 +225,6 @@
         left: 5px;
       }
 
-      #surroundingimg {
-        width: 40px;
-        bottom: 5px;
-        left: 5px;
-      }
 
       button {
         width: 100%;
@@ -248,8 +244,8 @@
 <body>
   <div id="viewer">
 
-    <img id="logoimg" src="logo/logo.png" alt="DCT Logo">
-    <img class="control" id="surroundingimg" src="icons/surroundings.png" alt="Surroudnings"
+    <img id="logoimg" src="https://cdn.prod.website-files.com/6722a6a0adf1d8b016a9f17e/67447e265524543968a190a2_DCT%20logo.png" alt="DCT Logo">
+    <img id="surroundingimg" src="https://cdn.prod.website-files.com/6722a6a0adf1d8b016a9f17e/67447e264c4db83e39681dfa_surroundings.png" alt="Surroudnings"
       onclick="hideSurroundNodes()">
   </div>
   <div id="annotation-panel"></div>
