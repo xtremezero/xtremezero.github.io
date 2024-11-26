@@ -62,6 +62,7 @@
   background: rgba(255, 255, 255, 0.95);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   overflow-y: auto;
+  overflow-x: hidden;
   transition: box-shadow 0.3s ease, transform 0.3s ease;
   animation: panelFadeIn 0.7s ease-out;
 }
@@ -114,7 +115,7 @@
       transition: opacity 0.3s ease, transform 0.3s ease;
       cursor: pointer;
       filter: drop-shadow(0 0 4px #d1d1d1);
-      animation: surroundingImgBounce 1s ease-out infinite;
+      animation: surroundingImgBounce 1s ease-out;
     }
 
     /* Animation for surrounding image bounce */
@@ -195,6 +196,7 @@
       font-size: 1.3em;
       font-weight: bold;
       margin-bottom: 5px;
+      margin-top: 10px;
       padding: 5px 25px;
       color: #fff;
       background: #58808a;
@@ -585,7 +587,7 @@
               content =``;
               content += `<div class="site-tour-banner">Site Tour</div>`;
 
-              content +=`<br><div id="annotation-title">`;
+              content +=`<br><br><div id="annotation-title">`;
               content += `<p>${selectedIndex+1}.  ${information.name}</p>`;
               content += `</div>`;
               content += `<span id="annotation-back">Back</span>`;
