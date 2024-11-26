@@ -9,49 +9,80 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
+ 
   <style>
     body {
       display: flex;
       flex-direction: row;
       margin: 0;
       font-family: 'Almarai', sans-serif;
-      /* Clean, modern font */
       background: linear-gradient(135deg, #f8f8f8, #e2e2e2);
-      /* Soft light gradient background */
       height: 100vh;
       overflow: hidden;
-      color: #333;
-      /* Dark gray text for better readability */
+      color: #333333;
+      animation: bodyFadeIn 1s ease-out;
+    }
+
+    /* Animation for body fade-in */
+    @keyframes bodyFadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     #viewer {
       flex: 3;
-      /* Two-thirds of the available space */
       background: rgba(255, 255, 255, 0.85);
-      /* Soft glass-like background */
       box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.1);
       border-radius: 12px;
       backdrop-filter: blur(12px);
-      /* Subtle glassmorphism effect */
+      animation: viewerSlideIn 0.7s ease-out;
+    }
+
+    /* Animation for viewer slide-in */
+    @keyframes viewerSlideIn {
+      0% {
+        opacity: 0;
+        transform: translateX(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
     }
 
     #annotation-panel {
-      flex: 1;
-      /* One-third of the available space */
-      padding: 40px;
+  flex: 1;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  animation: panelFadeIn 0.7s ease-out;
+}
 
-      background: rgba(255, 255, 255, 0.95);
-      /* Lighter semi-transparent panel */
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      border-radius: 16px;
-      overflow-y: auto;
-      transition: box-shadow 0.3s ease, transform 0.3s ease;
-    }
+/* Animation for annotation panel fade-in */
+@keyframes panelFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
 
-    #annotation-panel:hover {
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-      transform: translateY(-5px);
-    }
+/* Hide the panel completely if it is empty */
+#annotation-panel:empty {
+  display: none; /* Removes the element from the layout */
+}
+
 
     #logoimg {
       position: absolute;
@@ -60,9 +91,20 @@
       width: 100px;
       transition: opacity 0.3s ease, transform 0.3s ease;
       filter: drop-shadow(0 0 15px #d1d1d1);
-      /* Subtle neutral glow */
+      animation: logoFadeIn 1s ease-out;
     }
 
+    /* Animation for logo fade-in */
+    @keyframes logoFadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
     #surroundingimg {
       position: absolute;
@@ -72,136 +114,146 @@
       transition: opacity 0.3s ease, transform 0.3s ease;
       cursor: pointer;
       filter: drop-shadow(0 0 4px #d1d1d1);
-      /* Subtle neutral glow */
+      animation: surroundingImgBounce 1s ease-out infinite;
     }
 
-    #surroundingimg:hover {
-      transform: scale(1.2);
+    /* Animation for surrounding image bounce */
+    @keyframes surroundingImgBounce {
+      0% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+      100% {
+        transform: translateY(0);
+      }
     }
 
     .annotation {
       margin: 15px 0;
-      padding: 20px;
-      border-radius: 12px;
-      background: rgba(245, 245, 245, 0.8);
-      /* Soft, elegant background */
+      padding: 15px;
+      border-radius: 6px;
+      color: #212425;
+      background: #e6eced;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
       backdrop-filter: blur(6px);
       cursor: pointer;
       transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      /* Subtle dark border */
+      border: 1px solid #c8dadf;
+      animation: annotationFadeIn 0.5s ease-out; /* Add fade-in animation */
     }
 
     .annotation:hover {
-      background: rgba(255, 255, 255, 1);
-      /* Subtle white background on hover */
-      transform: scale(1.03);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      animation: annotationHover 0.3s forwards; /* Add hover animation */
+    }
+
+    /* Hover and animation on annotation */
+    @keyframes annotationHover {
+      0% {
+        background: #e6eced;
+        transform: scale(1);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      }
+      100% {
+        background: #58808a;
+        color: #ffffff;
+        transform: scale(1.03);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
     }
 
     .annotation-selected {
-      border: 2px solid #8c7b4f;
-      /* Elegant gold-tone border */
-      box-shadow: 0 0 20px rgba(140, 123, 79, 0.4);
-      /* Soft gold glow */
+      border: 2px solid #58808a;
+      box-shadow: 0 0 20px rgba(79, 133, 140, 0.4);
     }
 
     #annotation-back {
-      margin-top: 20px;
-      color: #8c7b4f;
-      /* Elegant gold-tone text */
+      margin-top: 5px;
+      margin-bottom: 10px;
+      color: #c19544;
       font-weight: bold;
       cursor: pointer;
       text-decoration: none;
       transition: color 0.3s ease, transform 0.3s ease;
+      animation: fadeInUp 0.5s ease-out;
     }
 
-    #annotation-back:hover {
-      color: #5a4a32;
-      /* Darker gold shade on hover */
-      transform: translateX(5px);
+    /* Animation for back button fade-in */
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    h2,
-    h3 {
-      color: #222;
-      /* Dark text for titles */
-      margin-bottom: 20px;
-      font-weight: 600;
-    }
-
-    p {
-      color: #555;
-      /* Soft dark for body text */
-      line-height: 1.7;
-    }
-
-    button {
-      padding: 15px 30px;
-      border: none;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #8c7b4f, #e1c9a6);
-      /* Elegant gold-to-beige gradient */
-      color: #ffffff;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-    }
-
-    button:hover {
-      background: linear-gradient(135deg, #e1c9a6, #8c7b4f);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    }
-
-    button:active {
-      transform: translateY(0);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    }
-
-    /* New .annotation-title style */
     #annotation-title {
-      font-size: 1.6em;
-      /* Large, elegant font size for titles */
+      font-size: 1.3em;
       font-weight: bold;
-      margin-bottom: 15px;
-      padding: 12px 25px;
-      color: #444;
-      /* Darker gray text color for readability */
-      background: rgba(240, 240, 240, 0.8);
-      /* Subtle light background */
-      border-radius: 10px;
+      margin-bottom: 5px;
+      padding: 5px 25px;
+      color: #fff;
+      background: #58808a;
       text-align: center;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      /* Soft shadow for depth */
-      border: 1px solid rgba(0, 0, 0, 0.15);
-      /* Slightly darker border */
       transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
+      animation: fadeInLeft 0.6s ease-out; /* Add title animation */
     }
 
     #annotation-title p {
       margin-top: 0em;
       margin-bottom: 0em;
+      color: #fff;
     }
 
-    #annotation-title:hover {
-      background: rgba(255, 255, 255, 0.95);
-      /* Lighter background on hover */
-      transform: scale(1.02);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-      /* Stronger shadow on hover */
-      color: #333;
-      /* Slightly darker text */
+    /* Animation for title fade-in from left */
+    @keyframes fadeInLeft {
+      0% {
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
     }
 
-    #annotation-title:active {
-      transform: scale(1);
-      /* Reset scale effect when clicked */
-      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-      /* Softer shadow on click */
+    .site-tour-banner {
+      position: relative;
+      margin-left: -40px;
+      margin-right: -40px;
+      width: calc(100% + 80px);
+      background-color: #58808a;
+      color: #FFFFFF;
+      text-align: center;
+      padding: 20px;
+      font-size: 24px;
+      font-weight: bold;
+      box-sizing: border-box;
+    }
+
+
+    /* Animation for paragraphs fade-in */
+    p {
+      opacity: 0;
+      animation: fadeInParagraph 1s ease-out forwards;
+      margin-bottom: 15px;
+    }
+
+    /* Fade-in for paragraphs */
+    @keyframes fadeInParagraph {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     @media (max-width: 768px) {
@@ -211,27 +263,48 @@
 
       #viewer {
         border-radius: 0;
-        flex:1;
+        flex: 3;
       }
 
       #annotation-panel {
+        flex: 2;
         margin: 0;
         padding: 30px;
+      }
+
+      #annotation-panel :empty{
+      display: none;
+    }
+      .annotation {
+        padding: 15px;
       }
 
       #logoimg {
         width: 80px;
         top: 5px;
         left: 5px;
+        animation: logoFadeIn 1s ease-out; /* Add logo fade-in for mobile */
       }
-
 
       button {
         width: 100%;
         text-align: center;
+        animation: buttonFadeIn 0.5s ease-out;
       }
     }
-  </style>
+
+    /* Animation for button fade-in */
+    @keyframes buttonFadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+</style>
 
 
 
@@ -478,13 +551,18 @@
         updatePanel(null, -1, api_ref);
       }
       function updatePanel(annotation, selectedIndex, api) {
-        let content = "";
+        if (annotationList.length == 0)
+          return;
+        let content;
+        content =``;
+        content += `<div class="site-tour-banner">Site Tour</div>`
+
+
         if (selectedIndex === -1) {
           //content = `<h3>${sketchfabModelData.name}</h3><p>${sketchfabModelData.description}</p>`;
           //content += `<h2></h2>`;
-          content = ``;
           annotationList.forEach((annotation, index) => {
-            content += `<div class="annotation" data-index="${index}">${annotation.name}</div>`;
+            content += `<div class="annotation" data-index="${index}">${index+1}. ${annotation.name}</div>`;
           });
           panel.innerHTML = content;
 
@@ -501,13 +579,17 @@
         } else {
           api.getAnnotation(selectedIndex, function (err, information) {
             if (!err) {
-
+              
               // Define your content
-              let content = `<div id="annotation-title">`;
-              content += `<p>${information.name}</p>`;
+              let content; 
+              content =``;
+              content += `<div class="site-tour-banner">Site Tour</div>`;
+
+              content +=`<br><div id="annotation-title">`;
+              content += `<p>${selectedIndex+1}.  ${information.name}</p>`;
               content += `</div>`;
-              content += `<p id="annotation-back">Back<br></p>`;
-              content += `<br>`;
+              content += `<span id="annotation-back">Back</span>`;
+         
               content += marked.parse(information.content.raw);
 
               //Links
@@ -543,23 +625,22 @@
               if (backButton) {
                 // Add a click event listener
                 backButton.addEventListener('click', () => {
-                  console.log('Back button clicked!');
                   resetPanel(); // Ensure the function exists and is accessible
                 });
               } else {
                 console.error('Element with ID not found.');
               }
 
-              backButton = document.getElementById('annotation-title');
-              if (backButton) {
-                // Add a click event listener
-                backButton.addEventListener('click', () => {
-                  console.log('Back button clicked!');
-                  resetPanel(); // Ensure the function exists and is accessible
-                });
-              } else {
-                console.error('Element with ID not found.');
-              }
+              // backButton = document.getElementById('annotation-title');
+              // if (backButton) {
+              //   // Add a click event listener
+              //   backButton.addEventListener('click', () => {
+              //     console.log('Back button clicked!');
+              //     resetPanel(); // Ensure the function exists and is accessible
+              //   });
+              // } else {
+              //   console.error('Element with ID not found.');
+              // }
 
 
 
