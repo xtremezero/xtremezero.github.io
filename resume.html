@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohamed Eltawil - Senior Software Developer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        a {
+            color: #f1f1f1;
+            text-decoration-color: transparent;
+        }
+
+        a:hover{
+            
+            color: #fbffe4;
+            text-decoration-color: #fbffe4;
+        }
+        a:visited {
+            color: #eee;
+            text-decoration-color: transparent;
+
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #e4e6ea;
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #161616 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #1e1e2e;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+            position: relative;
+            border: 1px solid #2a2a2a;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #b5cf00 0%, #7fa800 50%, #4e6d00 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="80" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="60" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="60" cy="40" r="1" fill="rgba(255,255,255,0.1)"/></svg>');
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .name {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .title {
+            font-size: 1.3em;
+            font-weight: 300;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95em;
+        }
+
+        .contact-icon {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 0;
+        }
+
+        .sidebar {
+            background: #242424;
+            padding: 40px 30px;
+            border-right: 3px solid #b5cf00;
+        }
+
+        .content {
+            padding: 40px;
+            background: #1e1e1e;
+        }
+
+        .section {
+            margin-bottom: 35px;
+        }
+
+        .section-title {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: #f1f5f9;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 3px solid #b5cf00;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 30px;
+            height: 3px;
+            background: #b5cf00;
+        }
+
+        .experience-item,
+        .education-item {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #282828;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            border-left: 4px solid #b5cf00;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .experience-item:hover,
+        .education-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(181, 207, 0, 0.2);
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        .job-title {
+            font-weight: 700;
+            color: #f1f5f9;
+            font-size: 1.1em;
+        }
+
+        .company {
+            font-weight: 600;
+            color: #b5cf00;
+            margin-top: 5px;
+        }
+
+        .duration {
+            color: #94a3b8;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        .job-description {
+            color: #cbd5e1;
+            margin-top: 10px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-category {
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            border: 1px solid #3a3a3a;
+        }
+
+        .skill-category h4 {
+            color: #f1f5f9;
+            margin-bottom: 12px;
+            font-size: 1em;
+            font-weight: 600;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            padding: 5px 0;
+            color: #cbd5e1;
+            font-size: 0.9em;
+        }
+
+        .skill-list li::before {
+            content: '▶';
+            color: #b5cf00;
+            margin-right: 8px;
+            font-size: 0.8em;
+        }
+
+        .summary {
+            background: linear-gradient(135deg, #b5cf00, #7fa800);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            font-size: 1.05em;
+            line-height: 1.7;
+            box-shadow: 0 5px 15px rgba(181, 207, 0, 0.3);
+        }
+
+        .awards-list {
+            list-style: none;
+        }
+
+        .awards-list li {
+            padding: 8px 0;
+            color: #cbd5e1;
+            font-size: 0.95em;
+        }
+
+        .awards-list li::before {
+            content: '🏆';
+            margin-right: 10px;
+        }
+
+        .languages {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .language-item {
+            background: #2a2a2a;
+            padding: 15px 20px;
+            border-radius: 25px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            font-weight: 600;
+            color: #f1f5f9;
+            border: 1px solid #3a3a3a;
+        }
+
+        .projects-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #b5cf00, #7fa800);
+            color: #f1f1f1;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+            margin-top: 10px;
+            margin-right: 10px;
+            box-shadow: 0 0 20px rgba(181, 207, 0, 0.3);
+        }
+
+        .projects-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 25px rgba(181, 207, 0, 0.5);
+            color: #edffbd;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .job-header {
+                flex-direction: column;
+            }
+
+            .name {
+                font-size: 2em;
+            }
+        }
+
+        @print {
+            body {
+                background: #1e1e2e;
+                padding: 0;
+                color: #e4e6ea;
+            }
+
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+                background: #1e1e2e;
+            }
+
+            .header::before {
+                display: none;
+            }
+
+            .sidebar {
+                background: #242438;
+            }
+
+            .content {
+                background: #1e1e2e;
+            }
+
+            .experience-item,
+            .education-item {
+                background: #242438;
+                border: 1px solid #3a3a4e;
+            }
+
+            .skill-category {
+                background: #2a2a3e;
+                border: 1px solid #3a3a4e;
+            }
+
+            .language-item {
+                background: #2a2a3e;
+                border: 1px solid #3a3a4e;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <h1 class="name">Mohamed Eltawil</h1>
+                <p class="title">Senior Software Developer & Game Development Specialist</p>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <svg class="contact-icon" viewBox="0 0 24 24">
+                            <path
+                                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                        </svg>
+                        Abu Dhabi, UAE
+                    </div>
+                    <div class="contact-item">
+                        <svg class="contact-icon" viewBox="0 0 24 24">
+                            <path
+                                d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                        </svg>
+                        <a href="mailto:M.Eltawil@protonmail.com">M.Eltawil@protonmail.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <svg class="contact-icon" viewBox="0 0 24 24">
+                            <path
+                                d="M16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2m-5.15 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56M14.34 14H9.66c-.1-.66-.16-1.32-.16-2 0-.68.06-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2M12 19.96c-.83-1.2-1.5-2.53-1.91-3.96h3.82c-.41 1.43-1.08 2.76-1.91 3.96M8 8H5.08C6.03 6.34 7.57 5.06 9.4 4.44 8.8 5.55 8.35 6.75 8 8m-2.92 8H8c.35 1.25.8 2.45 1.4 3.56-1.83-.63-3.37-1.9-4.32-3.56M4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2M12 4.03c.83 1.2 1.5 2.54 1.91 3.97h-3.82c.41-1.43 1.08-2.77 1.91-3.97M18.92 8h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" />
+                        </svg>
+                        <a href="https://xtremezero.xyz">https://xtremezero.xyz</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <aside class="sidebar">
+                <div class="section">
+                    <h2 class="section-title">Core Skills</h2>
+                    <div class="skill-category">
+                        <h4>Game Development</h4>
+                        <ul class="skill-list">
+                            <li>Unity 3D (Expert)</li>
+                            <li>Unreal Engine (Advanced)</li>
+                            <li>Godot Engine</li>
+                            <li>VR/AR Development</li>
+                            <li>Game Design & Mechanics</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <h4>Programming</h4>
+                        <ul class="skill-list">
+                            <li>C# (Expert)</li>
+                            <li>C++ (Advanced)</li>
+                            <li>Python (Advanced)</li>
+                            <li>JavaScript/Node.js</li>
+                            <li>GLSL Shaders</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <h4>Web & Mobile</h4>
+                        <ul class="skill-list">
+                            <li>HTML5/CSS3/JavaScript</li>
+                            <li>WebGL/WebAR</li>
+                            <li>Android Development</li>
+                            <li>Cross-platform Solutions</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <h4>Tools & Technologies</h4>
+                        <ul class="skill-list">
+                            <li>Blender 3D</li>
+                            <li>Adobe Creative Suite</li>
+                            <li>MySQL/LiteDB</li>
+                            <li>AWS/Cloud Services</li>
+                            <li>Arduino/Raspberry Pi</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">Languages</h2>
+                    <div class="languages">
+                        <div class="language-item">Arabic (Native)</div>
+                        <div class="language-item">English (Proficient)</div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">Key Achievements</h2>
+                    <ul class="awards-list">
+                        <li>1st Place - Unigine Engine GameJam</li>
+                        <li>1st Place - GameZanga GameJam 2018</li>
+                        <li>2nd Place - Sharjah Future GameJam</li>
+                        <li>Multiple Game Development Awards</li>
+                        <li>10+ Years Industry Experience</li>
+                        <li>50+ Successful Projects Delivered</li>
+                    </ul>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">Portfolio</h2>
+                    <a href="https://xtremezero.xyz" class="projects-link" target="_blank">View My Work</a>
+                    <a href="https://www.artstation.com/xtremezero" class="projects-link" target="_blank">Art
+                        Gallery</a>
+                </div>
+            </aside>
+
+            <main class="content">
+                <div class="summary">
+                    <strong>Experienced Software Developer & Game Development Specialist</strong> with 10+ years of
+                    expertise in creating immersive digital experiences, real-time applications, and interactive
+                    solutions. Proven track record of delivering high-performance games, VR/AR applications, and custom
+                    software solutions for major clients including Microsoft, Aramco, Dubai Municipality, and Sharjah
+                    Heritage. Expert in Unity, Unreal Engine, and modern web technologies with a passion for pushing
+                    technological boundaries.
+                </div>
+
+                <section class="section">
+                    <h2 class="section-title">Professional Experience</h2>
+
+                    <div class="experience-item">
+                        <div class="job-header">
+                            <div>
+                                <div class="job-title">VR Project Developer (Freelance)</div>
+                                <div class="company">Unseen Works</div>
+                            </div>
+                            <div class="duration">Apr 2024 - May 2025</div>
+                        </div>
+                        <div class="job-description">
+                            Developed comprehensive firefighter VR training software using PICO VR 4, creating realistic
+                            training scenarios and safety protocols. Delivered immersive training modules that enhanced
+                            emergency response preparation and safety outcomes.
+                        </div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="job-header">
+                            <div>
+                                <div class="job-title">WebAR Developer (Freelance)</div>
+                                <div class="company">AVI Tech</div>
+                            </div>
+                            <div class="duration">Nov 2024 - Apr 2025</div>
+                        </div>
+                        <div class="job-description">
+                            Developed custom 3D web-based viewer for architectural visualization and interactive
+                            children's WebAR magazine. Implemented cutting-edge web technologies to create engaging,
+                            cross-platform AR experiences accessible through standard web browsers.
+                        </div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="job-header">
+                            <div>
+                                <div class="job-title">Senior Game Developer</div>
+                                <div class="company">Rayqube Future Tech</div>
+                            </div>
+                            <div class="duration">Oct 2022 - Nov 2024</div>
+                        </div>
+                        <div class="job-description">
+                            Led development of real-time interactive solutions and games for major corporate exhibits
+                            (Saudi Telecom, Aramco, Emirates & Dubai). Utilized Unity Engine, Android Studio, and
+                            Arduino IDE to create innovative digital experiences that engaged thousands of visitors at
+                            trade shows and exhibitions.
+                        </div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="job-header">
+                            <div>
+                                <div class="job-title">Senior Unity Developer</div>
+                                <div class="company">GameIN</div>
+                            </div>
+                            <div class="duration">Oct 2021 - Sep 2022</div>
+                        </div>
+                        <div class="job-description">
+                            Spearheaded VR/AR and Metaverse projects for high-profile clients including Dubai
+                            Municipality, Sharjah Heritage, RAK Museums, and major brands like Doritos. Expertise in
+                            Unreal Engine, Unity, and advanced web technologies resulted in award-winning interactive
+                            experiences.
+                        </div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="job-header">
+                            <div>
+                                <div class="job-title">Unity C# Developer</div>
+                                <div class="company">OutrealXR</div>
+                            </div>
+                            <div class="duration">Jun 2020 - Sep 2021</div>
+                        </div>
+                        <div class="job-description">
+                            Maintained and enhanced the metaverse platform "HoloFair" for enterprise clients including
+                            Microsoft and Emirates Global Aluminium. Implemented cloud-based solutions using Unity, AWS,
+                            SmartFoxServer, and Vue.js to support virtual events and digital conferences.
+                        </div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="job-header">
+                            <div>
+                                <div class="job-title">Software Developer</div>
+                                <div class="company">Unseen Works</div>
+                            </div>
+                            <div class="duration">Jun 2018 - May 2021</div>
+                        </div>
+                        <div class="job-description">
+                            Developed comprehensive educational applications, AR/VR experiences, multiplayer games, and
+                            web platforms for government clients including DEWA, RAK Museums, Sharjah Museums, and Dubai
+                            Police. Created engaging digital solutions that enhanced public services and educational
+                            outreach.
+                        </div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="job-header">
+                            <div>
+                                <div class="job-title">Research Assistant</div>
+                                <div class="company">University of Sharjah</div>
+                            </div>
+                            <div class="duration">2016 - 2019</div>
+                        </div>
+                        <div class="job-description">
+                            Conducted advanced research in computational algorithms, developing performant KNN shortest
+                            path algorithms using Voronoi diagrams and grid systems for GIS applications. Published
+                            research on open-source software deployment in education and IoT vehicle systems.
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title">Education</h2>
+
+                    <div class="education-item">
+                        <div class="job-header">
+                            <div>
+                                <div class="job-title">Master's in Computer Science</div>
+                                <div class="company">University of Sharjah</div>
+                            </div>
+                            <div class="duration">2019 - Advanced Standing</div>
+                        </div>
+                        <div class="job-description">
+                            Specialized coursework in Computer Graphics, Advanced Operating Systems, and Data
+                            Structures. Focus on computational geometry and real-time graphics programming.
+                        </div>
+                    </div>
+
+                    <div class="education-item">
+                        <div class="job-header">
+                            <div>
+                                <div class="job-title">Bachelor's in Computer Engineering</div>
+                                <div class="company">University of Sharjah</div>
+                            </div>
+                            <div class="duration">2014 - 2018</div>
+                        </div>
+                        <div class="job-description">
+                            <strong>Graduated with Excellent Honors (GPA: 3.61/4.0)</strong><br>
+                            Comprehensive education in embedded systems, software development, networking, and digital
+                            circuit design. Outstanding performance in practical programming and system design projects.
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+
+</html>
