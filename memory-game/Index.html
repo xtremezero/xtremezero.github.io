@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Number Match — Memory Game</title>
+  <style>
+    :root{
+      --bg: #0f172a;        /* slate-900 */
+      --panel: #111827;     /* gray-900 */
+      --card: #1f2937;      /* gray-800 */
+      --muted: #94a3b8;     /* slate-400 */
+      --text: #e2e8f0;      /* slate-200 */
+      --accent: #38bdf8;    /* sky-400 */
+      --accent-2:#22c55e;   /* green-500 */
+      --warn:#f59e0b;       /* amber-500 */
+      --danger:#ef4444;     /* red-500 */
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 18px;
+    }
+    html, body { height: 100%; }
+    body{
+      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      background: radial-gradient(1200px 500px at 80% -10%, #1e293b33, transparent), var(--bg);
+      color: var(--text);
+      display:flex; align-items:center; justify-content:center; padding: 24px;
+    }
+    .app{
+      width: min(1100px, 100%);
+      display:grid; gap:20px;
+      grid-template-columns: 340px 1fr;
+    }
+    @media (max-width: 900px){ .app{ grid-template-columns: 1fr; } }
+
+    .panel{
+      background: linear-gradient(180deg, #0b1220, #0b1220), var(--panel);
+      border: 1px solid #1f2937; border-radius: var(--radius);
+      padding: 20px; box-shadow: var(--shadow);
+    }
+
+    h1{ font-size: clamp(24px, 2.4vw, 34px); margin: 0 0 8px; letter-spacing: .3px; }
+    p.sub{ margin:0 0 14px; color: var(--muted); }
+
+    .controls{ display:grid; gap:16px; }
+    .field{ display:grid; gap:8px; }
+    label{ font-weight:600; }
+    input[type="range"]{ width:100%; }
+    .row{ display:flex; gap:10px; align-items:center; justify-content:space-between; }
+
+    .pill{
+      display:inline-flex; align-items:center; gap:8px; padding: 8px 12px;
+      background:#0b1220; border:1px solid #243244; border-radius: 999px; color: var(--muted);
+      font-size: 14px;
+    }
+
+    .btn{
+      border:0; cursor:pointer; padding:12px 16px; border-radius: 12px; font-weight:700;
+      background: linear-gradient(180deg, #21a1ff, #1b72ff);
+      color: white; box-shadow: 0 8px 18px rgba(33,161,255,.35);
+      transition: transform .05s ease, filter .15s ease;
+    }
+    .btn:active{ transform: translateY(1px) scale(0.995); }
+    .btn.secondary{ background: #0b1220; color: var(--text); border:1px solid #223148; box-shadow:none; font-weight:600; }
+
+    .stats{ display:grid; grid-template-columns: repeat(2, 1fr); gap:10px; margin-top:6px; }
+    .stat{
+      background:#0b1220; border:1px solid #213144; padding:12px; border-radius: 12px;
+      display:grid; gap:4px; align-items:center; justify-items:center;
+    }
+    .stat .label{ color: var(--muted); font-size: 12px; }
+    .stat .value{ font-size: 20px; font-weight:800; }
+
+    .grid-wrap{
+      position:relative;
+      background: linear-gradient(180deg, #0b1220, #0b1220), var(--panel);
+      border: 1px solid #1f2937; border-radius: var(--radius);
+      padding: 18px; box-shadow: var(--shadow);
+      min-height: 420px;
+    }
+
+    .grid{ display:grid; gap:12px; }
+    /* grid columns will be set inline based on tile count */
+
+    .tile{
+      position: relative;
+      aspect-ratio: 1/1; width: 100%;
+      border:0; cursor:pointer; border-radius: 16px; font-weight:900; font-size: clamp(22px, 4.2vw, 36px);
+      background: #0b1220; color: transparent; /* hidden until flipped */
+      outline:none; user-select:none;
+      border: 1px solid #233247;
+      transform-style: preserve-3d;
+      transition: transform .35s ease;
+      perspective: 800px;
+    }
+    .tile-inner{
+      position:absolute; inset:0; border-radius: 15px; display:grid; place-items:center; backface-visibility:hidden;
+      transition: opacity .25s ease;
+    }
+    .face{ background: #101a2a; color: transparent; border-radius: 15px; }
+    .face::after{ content:"?"; color: var(--muted); font-weight:800; font-size: 1.6em; }
+
+    .back{ transform: rotateY(180deg); background: #18263a; color: var(--text); border:1px solid #274665; }
+
+    .tile.flipped{ transform: rotateY(180deg); }
+    .tile.matched .back{ background: #0e2a1a; border-color: #104b2c; color: #CFF7DA; box-shadow: inset 0 0 0 2px #1a7f4d55; }
+    .tile:disabled{ cursor: default; opacity: .9; }
+
+    .banner{ position:absolute; inset: 12px; display:none; align-items:center; justify-content:center; }
+    .banner.show{ display:flex; }
+    .win{
+      background:#07151d; border:1px solid #20485f; border-radius: 16px; padding: 18px 16px; text-align:center;
+      box-shadow: 0 6px 16px rgba(0,0,0,.4);
+    }
+    .win h2{ margin:0 0 8px; font-size: clamp(18px, 2vw, 24px); }
+    .win p{ margin:0 0 12px; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <main class="app" aria-live="polite">
+    <section class="panel" aria-label="Controls">
+      <h1>Number Match</h1>
+      <p class="sub">A clean, fast memory game. Choose how many tiles you want and pair identical numbers.</p>
+
+      <div class="controls" role="group" aria-label="Game Controls">
+        <div class="field">
+          <label for="tileCount">Tiles: <span id="tileCountLabel" class="pill">16</span></label>
+          <input id="tileCount" type="range" min="4" max="64" step="2" value="16" aria-describedby="tilesHelp" />
+          <small id="tilesHelp" class="sub">Use an <strong>even</strong> number. Grid adapts automatically.</small>
+        </div>
+        <div class="row">
+          <button id="newGame" class="btn" aria-label="Start a new game">New Game</button>
+          <button id="reset" class="btn secondary" aria-label="Reset flips and shuffle">Shuffle</button>
+        </div>
+        <div class="stats" aria-label="Game Stats">
+          <div class="stat"><div class="label">Moves</div><div id="moves" class="value">0</div></div>
+          <div class="stat"><div class="label">Matches</div><div id="matches" class="value">0</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid-wrap" aria-label="Game Board">
+      <div id="grid" class="grid" role="grid"></div>
+      <div id="banner" class="banner" aria-live="polite">
+        <div class="win">
+          <h2>🎉 You matched them all!</h2>
+          <p><span id="finalMoves">0</span> moves — <span id="finalPairs">0</span> pairs</p>
+          <button id="playAgain" class="btn">Play Again</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const state = {
+      tiles: [],
+      first: null,
+      lock: false,
+      moves: 0,
+      matches: 0,
+      totalPairs: 0,
+    };
+
+    const grid = document.getElementById('grid');
+    const tileCountInput = document.getElementById('tileCount');
+    const tileCountLabel = document.getElementById('tileCountLabel');
+    const newGameBtn = document.getElementById('newGame');
+    const resetBtn = document.getElementById('reset');
+    const movesEl = document.getElementById('moves');
+    const matchesEl = document.getElementById('matches');
+    const banner = document.getElementById('banner');
+    const finalMoves = document.getElementById('finalMoves');
+    const finalPairs = document.getElementById('finalPairs');
+    const playAgain = document.getElementById('playAgain');
+
+    // Utilities
+    const shuffle = (arr) => {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    };
+
+    function idealColumns(n){
+      // Choose columns close to a square grid
+      const root = Math.floor(Math.sqrt(n));
+      // Try root, root+1, etc. ensuring n % cols === 0 is NOT required (we allow wrapping)
+      return Math.min(8, Math.max(2, root + (n / root > root ? 1 : 0)));
+    }
+
+    function buildTiles(count){
+      const pairs = count / 2 | 0;
+      state.totalPairs = pairs;
+      const values = [];
+      for(let i=1;i<=pairs;i++){ values.push(i, i); }
+      shuffle(values);
+      return values.map((num, idx) => ({ id: idx, value: num, matched: false }));
+    }
+
+    function renderGrid(){
+      const count = Number(tileCountInput.value);
+      tileCountLabel.textContent = String(count);
+      state.tiles = buildTiles(count);
+      state.first = null; state.lock = false; state.moves = 0; state.matches = 0;
+      movesEl.textContent = '0';
+      matchesEl.textContent = '0';
+      banner.classList.remove('show');
+
+      const cols = idealColumns(count);
+      grid.style.gridTemplateColumns = `repeat(${cols}, minmax(0, 1fr))`;
+
+      grid.innerHTML = '';
+      state.tiles.forEach((t, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'tile';
+        btn.setAttribute('role','gridcell');
+        btn.setAttribute('aria-label', 'Hidden number');
+        btn.dataset.index = i;
+        btn.innerHTML = `
+          <div class="tile-inner face"></div>
+          <div class="tile-inner back" aria-hidden="true">${t.value}</div>
+        `;
+        btn.addEventListener('click', onFlip);
+        grid.appendChild(btn);
+      });
+    }
+
+    function onFlip(e){
+      const btn = e.currentTarget;
+      const idx = Number(btn.dataset.index);
+      const tile = state.tiles[idx];
+      if(state.lock || tile.matched || btn.classList.contains('flipped')) return;
+
+      btn.classList.add('flipped');
+
+      if(!state.first){
+        state.first = { idx, btn };
+        return;
+      }
+
+      // Second card
+      state.lock = true;
+      state.moves++; movesEl.textContent = String(state.moves);
+      const first = state.first; state.first = null;
+
+      const firstVal = state.tiles[first.idx].value;
+      const secondVal = tile.value;
+
+      if(firstVal === secondVal){
+        // Match
+        state.tiles[first.idx].matched = true;
+        state.tiles[idx].matched = true;
+        first.btn.classList.add('matched');
+        btn.classList.add('matched');
+        state.matches++; matchesEl.textContent = String(state.matches);
+        state.lock = false;
+        checkWin();
+      } else {
+        // Not a match — flip back
+        setTimeout(() => {
+          first.btn.classList.remove('flipped');
+          btn.classList.remove('flipped');
+          state.lock = false;
+        }, 700);
+      }
+    }
+
+    function checkWin(){
+      if(state.matches === state.totalPairs){
+        finalMoves.textContent = String(state.moves);
+        finalPairs.textContent = String(state.totalPairs);
+        banner.classList.add('show');
+      }
+    }
+
+    // Event wiring
+    tileCountInput.addEventListener('input', () => {
+      // Ensure even value
+      if (tileCountInput.value % 2 !== 0) {
+        tileCountInput.value = Number(tileCountInput.value) + 1;
+      }
+      renderGrid();
+    });
+
+    newGameBtn.addEventListener('click', renderGrid);
+    resetBtn.addEventListener('click', renderGrid);
+    playAgain.addEventListener('click', renderGrid);
+
+    // Initialize
+    renderGrid();
+  </script>
+</body>
+</html>
