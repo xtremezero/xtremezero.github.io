@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salary Rate Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+        }
+        /* Custom focus style to match the image */
+        .input-active {
+            border-color: #8b5cf6 !important;
+            background-color: #ffffff !important;
+        }
+        .input-inactive {
+            background-color: #f3f4f6;
+            border-color: #e5e7eb;
+        }
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+    </style>
+</head>
+<body class="bg-violet-50 flex items-center justify-center min-h-screen p-4">
+    <div class="w-full max-w-md bg-white p-8 rounded-2xl shadow-lg space-y-6">
+        <h1 class="text-2xl font-bold text-gray-800">How much is your salary?</h1>
+
+        <div id="calculator-container" class="space-y-4">
+            <!-- Yearly Salary -->
+            <div class="relative">
+                <label for="yearly" class="text-sm text-gray-500">Yearly salary</label>
+                <div class="flex items-center">
+                    <span class="absolute left-4 text-gray-500">$</span>
+                    <input type="number" id="yearly" class="salary-input input-inactive w-full pl-8 pr-4 py-3 rounded-xl border-2 transition-colors focus:outline-none" placeholder="0.00">
+                </div>
+            </div>
+
+            <!-- Monthly Salary -->
+            <div class="relative">
+                <label for="monthly" class="text-sm text-gray-500">Monthly salary</label>
+                <div class="flex items-center">
+                    <span class="absolute left-4 text-gray-500">$</span>
+                    <input type="number" id="monthly" class="salary-input input-inactive w-full pl-8 pr-4 py-3 rounded-xl border-2 transition-colors focus:outline-none" placeholder="0.00">
+                </div>
+            </div>
+
+            <!-- Biweekly Salary -->
+            <div class="relative">
+                <label for="biweekly" class="text-sm text-gray-500">Biweekly salary</label>
+                <div class="flex items-center">
+                    <span class="absolute left-4 text-gray-500">$</span>
+                    <input type="number" id="biweekly" class="salary-input input-inactive w-full pl-8 pr-4 py-3 rounded-xl border-2 transition-colors focus:outline-none" placeholder="0.00">
+                </div>
+            </div>
+
+            <!-- Weekly Salary -->
+            <div class="relative">
+                <label for="weekly" class="text-sm text-gray-500">Weekly salary</label>
+                <div class="flex items-center">
+                    <span class="absolute left-4 text-gray-500">$</span>
+                    <input type="number" id="weekly" class="salary-input input-inactive w-full pl-8 pr-4 py-3 rounded-xl border-2 transition-colors focus:outline-none" placeholder="0.00">
+                </div>
+            </div>
+            
+            <!-- Daily Salary -->
+            <div class="relative">
+                <label for="daily" class="text-sm text-gray-500">Daily salary</label>
+                <div class="flex items-center">
+                    <span class="absolute left-4 text-gray-500">$</span>
+                    <input type="number" id="daily" class="salary-input input-inactive w-full pl-8 pr-4 py-3 rounded-xl border-2 transition-colors focus:outline-none" placeholder="0.00">
+                </div>
+            </div>
+
+            <!-- Hourly Salary -->
+            <div class="relative">
+                <label for="hourly" class="text-sm text-gray-500">Hourly salary</label>
+                <div class="flex items-center">
+                    <span class="absolute left-4 text-gray-500">$</span>
+                    <input type="number" id="hourly" class="salary-input input-inactive w-full pl-8 pr-4 py-3 rounded-xl border-2 transition-colors focus:outline-none" placeholder="0.00">
+                </div>
+            </div>
+
+            <!-- Work Hours -->
+            <div>
+                <label for="hours" class="text-sm text-gray-500">Your work hours per week</label>
+                <input type="number" id="hours" value="40" class="w-full mt-1 p-3 rounded-xl border-2 bg-gray-100 border-gray-200 transition-colors focus:outline-none focus:border-violet-500">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const inputs = document.querySelectorAll('.salary-input');
+        const hoursInput = document.getElementById('hours');
+        let lastActiveInput = document.getElementById('hourly');
+
+        // Function to format numbers to two decimal places without rounding errors
+        function formatNumber(num) {
+            return (Math.round(num * 100) / 100).toFixed(2);
+        }
+        
+        // Set initial active input
+        if(lastActiveInput) {
+            lastActiveInput.classList.remove('input-inactive');
+            lastActiveInput.classList.add('input-active');
+        }
+
+        // Calculation logic
+        function calculateSalaries(sourceInput) {
+            const sourceId = sourceInput.id;
+            const sourceValue = parseFloat(sourceInput.value);
+            const hoursPerWeek = parseFloat(hoursInput.value) || 0;
+            
+            if (isNaN(sourceValue) || sourceValue === 0) {
+                inputs.forEach(input => {
+                    if (input.id !== sourceId) {
+                        input.value = '';
+                    }
+                });
+                return;
+            }
+
+            let hourlyRate = 0;
+
+            // Calculate the hourly rate from the source input
+            switch (sourceId) {
+                case 'yearly':
+                    hourlyRate = sourceValue / 52 / hoursPerWeek;
+                    break;
+                case 'monthly':
+                    hourlyRate = (sourceValue * 12) / 52 / hoursPerWeek;
+                    break;
+                case 'biweekly':
+                    hourlyRate = sourceValue / 2 / hoursPerWeek;
+                    break;
+                case 'weekly':
+                    hourlyRate = sourceValue / hoursPerWeek;
+                    break;
+                case 'daily':
+                    // Assuming a 5-day work week
+                    hourlyRate = sourceValue / (hoursPerWeek / 5);
+                    break;
+                case 'hourly':
+                    hourlyRate = sourceValue;
+                    break;
+            }
+            
+            if (!isFinite(hourlyRate)) hourlyRate = 0;
+
+            // Update all other fields based on the new hourly rate
+            const values = {
+                hourly: hourlyRate,
+                daily: hourlyRate * (hoursPerWeek / 5),
+                weekly: hourlyRate * hoursPerWeek,
+                biweekly: hourlyRate * hoursPerWeek * 2,
+                monthly: (hourlyRate * hoursPerWeek * 52) / 12,
+                yearly: hourlyRate * hoursPerWeek * 52
+            };
+
+            inputs.forEach(input => {
+                if (input.id !== sourceId) {
+                    const value = values[input.id];
+                    input.value = isNaN(value) ? '' : formatNumber(value);
+                }
+            });
+        }
+
+        // Add event listeners
+        inputs.forEach(input => {
+            input.addEventListener('focus', (e) => {
+                inputs.forEach(i => {
+                    i.classList.remove('input-active');
+                    i.classList.add('input-inactive');
+                });
+                e.target.classList.add('input-active');
+                e.target.classList.remove('input-inactive');
+                lastActiveInput = e.target;
+            });
+            
+            input.addEventListener('input', (e) => {
+                calculateSalaries(e.target);
+            });
+        });
+        
+        hoursInput.addEventListener('input', () => {
+             if (lastActiveInput && lastActiveInput.value) {
+                calculateSalaries(lastActiveInput);
+            }
+        });
+
+    </script>
+</body>
+</html>
+
