@@ -6,6 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XtremeZero | Game Developer and Artist</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="shortcut icon" type="image/png" href="logo.png">
     <style>
         :root {
             --bg: #090a0f;
@@ -33,6 +35,32 @@
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
+        }
+
+        /* Cover Background with Interactive Spotlight Reveal */
+        .bg-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            pointer-events: none;
+        }
+
+        #bg-base {
+            opacity: 0.25;
+            z-index: -2;
+        }
+
+        #bg-spotlight {
+            opacity: 1;
+            z-index: -1;
+            -webkit-mask-image: radial-gradient(circle 280px at var(--mouse-x, -1000px) var(--mouse-y, -1000px), black 0%, rgba(0, 0, 0, 0.6) 45%, transparent 100%);
+            mask-image: radial-gradient(circle 280px at var(--mouse-x, -1000px) var(--mouse-y, -1000px), black 0%, rgba(0, 0, 0, 0.6) 45%, transparent 100%);
         }
 
         /* Abstract Dynamic Canvas */
@@ -94,16 +122,28 @@
             z-index: 1;
         }
 
-        /* Header Visuals */
         header {
             text-align: center;
             margin-bottom: 4rem;
         }
 
+        .hero-logo {
+            width: 120px;
+            height: auto;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 20px rgba(226, 232, 240, 0.25));
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        .hero-logo:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 30px rgba(226, 232, 240, 0.45));
+        }
+
         .hero-title {
-            font-size: 3.5rem;
+            font-size: 2.25rem;
             font-weight: 900;
-            letter-spacing: -1px;
+            letter-spacing: -0.5px;
             text-transform: uppercase;
             background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 40%, #94a3b8 75%, #475569 100%);
             -webkit-background-clip: text;
@@ -337,10 +377,27 @@
             opacity: 0.6;
             filter: brightness(0.8) contrast(1.1);
         }
+
+        /* Footer Copyright */
+        footer {
+            text-align: center;
+            padding: 2rem 0 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        footer p {
+            margin-bottom: 0;
+            color: inherit;
+        }
     </style>
 </head>
 
 <body>
+
+    <div id="bg-base" class="bg-layer"></div>
+    <div id="bg-spotlight" class="bg-layer"></div>
 
     <div class="ambient-glow glow-1"></div>
     <div class="ambient-glow glow-2"></div>
@@ -348,7 +405,8 @@
 
     <div class="container">
         <header>
-            <h1 class="hero-title">XtremeZero</h1>
+            <img src="logo.png" alt="XtremeZero Logo" class="hero-logo">
+            <h1 class="hero-title" style="display: none;">XtremeZero</h1>
             <p class="hero-subtitle">Game Developer and Artist</p>
         </header>
 
@@ -357,7 +415,7 @@
                 <source src="overview.mp4" type="video/mp4">
             </video>
             <div class="panel-content">
-                <h2>Overview</h2>
+                <h2></h2>
                 <p>
                     <br>
                     <br>
@@ -475,7 +533,7 @@
                 <div class="contact-grid">
                     <a href="mailto:contact@xtremezero.net" style="display: none;" class="contact-btn">Email</a>
                     <a href="https://xtremezero.itch.io" class="contact-btn">Itch.io</a>
-                    <a href="https://store.steampowered.com/developer/XtremeZero" class="contact-btn">Steam</a>
+                    <a href="https://store.steampowered.com/curator/46170602" class="contact-btn">Steam</a>
                     <a href="https://github.com/xtremezero/" class="contact-btn">Github</a>
                     <a href="https://discordapp.com/channels/1529189276590407913/1529189278293430434"
                         class="contact-btn">Discord</a>
@@ -484,6 +542,10 @@
                 </div>
             </div>
         </section>
+
+        <footer>
+            <p>&copy; 2026 XtremeZero. All rights reserved.</p>
+        </footer>
     </div>
 
     <!-- Abstract Interactive Geometry Animation -->
@@ -573,6 +635,22 @@
             }
         }
 
+        // Interactive background spotlight tracking
+        const bgSpotlight = document.getElementById('bg-spotlight');
+        let mouseX = -1000, mouseY = -1000;
+        let targetMouseX = -1000, targetMouseY = -1000;
+        let isMouseOver = false;
+
+        window.addEventListener('mousemove', (e) => {
+            targetMouseX = e.clientX;
+            targetMouseY = e.clientY;
+            isMouseOver = true;
+        });
+
+        document.addEventListener('mouseleave', () => {
+            isMouseOver = false;
+        });
+
         function animate() {
             ctx.clearRect(0, 0, width, height);
 
@@ -581,6 +659,19 @@
                 node.update();
                 node.draw();
             });
+
+            // Lerp mouse spotlight position smoothly
+            if (isMouseOver) {
+                mouseX += (targetMouseX - mouseX) * 0.12;
+                mouseY += (targetMouseY - mouseY) * 0.12;
+            } else {
+                mouseX += (-1000 - mouseX) * 0.08;
+                mouseY += (-1000 - mouseY) * 0.08;
+            }
+            if (bgSpotlight) {
+                bgSpotlight.style.setProperty('--mouse-x', `${mouseX.toFixed(1)}px`);
+                bgSpotlight.style.setProperty('--mouse-y', `${mouseY.toFixed(1)}px`);
+            }
 
             requestAnimationFrame(animate);
         }
